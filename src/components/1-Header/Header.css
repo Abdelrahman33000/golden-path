@@ -5,7 +5,7 @@ header{
 @media (max-width: 480px){
 header .img{
     width: fit-content;
-    /* overflow-x: hidden; */
+    overflow-x: hidden;
     /* padding: 0; */
     display: none;
 }
