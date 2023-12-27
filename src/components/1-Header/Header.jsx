@@ -9,7 +9,7 @@ const Header = () => {
         <img src={Logo} alt="Logo" style={{width:"150px" , height:"35px"}} className='me-3 img' />
        
 
-        <div className='mx-2 mail '>
+        <div className='ms-2 mail '>
                 <p className='icon-email mb-4' style={{lineHeight:"10px" ,color:"#093266" }}> Info@goldenPath</p>
                 <p className='icon-phone ' style={{lineHeight:"2px"  , color:"#093266"}}> +123456789</p>
             </div>
