@@ -11,12 +11,10 @@ body {
   -moz-osx-font-smoothing: grayscale;
   overflow-x: hidden;
   
+  
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
-}
+
 
 .scroll2Top{
   position: fixed;
@@ -27,6 +25,5 @@ border-radius: 15px 0;
   z-index: 5;
  }
 
-.scroll2Top:hover{
-  opacity: 1;
-}
+
+
