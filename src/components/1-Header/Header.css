@@ -3,23 +3,16 @@
     color: #093266;
     font-size: 20px;
 }
-header{
+/* header{
     padding: 0 10px;
     margin: auto 5px;
-}
+} */
 
-@media (max-width: 480px){
-header{
-    width: fit-content;
-    overflow-x: hidden;
-    padding: 0 20px;
-    margin: 0 15px;
-    font-size: 15px;
-    
-    
-}
+@media (max-width: 380px){
+
 .mail{
-    font-size: 15px;
+    background-color: aqua;
+    scale: .7;
 }
 
 
