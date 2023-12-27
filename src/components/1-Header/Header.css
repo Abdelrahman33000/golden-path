@@ -1,15 +1,29 @@
 
-header{
-    /* background-color: aqua; */
+.icon-phone ,.icon-email{
+    color: #093266;
+    font-size: 20px;
 }
+header{
+    padding: 0 10px;
+    margin: auto 5px;
+}
+
 @media (max-width: 480px){
-header .img{
+header{
     width: fit-content;
     overflow-x: hidden;
-    /* padding: 0; */
-    display: none;
+    padding: 0 20px;
+    margin: 0 15px;
+    font-size: 15px;
+    
+    
+}
+.mail{
+    font-size: 15px;
 }
 
 
+
 }
+
 

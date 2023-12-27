@@ -1,4 +1,5 @@
 export {default as Header} from './1-Header/Header'
+export {default as NavBar } from './1-NavBar/NavBar'
 export {default as Hero } from './2-Hero/Hero'
 export {default as About } from './3-About/About'
 export {default as ProductCarousel } from './4-ٍProducts/Products'

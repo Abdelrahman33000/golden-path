@@ -5,7 +5,7 @@ const About = () => {
     <div className='row my-5' >
         <img src={Img} alt="Img" className='col-lg-5 shadow-lg  rounded-5 mb-5' />
         <div className='col-lg-6  '>
-            <h1 className='px-5 '>About Golden paths</h1>
+            <h1 className='px-5 ' style={{color:"#093266"}}>About Golden paths</h1>
             <p className='px-5 py-3'>Lorem ipsum dolor sit, amet consectetur adipisicing elit.
                  Explicabo ipsam dolorem repudiandae,
                   quasi tenetur harum iure possimus eos, 
