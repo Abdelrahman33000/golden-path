@@ -6,8 +6,8 @@ import './Header.css'
 const Header = () => {
   return (
     <header className='d-flex justify-content-between mx-lg-5  my-3 align-items-center'>
-        <img src={Logo} alt="Logo" style={{width:"150px" , height:"35px"}} className='me-3' />
-<div className='d-flex align-items-center me-3 '>
+        <img src={Logo} alt="Logo" style={{width:"150px" , height:"35px"}} className='me-3 img' />
+<div className='d-flex align-items-center me-3 mail '>
             <img src={Mail} alt="Mail"  style={{width:"25px"}}  />
             <div className='mx-2 '>
                 <p style={{lineHeight:"10px" , opacity:".7" ,color:"#2611e4" }}>Mail Us On</p>
