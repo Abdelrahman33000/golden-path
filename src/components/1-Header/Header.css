@@ -10,8 +10,7 @@
 
 @media (max-width: 380px){
 
-.mail{
-    background-color: aqua;
+.mail , .img{
     scale: .7;
 }
 
