@@ -1,0 +1,11 @@
+
+header{
+    /* background-color: aqua; */
+}
+@media (max-width: 480px){
+header{
+    width: fit-content;
+    overflow-x: hidden;
+}
+
+}

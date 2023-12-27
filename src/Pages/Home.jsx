@@ -20,7 +20,7 @@ const Home = () => {
   ];
   return (
     <div>
-      <nav className="bg-dark p-3  p-sm-0 py-sm-2" >
+      <nav className="bg-dark p-3  p-sm-0 py-sm-2 " >
         {lists.map((list) => (
           <a
             className=" list   p-4"
