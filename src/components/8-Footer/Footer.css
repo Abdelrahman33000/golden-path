@@ -1,0 +1,9 @@
+footer p{
+    opacity: .5;
+    transition: .5s;
+}
+footer p:hover{
+    opacity: 1;
+    cursor: pointer;
+   color: #ec6f08;
+}

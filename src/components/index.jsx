@@ -1,0 +1,8 @@
+export {default as Header} from './1-Header/Header'
+export {default as Hero } from './2-Hero/Hero'
+export {default as About } from './3-About/About'
+export {default as ProductCarousel } from './4-ٍProducts/Products'
+export {default as Products } from './5-ProductsCard/Products2'
+export { default as Logo} from './6-Logo/Logo'
+export {default as SubScribe } from './7-SubScribe/SubScribe'
+export {default as Footer } from './8-Footer/Footer'

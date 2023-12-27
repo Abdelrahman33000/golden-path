@@ -1,0 +1,26 @@
+
+  
+  .swiper {
+    margin-top: 10px;
+    width: 100vw;
+    margin: auto;
+    
+
+  }
+
+  
+  .swiper-slide {
+    text-align: center;
+    font-size: 18px;
+  }
+  
+
+  .swip img{
+    width: 100%;
+    height: 250px;
+    border-radius: 30px 0;
+    box-shadow: 5px 5px 15px #000;
+    display: block;
+    padding: 15px;
+    margin: auto;
+  }

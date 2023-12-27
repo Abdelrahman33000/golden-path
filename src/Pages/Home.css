@@ -1,0 +1,11 @@
+.list{
+    color: #fff;
+    transition: 1s;
+}
+
+.list:hover{
+    color: rgb(244, 145, 16);
+    background-color: rgb(4, 66, 66);
+    border-radius: 20px;
+    
+}
