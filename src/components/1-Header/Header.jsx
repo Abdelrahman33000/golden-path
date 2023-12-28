@@ -5,13 +5,13 @@ import Logo from '../images/Golden Path - Logo.png'
 import './Header.css'
 const Header = () => {
   return (
-    <header className='d-flex justify-content-around    my-3 align-items-center'>
+    <header className='d-flex justify-content-between mx-5   my-3 align-items-center'>
         <img src={Logo} alt="Logo" style={{width:"150px" , height:"35px"}} className='me-3 img' />
        
 
         <div className=' mail '>
-                <p className='icon-email mb-4' style={{lineHeight:"10px" ,color:"#093266" }}> Info@goldenPath</p>
-                <p className='icon-phone ' style={{lineHeight:"2px"  , color:"#093266"}}> +123456789</p>
+                <p className='icon-email mb-4' style={{ color:"#093266" , fontSize:"12px"}}> Info@goldenPath</p>
+                <p className='icon-phone ' style={{ color:"#093266" , fontSize:"12px"}}> +123456789</p>
             </div>
 
     </header>

@@ -3,7 +3,7 @@ import './Hero.css'
 const Hero = () => {
   return (
     <main>
-   <div className='ms-5 py-5'>
+   <div className=' p-5'>
        <h1>Capture Life's <br /> Brilliance</h1><br />
        Lorem ipsum dolor sit amet consectetur adipisicing elit. <br />
         Eligendi deleniti obcaecati veritatis officia aperiam  <br />
