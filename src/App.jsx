@@ -4,7 +4,7 @@ import { Footer, Header, NavBar } from "./components";
 import { Routes, Route } from "react-router-dom";
 function App() {
   return (
-    <div className="App" id="up">
+    <div className="App" id="up" style={{overflowX:"hidden"}}>
       <Header />
       <NavBar />
       <Routes>

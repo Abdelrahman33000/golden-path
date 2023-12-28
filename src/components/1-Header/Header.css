@@ -1,4 +1,7 @@
 
+header{
+    overflow-x: hidden;
+}
 .icon-phone ,.icon-email{
     color: #093266;
     font-size: 20px;
@@ -9,7 +12,9 @@
 } */
 
 @media (max-width: 380px){
-
+header {
+    overflow-x: hidden;
+}
 .mail , .img{
     scale: .7;
 

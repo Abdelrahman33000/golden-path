@@ -4,6 +4,8 @@
     margin-top: 10px;
     width: 100vw;
     margin: auto;
+    padding: 0 15px;
+    overflow-x: hidden;
     
 
   }
