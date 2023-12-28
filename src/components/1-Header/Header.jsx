@@ -11,7 +11,7 @@ const Header = () => {
 
         <div className=' mail '>
                 <p className='icon-email my-3' style={{ color:"#093266" ,lineHeight:"0px", fontSize:"12px"}}> Info@goldenPath</p>
-                <p className='icon-phone ' style={{ color:"#093266" ,lineHeight:"0px", fontSize:"12px"}}> +123456789</p>
+                <p className='icon-phone ' style={{ color:"#093266" ,lineHeight:"10px", fontSize:"12px"}}> +123456789</p>
             </div>
 
     </header>
