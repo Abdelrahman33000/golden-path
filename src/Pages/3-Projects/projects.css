@@ -1,0 +1,120 @@
+.box {
+border: 5px solid #f5f5f5;
+background: linear-gradient(to top right, #fff 10%, #000 100%);
+font-family: "Raleway", sans-serif;
+text-align: center;
+box-shadow: 0 0 15px 5px rgba(0, 0, 0, 0.07);
+overflow: hidden;
+position: relative;
+}
+.box:before {
+  content: "";
+  width: 50%;
+  height: 75%;
+  border-top: 208px solid rgba(7, 0, 2, 0.3);
+  border-left: 140px solid rgb(255, 149, 0);
+  border-bottom: 188px solid transparent;
+  position: absolute;
+  top: 0;
+  left: -230px;
+  z-index: 1;
+  transition: all 0.4s ease-in-out;
+}
+.box:hover:before {
+border-top: 325px solid rgb(255, 149, 0);
+border-left: 422px solid  rgb(255, 149, 0) ;
+border-bottom: 218px solid transparent;
+border-right: 160px solid transparent;
+transform: rotate3d(0, 0, 1, 52deg) scale3d(1, 1, 1);
+top: 103px;
+left: -350px;
+}
+.box img {
+  width: 100%;
+  height: 250px;
+  transform: scale(1, 1);
+  transition: all 0.3s ease-in-out;
+}
+.box:hover img {
+opacity: 0.7;
+transform: scale(1.1, 1.1);
+}
+.box .box-content {
+color: #fff;
+background-color:rgb(255, 149, 0);
+width: 60%;
+padding: 10px 10px;
+transform: scale(0);
+position: absolute;
+top: 15px;
+right: 15px;
+transition: all 0.5s ease-in-out;
+}
+.box:hover .box-content {
+  transform: scale(1);
+}
+.box .title {
+font-size: 20px;
+font-weight: 700;
+letter-spacing: 0.5px;
+text-transform: uppercase;
+margin: 0;
+}
+.box .post {
+font-size: 15px;
+font-weight: 500;
+font-style: italic;
+text-transform: capitalize;
+display: block;
+}
+.box .icon {
+  padding: 0;
+  margin: 0;
+  list-style: none;
+  position: absolute;
+  left: 10px;
+  bottom: 10px;
+  z-index: 1;
+  transition: all 0.5s ease-in-out;
+}
+.box .icon li {
+margin: 0 3px 0 0;
+
+  display: inline-block;
+
+opacity: 0;
+
+transition: all 0.5s ease-in-out;
+}
+.box:hover .icon li {
+  opacity: 1;
+}
+.box:hover .icon li:nth-child(1) {
+  transition-delay: 0.2s;
+}
+.box:hover .icon li:nth-child(2) {
+  transition-delay: 0.3s;
+}
+.box .icon li a {
+  background-color: #fff;
+font-size: 16px;
+line-height: 28px;
+height: 30px;
+width: 30px;
+border: 2px dotted transparent;
+border-radius: 50%;
+display: block;
+transition: rotate(0);
+transition: all 0.3s;
+}
+.box .icon li a:hover {
+color: #f44178;
+background: #fff;
+border-color: #f44178;
+transform: rotate(360deg);
+}
+@media only screen and (max-width: 990px) {
+.box {
+  margin: 0 0 30px;
+}
+}

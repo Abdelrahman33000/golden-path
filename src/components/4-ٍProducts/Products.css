@@ -1,31 +1,39 @@
+/* #app { height: 100% }
+html,
+body {
+  position: relative;
+  height: 100%;
+} */
 
-  
-  .swiper {
-    margin-top: 10px;
-    width: 100%;
-    
-  }
+/* body {
+  background: #eee;
+  font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
+  font-size: 14px;
+  color: #000;
+  margin: 0;
+  padding: 0;
+} */
 
-  
-  .swiper-slide {
-    text-align: center;
-    font-size: 18px;
-    padding: 15px 20px;
-    border-radius: 20px 0;
-    background: #ceccccfe;
-    margin-bottom: 10px;
-    
-  
+.swiper {
+  width: 100%;
+  /* padding-top: 50px; */
+  /* padding-bottom: 50px; */
+  box-shadow: 5px 5px 10px #000;
+  background-color: rgb(255, 145, 0);
+}
 
-  }
-  
+.swiper-slide .sd2 {
+  background-position: center;
+  background-size: cover;
+  width: 300px;
+  height: 300px;
+  padding: 20px 50px;
+}
 
-  .swip img{
-    width: 100%;
-    height: 250px;
-    border-radius: 30px 0;
-    box-shadow: 5px 5px 15px #151414;
-    display: block;
-    padding: 15px;
-    margin: auto;
-  }
+.swiper-slide img {
+  display: block;
+  border-radius: 50px;
+  padding: 10px;
+  width: 100%;
+  box-shadow: 5px 5px 15px #000;
+}

@@ -9,8 +9,7 @@ const NavBar = () => {
         { name: " About", url: "/about" , id:"2"},
         { name: " Projects", url: "/projects " , id:"3"},
         { name: " Products", url: "/products " , id:"4"},
-        { name: " Partners", url: "/partners " , id:"5"},
-        { name: " Contact Us", url: "/Contact" , id:"6"},
+        { name: " Contact Us", url: "/Contact" , id:"5"},
       ];
   return (  
       <div className="mainNav container-fluid  py-10 ps-4">

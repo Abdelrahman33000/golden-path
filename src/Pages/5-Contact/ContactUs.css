@@ -1,0 +1,37 @@
+.btn5{
+    transition: .5s;
+    background-color: #ff8d03;
+}
+
+.btn5:hover{
+background-color: #000;
+color: #fff;
+
+}
+.inp{
+    border: none;
+    border-bottom: 3px solid black;
+    width: 100%;
+    background-color: rgb(185, 185, 183);
+    outline: none;
+    height: 50px;
+    border-radius: 20px;
+    padding: 5px 15px;
+    
+
+}
+/* .side1{
+    background-image: url(../../components//images/cam2.jpg );
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    color: #fff;
+} */
+
+/* .icon{
+    font-size: 20px;
+} */
+
+/* .contact input{
+   
+} */
