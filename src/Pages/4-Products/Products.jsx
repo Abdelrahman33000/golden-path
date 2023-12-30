@@ -96,7 +96,7 @@ const Products = () => {
 
    </div>
      <Box 
-       sx={{ flexGrow: 1, bgcolor: 'background.paper', display: 'flex', height: 224 }}
+       sx={{ flexGrow: 1, bgcolor: 'background.paper', display: 'flex' }}
      >
        <Tabs
          orientation="vertical"
