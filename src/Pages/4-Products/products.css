@@ -1,0 +1,11 @@
+.cd5{
+    transition: .5s;
+    margin: auto;
+}
+
+.cd5:hover{
+    scale: 1.1;
+    rotate: -5deg;
+    background-color: aquamarine;
+
+}

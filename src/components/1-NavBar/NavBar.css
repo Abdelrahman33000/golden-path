@@ -62,10 +62,11 @@
     backdrop-filter: 10px;
     border-radius: 50px 0px;
     /* box-shadow: 7px 7px 20px #4f4848; */
+    /* z-index: 10; */
     
   }
   .popup .list{
-      
+    
       border-bottom:1px solid rgba(204, 199, 199, 0.108);
       padding: .1rem 0px;
       
