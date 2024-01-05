@@ -9,11 +9,11 @@
     /* height: 80px; */
     /* margin: auto; */
     display: flex;
-    /* color: #fff; */
+    color:#0a3367;
     justify-content: center;
-    align-items: center;
+    /* align-items: center; */
     text-align: left;
-    padding: 10px ;
+    padding: 10px  30px;
     font-family: 'Bodoni Moda', serif;
 border-radius: 30px 0;
 box-shadow: 10px 10px 15px #000;

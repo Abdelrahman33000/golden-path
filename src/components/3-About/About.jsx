@@ -7,7 +7,7 @@ const About = () => {
     <div className='row my-5' >
         <img src={Img} alt="Img" className='col-lg-5 shadow-lg  rounded-5 mb-5' />
         <div className='col-lg-6  '>
-            <h5 className='px-5 py-3 ms-5 img5' >About Golden paths</h5>
+            <h4 className='px-5 py-3 ms-5 img5' >About Golden paths</h4>
             <p className='px-5 py-3'>Lorem ipsum dolor sit, amet consectetur adipisicing elit.
                  Explicabo ipsam dolorem repudiandae,
                   quasi tenetur harum iure possimus eos, 
