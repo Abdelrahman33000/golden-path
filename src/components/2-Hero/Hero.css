@@ -1,9 +1,15 @@
 main{
     width: 100%;
-    height: 500px;
-    background-image: url("../images/Photographer.jpg");
+    /* background-image: url("../images/Photographer.jpg");
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
-    color: azure;
+    color: azure; */
+}
+
+.Carousel{
+    display: flex;
+
+    /* justify-content: center; */
+   /* text-align: end; */
 }

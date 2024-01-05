@@ -17,7 +17,7 @@ const About = () => {
        <Carousel.Caption>
          <h3>First slide label</h3>
          <p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
-       <button className='btn5 p-3 rounded'> Read More</button>
+       {/* <button className='btn5 p-3 rounded'> Read More</button> */}
   
        </Carousel.Caption>
      </Carousel.Item>
@@ -27,7 +27,7 @@ const About = () => {
        <Carousel.Caption>
          <h3>Second slide label</h3>
          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-         <button className='btn5 p-3 rounded'> Read More</button>
+         {/* <button className='btn5 p-3 rounded'> Read More</button> */}
   
        </Carousel.Caption>
      </Carousel.Item>
@@ -39,7 +39,7 @@ const About = () => {
          <p>
            Praesent commodo cursus magna, vel scelerisque nisl consectetur.
          </p>
-       <button className='btn5 p-3 rounded'> Read More</button>
+       {/* <button className='btn5 p-3 rounded'> Read More</button> */}
   
        </Carousel.Caption>
      </Carousel.Item>
@@ -78,7 +78,7 @@ const About = () => {
 
 </div>
 
-<h2 style={{textAlign:"center", marginBottom:"30px" , opacity:".5"}}> Our Vision</h2>
+{/* <h2 style={{textAlign:"center", marginBottom:"30px" , opacity:".5"}}> Our Vision</h2> */}
 
 <div className='my-5 align-items-center rounded-5 shadow-lg row' style={{margin:'auto', textAlign:"left" , backgroundColor:"#bcbcb761" , width:"85%"}}>
       <div className='col-lg-5' >
@@ -87,7 +87,7 @@ const About = () => {
         <div className='col-lg-5 py-3' style={{textAlign:"justify"}}>
             <h1>Our Vision</h1>
             <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Eveniet quae repellendus ea! Explicabo nemo a quisquam error molestiae, reiciendis tempora veniam molestias voluptatem, magni est numquam quibusdam deserunt sapiente cumque?</p>
-            <button className='btn5 px-3 py-2 mb-3 rounded-4 '>Read More</button>
+            {/* <button className='btn5 px-3 py-2 mb-3 rounded-4 '>Read More</button> */}
  <div className=''>
                <p> <TaskAlt /> Lorem ipsum dolor sit amet.</p>
                <p> <TaskAlt /> Lorem ipsum dolor sit amet.</p>
@@ -106,14 +106,14 @@ const About = () => {
 
 
 
-    <h2 style={{textAlign:"center", marginBottom:"30px" , opacity:".5"}}> Our Mission</h2>
+    {/* <h2 style={{textAlign:"center", marginBottom:"30px" , opacity:".5"}}> Our Mission</h2> */}
 
 <div className='my-5 align-items-center rounded-5 shadow-lg row' style={{margin:'auto', textAlign:"left" , backgroundColor:"#bcbcb761" , width:"85%"}}>
       
         <div className='col-lg-5 py-3' style={{flexGrow:"1"}}>
             <h1>Our Mission</h1>
             <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Eveniet quae <br /> repellendus ea! Explicabo nemo a quisquam error molestiae, reiciendis <br /> tempora veniam molestias voluptatem,  magni est numquam quibusdam <br /> deserunt sapiente cumque?</p>
-            <button className='btn5 px-3 py-2 mb-3 rounded-4 '>Read More</button>
+            {/* <button className='btn5 px-3 py-2 mb-3 rounded-4 '>Read More</button> */}
  <div className=''>
                <p> <TaskAlt /> Lorem ipsum dolor sit amet.</p>
                <p> <TaskAlt /> Lorem ipsum dolor sit amet.</p>

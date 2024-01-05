@@ -10,7 +10,8 @@ import img2 from '../../components/images/cam2.jpg'
 import img3 from '../../components/images/cam3.jpg'
 import img1 from '../../components/images/cam4.jpg'
 import { Link } from 'react-router-dom';
-import { AddLink, TravelExplore } from '@mui/icons-material';
+import { AddLink, ArrowBackIosNew, ArrowForwardIos, TravelExplore } from '@mui/icons-material';
+import "./projects.css"
 function CustomTabPanel(props) {
   const { children, value, index, ...other } = props;
 
@@ -55,12 +56,14 @@ const Projects = () => {
 
   return (
     
-    <Box my={5} py={5} sx={{ width: '100%' , margin:"auto" ,textAlign:"center", minHeight:"100vh"}}>
-      <Box   sx={{ borderColor: 'divider',display:"flex", justifyContent:"center" ,  borderBottom:"3px solid #ffa200" , borderTop:"3px solid #ffa200"}}>
+    <Box  my={5} py={5} sx={{ width: '100%' , margin:"auto" ,textAlign:"center", minHeight:"100vh"}}>
+
+        <h1 className='project' style={{fontFamily:"Bodoni Moda"}}> projects</h1>
+      <Box    sx={{ borderColor: 'divider',display:"flex", justifyContent:"center" ,  borderBottom:"3px solid #ffa200" , borderTop:"3px solid #ffa200" }}>
         <Tabs value={value} onChange={handleChange} aria-label="basic tabs example" sx={{ textAlign:"center"}}>
-          <Tab label="All" {...a11yProps(0)} />
-          <Tab label="Item one" {...a11yProps(1)} />
-          <Tab label="Item Two" {...a11yProps(2)} />
+          <Tab  className='tab' label="All" {...a11yProps(0)} />
+          <Tab className='tab'label="Item one" {...a11yProps(1)} />
+          <Tab className='tab' label="Item Two" {...a11yProps(2)} />
         </Tabs>
       </Box>
       <CustomTabPanel value={value}  index={0}>
@@ -371,6 +374,13 @@ const Projects = () => {
   
     </div>
       </CustomTabPanel>
+      <div style={{textAlign:"center" , gap:"10px"}}>
+  <button className='btn5 mx-3 p-2'><ArrowBackIosNew /></button>
+  <button className='btn5 mx-3 py-3 px-4'> 01 </button>
+  <button className='btn5 mx-3 py-3 px-4'> 02 </button>
+  <button className='btn5 mx-3 p-2'><ArrowForwardIos /></button>
+
+</div>
     </Box>
 
 

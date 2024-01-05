@@ -7,6 +7,15 @@ box-shadow: 0 0 15px 5px rgba(0, 0, 0, 0.07);
 overflow: hidden;
 position: relative;
 }
+.project{
+  background-image: url(/src//components/images/bg1.jpg);
+  background-position: center;
+  background-size: cover;
+  padding: 70px 5px;
+  color: #fff;
+  margin-bottom: 50px;
+}
+
 .box:before {
   content: "";
   width: 50%;
@@ -117,4 +126,24 @@ transform: rotate(360deg);
 .box {
   margin: 0 0 30px;
 }
+}
+
+
+.tab{
+  transition: 1s;
+  font-family: 'Bodoni Moda' !important;
+
+}
+
+.tab:hover{
+  background-color: #ffa200;
+  color: #000;
+  border-radius: 15px;
+  box-shadow: 7px 7px 15px #000;
+  padding: 0 5px;
+  margin: 0 10px;
+  
+}
+.tab:active{
+  background-color: #4d08d9;
 }

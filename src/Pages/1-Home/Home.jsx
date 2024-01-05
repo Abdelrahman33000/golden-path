@@ -24,17 +24,17 @@ const Home = () => {
         <About />
     
 
-      <h1 style={{color:"#093266"}} className="ps-5 my-5">
+      <h3  className="ps-5 m-5 img2">
         Our Products
-      </h1>
+      </h3>
       <ProductCarousel />
-      <h1 style={{color:"#093266"}} className="ps-5 my-5">
+      <h3  className="ps-5 m-5 img2">
         Our Projects
-      </h1>
+      </h3>
       <Products />
-      <h1 style={{color:"#093266"}} className="ps-5 my-5">
+      <h3 className="ps-5 m-5 img2">
         Our Partners
-      </h1>
+      </h3>
       <Logo />
         <SubScribe />
     

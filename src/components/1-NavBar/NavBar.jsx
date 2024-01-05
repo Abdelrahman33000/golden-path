@@ -19,7 +19,7 @@ const NavBar = () => {
       setShowModel(true);
     }}
   />
-  <div />
+  {/* <div /> */}
   <nav>
     {lists.map((list) => (
       <Link className="list" to={list.url} key={list.id}>

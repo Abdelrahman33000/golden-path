@@ -1,10 +1,6 @@
 import React from "react";
 import "./ContactUs.css";
-// import { ImPhone, ImMail3 } from "react-icons/im";
-// import { BsCaretRightSquareFill, BsFacebook } from "react-icons/bs";
-// import { Link } from "react-router-dom";
-// import { AiFillLinkedin } from "react-icons/ai";
-// import { FaGlobeAmericas } from "react-icons/fa";
+
 import Lottie from "lottie-react";
 
 import contact from "../../animation/contact.json";
@@ -14,10 +10,11 @@ const ContactUs = () => {
     <div className="container-fluide  mt-0">
 
 
+
       <div className="  text-center p-4">
-        <h1>
+        <h2>
           <b className="" >Contact Us</b>{" "}
-        </h1>
+        </h2>
         <p>We’re always here for you to
 give best service</p>
       </div>
@@ -33,10 +30,20 @@ give best service</p>
             <h6 className="mx-4 mb-4">Simply leave your contact number, We will call you back.
 
 </h6>
-<div className="p-4 text-center" >
+<div className="ms-4" >
   
-  <button className="p-3 mb-5 w-50 rounded-4 btn5">Phone Num</button> <br />
-  <button className="p-3 w-50 rounded-4 btn5" >Get Call Back</button>
+  <p className="  icon-message  ">  info@gmail.com</p> <br />
+  <p className=" icon-mobile " > +123456789</p>
+  <div className='d-flex justify-content-between my-3 pe-3 py-3'>
+               <p>Stay Connected</p>
+           <div>
+                   <span className='icon-instagram me-2   icon' />
+                   <span className='icon-linkedin2 me-2   icon' />
+                   <span className='icon-github me-2   icon' />
+                   <span className='icon-youtube me-2   icon' />
+                   <span className='icon-facebook1    icon ' />
+           </div>
+ </div>
         
 </div>  
           

@@ -11,6 +11,7 @@ import Autocomplete, { createFilterOptions } from '@mui/material/Autocomplete';
 
 
 import img7 from '../../components/images/cam3.jpg'
+import { ArrowBackIosNew, ArrowForwardIos, Search } from '@mui/icons-material';
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
 
@@ -74,15 +75,26 @@ const Products = () => {
   return (
 
 
-   <div className='my-5' style={{minHeight:"100vh"}}>
-   <div className='d-flex align-items-center 'style={{flexWrap:"wrap"}}>
-      <div className=' ms-2' style={{flexGrow:"1"}}>
-         <h3 className=''>Categories</h3>
-         <input type="search" className=' rounded-5 ' placeholder='Search...' style={{outline:"none" , border:"none" ,backgroundColor:"#d2cccc"}} />
+   <div className='my-5' style={{ flexWrap:"wrap"  }}>
+    <h1 className='products text-center' style={{fontFamily:"Bodoni Moda"}}>products</h1>
+   <div className='d-flex align-items-center my-5 'style={{flexWrap:"wrap"}}>
+      <div className=' mx-5' style={{flexGrow:"1"}}>
         
+         <div className="input-group ">
+        <button className='icon1'>
+        <Search />
+        </button>
+
+          <input
+          className='rounded-4'
+            type="search"
+            placeholder=" search..."
+          />
+        </div>
+   
       </div>
 
-      <Autocomplete className='pe-5 my-2 ms-2'
+      <Autocomplete className='pe-5  ms-5 '
       id="filter-demo"
       options={top100Films}
       getOptionLabel={(option) => option.title}
@@ -95,79 +107,87 @@ const Products = () => {
 
 
    </div>
-     <Box 
-       sx={{ flexGrow: 1, bgcolor: 'background.paper', display: 'flex' }}
+     <Box  className="row"
+       sx={{  bgcolor: 'background.paper', display: 'flex', flexWrap:"wrap" , justifyContent:"space-between" }}
      >
+              <h3 className='text-dark ms-5'>Categories</h3>
+
        <Tabs
+       
+       className='col-lg-2 mb-5 mt-4 tabs5 mx-5 '
          orientation="vertical"
          variant="scrollable"
          value={value}
          onChange={handleChange}
          aria-label="Vertical tabs example"
-         sx={{ borderRight: 1, borderColor: 'divider' , minWidth:"100px" }}
+         
        >
-         <Tab label="Item One" {...a11yProps(0)} />
-         <Tab label="Item Two" {...a11yProps(1)} />
-         <Tab label="Item Three" {...a11yProps(2)} />
-         <Tab label="Item Four" {...a11yProps(3)} />
-         <Tab label="Item Five" {...a11yProps(4)} />
-         <Tab label="Item Six" {...a11yProps(5)} />
-         <Tab label="Item Seven" {...a11yProps(6)} />
+         <Tab className='categories' label="Item One" {...a11yProps(0)} />
+         <Tab className='categories' label="Item Two" {...a11yProps(1)} />
+         <Tab className='categories' label="Item Three" {...a11yProps(2)} />
+         <Tab className='categories' label="Item Four" {...a11yProps(3)} />
+         <Tab className='categories' label="Item Five" {...a11yProps(4)} />
+         <Tab className='categories' label="Item Six" {...a11yProps(5)} />
+         <Tab className='categories' label="Item Seven" {...a11yProps(6)} />
        </Tabs>
+
+       <div className='col-lg-9'>
+
+
        <TabPanel value={value} index={0} >
 <div className='d-flex' style={{gap:"30px" , flexWrap:"wrap"}}>
-  <div className='card  cd5 rounded-5 shadow-lg' style={{ display:"flex" ,justifyContent:"center" ,alignItems:"center" }}>
-  <img src={img7} alt='' width={200} className='rounded-5 p-2' />
+  <div className='card  cd5 rounded-5 shadow-lg' style={{ display:"flex" ,alignItems:"center" }}>
+  <img src={img7} alt='' width={300} height={300} className='rounded-5 p-2' />
   
-        {/* <Rating name="read-only" value={5} readOnly className='my-2' /> */}
   <h5>Product 1</h5>
-  <p> <button className='btn5 py-1 px-3 rounded-3'>Request now</button></p>
+  <p>Lorem ipsum dolor sit amet.</p>
+  <p> <button className='btn5 py-1 px-3 rounded-3'>Read More</button></p>
   
   </div>
 
-  <div className='card  cd5 rounded-5 shadow-lg' style={{ display:"flex" ,justifyContent:"center" ,alignItems:"center" }}>
-  <img src={img7} alt='' width={200} className='rounded-5 p-2' />
+  <div className='card  cd5 rounded-5 shadow-lg' style={{ display:"flex" ,alignItems:"center" }}>
+  <img src={img7} alt='' width={300} height={300} className='rounded-5 p-2' />
   
-        {/* <Rating name="read-only" value={5} readOnly className='my-2' /> */}
   <h5>Product 1</h5>
-  <p> <button className='btn5 py-1 px-3 rounded-3'>Request now</button></p>
+  <p>Lorem ipsum dolor sit amet.</p>
+  <p> <button className='btn5 py-1 px-3 rounded-3'>Read More</button></p>
   
   </div>
 
-  <div className='card  cd5 rounded-5 shadow-lg' style={{ display:"flex" ,justifyContent:"center" ,alignItems:"center" }}>
-  <img src={img7} alt='' width={200} className='rounded-5 p-2' />
+  <div className='card  cd5 rounded-5 shadow-lg' style={{ display:"flex" ,alignItems:"center" }}>
+  <img src={img7} alt='' width={300} height={300} className='rounded-5 p-2' />
   
-        {/* <Rating name="read-only" value={5} readOnly className='my-2' /> */}
   <h5>Product 1</h5>
-  <p> <button className='btn5 py-1 px-3 rounded-3'>Request now</button></p>
+  <p>Lorem ipsum dolor sit amet.</p>
+  <p> <button className='btn5 py-1 px-3 rounded-3'>Read More</button></p>
   
   </div>
 
-  <div className='card  cd5 rounded-5 shadow-lg' style={{ display:"flex" ,justifyContent:"center" ,alignItems:"center" }}>
-  <img src={img7} alt='' width={200} className='rounded-5 p-2' />
+  <div className='card  cd5 rounded-5 shadow-lg' style={{ display:"flex" ,alignItems:"center" }}>
+  <img src={img7} alt='' width={300} height={300} className='rounded-5 p-2' />
   
-        {/* <Rating name="read-only" value={5} readOnly className='my-2' /> */}
   <h5>Product 1</h5>
-  <p> <button className='btn5 py-1 px-3 rounded-3'>Request now</button></p>
-  
-  </div>
-
-  <div className='card  cd5 rounded-5 shadow-lg' style={{ display:"flex" ,justifyContent:"center" ,alignItems:"center" }}>
-  <img src={img7} alt='' width={200} className='rounded-5 p-2' />
-  
-        {/* <Rating name="read-only" value={5} readOnly className='my-2' /> */}
-  <h5>Product 1</h5>
-  <p> <button className='btn5 py-1 px-3 rounded-3'>Request now</button></p>
+  <p>Lorem ipsum dolor sit amet.</p>
+  <p> <button className='btn5 py-1 px-3 rounded-3'>Read More</button></p>
   
   </div>
 
 
-  <div className='card  cd5 rounded-5 shadow-lg' style={{ display:"flex" ,justifyContent:"center" ,alignItems:"center" }}>
-  <img src={img7} alt='' width={200} className='rounded-5 p-2' />
+  <div className='card  cd5 rounded-5 shadow-lg' style={{ display:"flex" ,alignItems:"center" }}>
+  <img src={img7} alt='' width={300} height={300} className='rounded-5 p-2' />
   
-        {/* <Rating name="read-only" value={5} readOnly className='my-2' /> */}
   <h5>Product 1</h5>
-  <p> <button className='btn5 py-1 px-3 rounded-3'>Request now</button></p>
+  <p>Lorem ipsum dolor sit amet.</p>
+  <p> <button className='btn5 py-1 px-3 rounded-3'>Read More</button></p>
+  
+  </div>
+
+  <div className='card  cd5 rounded-5 shadow-lg' style={{ display:"flex" ,alignItems:"center" }}>
+  <img src={img7} alt='' width={300} height={300} className='rounded-5 p-2' />
+  
+  <h5>Product 1</h5>
+  <p>Lorem ipsum dolor sit amet.</p>
+  <p> <button className='btn5 py-1 px-3 rounded-3'>Read More</button></p>
   
   </div>
 
@@ -176,35 +196,41 @@ const Products = () => {
 </div>
 
        </TabPanel>
+
+
+
+
        <TabPanel value={value} index={1}>
        
        
        
 <div className='d-flex' style={{gap:"30px" , flexWrap:"wrap"}}>
-  <div className='card  cd5 rounded-5 shadow-lg' style={{ display:"flex" ,justifyContent:"center" ,alignItems:"center" }}>
-  <img src={img7} alt='' width={200} className='rounded-5 p-2' />
+<div className='card  cd5 rounded-5 shadow-lg' style={{ display:"flex" ,alignItems:"center" }}>
+  <img src={img7} alt='' width={300} height={300} className='rounded-5 p-2' />
   
-        {/* <Rating name="read-only" value={5} readOnly className='my-2' /> */}
   <h5>Product 1</h5>
-  <p> <button className='btn5 py-1 px-3 rounded-3'>Request now</button></p>
+  <p>Lorem ipsum dolor sit amet.</p>
+  <p> <button className='btn5 py-1 px-3 rounded-3'>Read More</button></p>
   
   </div>
 
-  <div className='card  cd5 rounded-5 shadow-lg' style={{ display:"flex" ,justifyContent:"center" ,alignItems:"center" }}>
-  <img src={img7} alt='' width={200} className='rounded-5 p-2' />
+
+  <div className='card  cd5 rounded-5 shadow-lg' style={{ display:"flex" ,alignItems:"center" }}>
+  <img src={img7} alt='' width={300} height={300} className='rounded-5 p-2' />
   
-        {/* <Rating name="read-only" value={5} readOnly className='my-2' /> */}
   <h5>Product 1</h5>
-  <p> <button className='btn5 py-1 px-3 rounded-3'>Request now</button></p>
+  <p>Lorem ipsum dolor sit amet.</p>
+  <p> <button className='btn5 py-1 px-3 rounded-3'>Read More</button></p>
   
   </div>
 
-  <div className='card  cd5 rounded-5 shadow-lg' style={{ display:"flex" ,justifyContent:"center" ,alignItems:"center" }}>
-  <img src={img7} alt='' width={200} className='rounded-5 p-2' />
+
+   <div className='card  cd5 rounded-5 shadow-lg' style={{ display:"flex" ,alignItems:"center" }}>
+  <img src={img7} alt='' width={300} height={300} className='rounded-5 p-2' />
   
-        {/* <Rating name="read-only" value={5} readOnly className='my-2' /> */}
   <h5>Product 1</h5>
-  <p> <button className='btn5 py-1 px-3 rounded-3'>Request now</button></p>
+  <p>Lorem ipsum dolor sit amet.</p>
+  <p> <button className='btn5 py-1 px-3 rounded-3'>Read More</button></p>
   
   </div>
 
@@ -219,21 +245,21 @@ const Products = () => {
         
         
 <div className='d-flex' style={{gap:"30px" , flexWrap:"wrap"}}>
-  <div className='card  cd5 rounded-5 shadow-lg' style={{ display:"flex" ,justifyContent:"center" ,alignItems:"center" }}>
-  <img src={img7} alt='' width={200} className='rounded-5 p-2' />
+<div className='card  cd5 rounded-5 shadow-lg' style={{ display:"flex" ,alignItems:"center" }}>
+  <img src={img7} alt='' width={300} height={300} className='rounded-5 p-2' />
   
-        {/* <Rating name="read-only" value={5} readOnly className='my-2' /> */}
   <h5>Product 1</h5>
-  <p> <button className='btn5 py-1 px-3 rounded-3'>Request now</button></p>
+  <p>Lorem ipsum dolor sit amet.</p>
+  <p> <button className='btn5 py-1 px-3 rounded-3'>Read More</button></p>
   
   </div>
 
-  <div className='card  cd5 rounded-5 shadow-lg' style={{ display:"flex" ,justifyContent:"center" ,alignItems:"center" }}>
-  <img src={img7} alt='' width={200} className='rounded-5 p-2' />
+  <div className='card  cd5 rounded-5 shadow-lg' style={{ display:"flex" ,alignItems:"center" }}>
+  <img src={img7} alt='' width={300} height={300} className='rounded-5 p-2' />
   
-        {/* <Rating name="read-only" value={5} readOnly className='my-2' /> */}
   <h5>Product 1</h5>
-  <p> <button className='btn5 py-1 px-3 rounded-3'>Request now</button></p>
+  <p>Lorem ipsum dolor sit amet.</p>
+  <p> <button className='btn5 py-1 px-3 rounded-3'>Read More</button></p>
   
   </div>
 
@@ -255,6 +281,17 @@ const Products = () => {
        <TabPanel value={value} index={6}>
          Item Seven
        </TabPanel>
+
+       </div>
+
+
+<div style={{textAlign:"center"}}>
+  <button className='btn5 mx-3 p-2'><ArrowBackIosNew /></button>
+  <button className='btn5 mx-3 py-3 px-4'> 01 </button>
+  <button className='btn5 mx-3 py-3 px-4'> 02 </button>
+  <button className='btn5 mx-3 p-2'><ArrowForwardIos /></button>
+
+</div>
      </Box>
    </div>
 
