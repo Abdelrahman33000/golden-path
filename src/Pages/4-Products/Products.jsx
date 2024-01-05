@@ -285,7 +285,7 @@ const Products = () => {
        </div>
 
 
-<div style={{textAlign:"center"}}>
+<div className='my-5' style={{textAlign:"center"}}>
   <button className='btn5 mx-3 p-2'><ArrowBackIosNew /></button>
   <button className='btn5 mx-3 py-3 px-4'> 01 </button>
   <button className='btn5 mx-3 py-3 px-4'> 02 </button>
