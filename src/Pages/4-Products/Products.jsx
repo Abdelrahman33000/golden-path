@@ -4,6 +4,7 @@ import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
 import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
+import { Link } from 'react-router-dom';
 import "./products.css"
 // import Rating from '@mui/material/Rating';
 import TextField from '@mui/material/TextField';
@@ -141,7 +142,9 @@ const Products = () => {
   
   <h5>Product 1</h5>
   <p>Lorem ipsum dolor sit amet.</p>
-  <p> <button className='btn5 py-1 px-3 rounded-3'>Read More</button></p>
+  <p>  
+    <Link to={"/product1"} style={{textDecoration:"none" , color:"#000"}}  className='btn5 py-1 px-3 rounded-3'>Read More</Link> 
+    </p>
   
   </div>
 

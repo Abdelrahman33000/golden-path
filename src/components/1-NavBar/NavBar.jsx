@@ -1,7 +1,9 @@
 import React, { useState } from 'react'
 import './NavBar.css'
+// import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router-dom';
 const NavBar = () => {
+  // const [t , i18n]= useTranslation();
   const [showModel, setShowModel] = useState(false);
 
     const lists = [

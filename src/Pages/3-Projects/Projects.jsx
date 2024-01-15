@@ -79,7 +79,7 @@ const Projects = () => {
                     <span class="post">Web designer</span>
                 </div>
                 <ul class="icon">
-                <li><Link href="#"><AddLink /></Link></li>
+                <li><Link to="/Project1"><AddLink /></Link></li>
                 <li><Link href="#"><TravelExplore /></Link></li>
                 </ul>
             </div>

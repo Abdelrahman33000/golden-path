@@ -1,10 +1,11 @@
 .btn5{
     transition: .5s;
     background-color: #ff8d03;
+    color: #000;
 }
 
 .btn5:hover{
-background-color: #000;
+background-color: #786464;
 color: #fff;
 
 }
