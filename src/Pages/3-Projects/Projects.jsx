@@ -12,6 +12,8 @@ import img1 from '../../components/images/cam4.jpg'
 import { Link } from 'react-router-dom';
 import { AddLink, ArrowBackIosNew, ArrowForwardIos, TravelExplore } from '@mui/icons-material';
 import "./projects.css"
+import { useTranslation } from 'react-i18next';
+
 function CustomTabPanel(props) {
   const { children, value, index, ...other } = props;
 
@@ -53,12 +55,14 @@ const Projects = () => {
     setValue(newValue);
   };
 
+  const { t } = useTranslation();
+
 
   return (
     
     <Box  my={5} py={5} sx={{ width: '100%' , margin:"auto" ,textAlign:"center", minHeight:"100vh"}}>
 
-        <h1 className='project' style={{fontFamily:"Bodoni Moda"}}> projects</h1>
+        <h1 className='project' style={{fontFamily:"Bodoni Moda"}}>   {t('Our Projects')}</h1>
       <Box    sx={{ borderColor: 'divider',display:"flex", justifyContent:"center" ,  borderBottom:"3px solid #ffa200" , borderTop:"3px solid #ffa200" }}>
         <Tabs value={value} onChange={handleChange} aria-label="basic tabs example" sx={{ textAlign:"center"}}>
           <Tab  className='tab' label="All" {...a11yProps(0)} />

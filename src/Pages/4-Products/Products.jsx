@@ -75,14 +75,14 @@ const Products = () => {
     setValue(newValue);
   };
 
-  const { t, i18n } = useTranslation();
+  const { t} = useTranslation();
   // document.body.dir = i18n.dir();
 
   return (
 
 
    <div className='my-5' style={{ flexWrap:"wrap"  }}>
-    <h1 className='products text-center' style={{fontFamily:"Bodoni Moda"}}>products</h1>
+    <h1 className='products text-center' style={{fontFamily:"Bodoni Moda"}}>  {t('Our Products')}</h1>
    <div className='d-flex align-items-center my-5 'style={{flexWrap:"wrap"}}>
       <div className=' mx-5' style={{flexGrow:"1"}}>
         
@@ -116,7 +116,7 @@ const Products = () => {
      <Box  className="row"
        sx={{  bgcolor: 'background.paper', display: 'flex', flexWrap:"wrap" , justifyContent:"space-between" }}
      >
-              <h3 className='text-dark mx-5'>Categories</h3>
+              <h3 className='text-dark mx-5'>{t('Categories')}</h3>
 
        <Tabs
        
