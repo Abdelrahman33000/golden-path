@@ -3,8 +3,8 @@ import img from '../images/cam2.jpg'
 import './Subscribe.css'
 const SubScribe = () => {
   return (
-    <div className='my-5 align-items-center rounded-5 shadow-lg row' style={{margin:'auto', textAlign:"center" , backgroundColor:"#bcbcb761" , width:"85%"}}>
-      <div className='col-lg-5'>
+    <div className='my-5 align-items-center rounded-5 shadow-lg row ' style={{margin:'auto', textAlign:"center" , backgroundColor:"#bcbcb761" , width:"85%"}}>
+      <div className='col-lg-5  d-flex justify-content-center ps-5'>
           <img src={img} alt="img" className=' rounded-5 p-3 me-5'style={{width:"100%"}} />
       </div>
         <div className='col-lg-5 py-3'>

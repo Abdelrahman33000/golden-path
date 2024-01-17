@@ -15,6 +15,7 @@ export default function App() {
   return (
     <>
       <Swiper
+      dir='ltr'
       loop={true}
       centeredSlides={true}
       autoplay={{

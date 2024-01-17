@@ -1,7 +1,11 @@
 import React from 'react'
 import img from '../images/Golden Path - Logo.png'
 import './Footer.css'
+import { useTranslation } from 'react-i18next';
+
 const Footer = () => {
+  const { t } = useTranslation();
+
   return (
     <footer className='row   text-light mx-0'>
 <div className='col-lg-3 px-5'>
@@ -9,35 +13,35 @@ const Footer = () => {
     
 </div> <div className='bg-dark  col-lg-9 row p-5 m-0'>
          <div className='col-lg-2   m-sm-3  col-sm-4 '>
-           <h4 style={{color:"#ffa200"}}>Home</h4>
+           <h4 style={{color:"#ffa200"}}>{t('Home')}</h4>
            <p>Sub Link</p>
            <p>Sub Link</p>
            <p>Sub Link</p>
          </div>
     
          <div className='col-lg-2   m-sm-3  col-sm-4 '>
-           <h4 style={{color:"#ffa200"}}>About</h4>
+           <h4 style={{color:"#ffa200"}}>{t('About')}</h4>
            <p>Sub Link</p>
            <p>Sub Link</p>
            <p>Sub Link</p>
          </div>
 
          <div className='col-lg-2   m-sm-3  col-sm-4 '>
-           <h4 style={{color:"#ffa200"}}>Projects</h4>
+           <h4 style={{color:"#ffa200"}}>{t('Projects')}</h4>
            <p>Sub Link</p>
            <p>Sub Link</p>
            <p>Sub Link</p>
          </div>
     
          <div className='col-lg-2  m-sm-3  col-sm-4 '>
-           <h4 style={{color:"#ffa200"}}>Products</h4>
+           <h4 style={{color:"#ffa200"}}>{t('Products')}</h4>
            <p>Sub Link</p>
            <p>Sub Link</p>
            <p>Sub Link</p>
          </div>
 
          <div className='col-lg-2   m-sm-3  col-sm-4 '>
-           <h4 style={{color:"#ffa200"}}>Contact Us</h4>
+           <h4 style={{color:"#ffa200"}}>{t('Contact Us')}</h4>
            <p>Sub Link</p>
            <p>Sub Link</p>
            <p>Sub Link</p>

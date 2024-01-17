@@ -4,9 +4,11 @@ import Carousel from 'react-bootstrap/Carousel';
 import img   from '../../components/images/Photographer.jpg';
 import img2   from '../../components/images/photograph.jpg';
 import img3   from '../../components/images/photograph5.jpg';
+
 const Hero = () => {
   return (
     <main>
+
    {/* <div className=' p-5'>
        <h1>Capture Life's <br /> Brilliance</h1><br />
        Lorem ipsum dolor sit amet consectetur adipisicing elit. <br />

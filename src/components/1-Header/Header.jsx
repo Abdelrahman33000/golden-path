@@ -5,7 +5,7 @@ import Logo from '../images/Golden Path - Logo.png'
 import './Header.css'
 const Header = () => {
   return (
-    <header className='d-flex justify-content-between mx-5   my-3 align-items-center'>
+    <header className='d-flex justify-content-between mx-2   my-3 align-items-center'>
         <img src={Logo} alt="Logo" style={{width:"150px" , height:"35px"}} className='me-3 img' />
        
 

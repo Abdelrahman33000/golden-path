@@ -30,11 +30,11 @@ give best service</p>
             <h6 className="mx-4 mb-4">Simply leave your contact number, We will call you back.
 
 </h6>
-<div className="ms-4" >
+<div className="mx-4" >
   
   <p className="  icon-message  ">  info@gmail.com</p> <br />
   <p className=" icon-mobile " > +123456789</p>
-  <div className='d-flex justify-content-between my-3 pe-5 py-3'>
+  <div className='d-flex justify-content-between my-3 px-2 py-3'>
                <p>Stay Connected</p>
            <div>
                    <span className='icon-instagram me-2   icon' />

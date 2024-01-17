@@ -82,9 +82,9 @@ const About = () => {
 
 <div className='my-5 align-items-center rounded-5 shadow-lg row' style={{margin:'auto', textAlign:"left" , backgroundColor:"#bcbcb761" , width:"85%"}}>
       <div className='col-lg-5' >
-          <img src={img2} alt="img" className=' rounded-5 p-3 me-5'style={{width:"100%" ,height:"300px"}}  />
+          <img src={img2} alt="img" className=' rounded-5 p-3 'style={{width:"100%" ,height:"300px"}}  />
       </div>
-        <div className='col-lg-5 py-3' style={{textAlign:"justify"}}>
+        <div className='col-lg-5 py-3 ' style={{textAlign:"justify"}}>
             <h1>Our Vision</h1>
             <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Eveniet quae repellendus ea! Explicabo nemo a quisquam error molestiae, reiciendis tempora veniam molestias voluptatem, magni est numquam quibusdam deserunt sapiente cumque?</p>
             {/* <button className='btn5 px-3 py-2 mb-3 rounded-4 '>Read More</button> */}
@@ -127,7 +127,7 @@ const About = () => {
  </div>
         </div>
         <div className='col-lg-5 '>
-          <img src={img2} alt="img" className=' rounded-5 p-3 me-5'style={{width:"100%" , height:'300px'}} />
+          <img src={img2} alt="img" className=' rounded-5 p-3 'style={{width:"100%" , height:'300px'}} />
       </div>
 
     </div>

@@ -17,9 +17,11 @@ import './Products.css';
 // import { EffectCoverflow, Pagination } from 'swiper/modules';
 
 export default function App() {
+
   return (
     <>
-      <Swiper 
+      <Swiper
+      dir='ltr'
        loop={true}
        centeredSlides={true}
        autoplay={{
@@ -70,12 +72,18 @@ export default function App() {
         }}
         className="mySwiper5"
       >
-      <SwiperSlide className='sd2'><div >
+      <SwiperSlide className='sd2'>
+        <div >
           <img src={Came1} alt="" />
       </div> <br />
       <h3>Camera</h3>
        <p style={{opacity:".5"}}>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aspernatur commodi ab amet
-           mollitia in ut quod velit officiis eos nesciunt?</p> </SwiperSlide>
+           mollitia in ut quod velit officiis eos nesciunt?</p>
+           
+            </SwiperSlide>
+
+
+
       <SwiperSlide className='sd2'><div>
           <img src={Came2} alt="" />
       </div><br />   <h3>Camera</h3>

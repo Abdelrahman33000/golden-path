@@ -1,5 +1,7 @@
 import React from "react";
 import "./Home.css";
+import { useTranslation } from 'react-i18next';
+
 import {
   About,
   Hero,
@@ -9,6 +11,8 @@ import {
   SubScribe,
 } from "../../components";
 const Home = () => {
+  const { t } = useTranslation();
+
   // const lists = [
   //   { name: " Home", id: "/" },
   //   { name: " About", id: "#About" },
@@ -25,15 +29,15 @@ const Home = () => {
     
 
       <h3  className="ps-5 m-5 img2">
-        Our Products
+       {t('Our Products')} 
       </h3>
       <ProductCarousel />
       <h3  className="ps-5 m-5 img2">
-        Our Projects
+       {t('Our Projects')}
       </h3>
       <Products />
       <h3 className="ps-5 m-5 img2">
-        Our Partners
+        {t('Our Partners')}
       </h3>
       <Logo />
         <SubScribe />

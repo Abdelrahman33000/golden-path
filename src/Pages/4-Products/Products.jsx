@@ -6,6 +6,8 @@ import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
 import { Link } from 'react-router-dom';
 import "./products.css"
+import { useTranslation } from 'react-i18next';
+
 // import Rating from '@mui/material/Rating';
 import TextField from '@mui/material/TextField';
 import Autocomplete, { createFilterOptions } from '@mui/material/Autocomplete';
@@ -15,7 +17,7 @@ import img7 from '../../components/images/cam3.jpg'
 import { ArrowBackIosNew, ArrowForwardIos, Search } from '@mui/icons-material';
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
-
+ 
   return (
     <div
       role="tabpanel"
@@ -73,6 +75,9 @@ const Products = () => {
     setValue(newValue);
   };
 
+  const { t, i18n } = useTranslation();
+  // document.body.dir = i18n.dir();
+
   return (
 
 
@@ -81,15 +86,15 @@ const Products = () => {
    <div className='d-flex align-items-center my-5 'style={{flexWrap:"wrap"}}>
       <div className=' mx-5' style={{flexGrow:"1"}}>
         
-         <div className="input-group ">
-        <button className='icon1'>
+         <div className="input-group " dir='rtl'>
+        <button className='icon1  '>
         <Search />
         </button>
 
           <input
-          className='rounded-4'
+          className='rounded-4 px-5 '
             type="search"
-            placeholder=" search..."
+            placeholder={t('search...')}
           />
         </div>
    
@@ -111,7 +116,7 @@ const Products = () => {
      <Box  className="row"
        sx={{  bgcolor: 'background.paper', display: 'flex', flexWrap:"wrap" , justifyContent:"space-between" }}
      >
-              <h3 className='text-dark ms-5'>Categories</h3>
+              <h3 className='text-dark mx-5'>Categories</h3>
 
        <Tabs
        
