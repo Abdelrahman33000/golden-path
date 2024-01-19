@@ -19,7 +19,11 @@ const DashboardProduct = () => {
   }, [listOfProducts]);
 
   async function getProductsFromAPI() {
-    await fetch("https://dash-board-sspy.onrender.com/api/all-products")
+    await fetch("https://dash-board-sspy.onrender.com/api/all-products", {
+      headers: {
+        mode: "no-cors",
+      },
+    })
       .then((response) => response.json())
       .then((data) => {
         console.log(data, "data get");
@@ -67,7 +71,7 @@ const DashboardProduct = () => {
 
   async function createNewProductAPI(productData) {
     // console.log(listOfProducts[productIndex]._id, "id");
-  
+
     await fetch(`https://dash-board-sspy.onrender.com/api/product`, {
       mode: "no-cors",
       method: "POST",
