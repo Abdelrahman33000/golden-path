@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from "react";
-import LayoutTableDashboard from "../../components/LayoutTableDashboard/LayoutTableDashboard";
+import TableLayout from "../../components/TableLayout/TableLayout";
+import Loader from "../../components/Loader/Loader";
 
-const DashboardProduct = () => {
+const ProductTableBoard = () => {
   const [listOfProducts, setListOfProducts] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
 
@@ -19,15 +20,10 @@ const DashboardProduct = () => {
   }, [listOfProducts]);
 
   async function getProductsFromAPI() {
-    await fetch("https://dash-board-sspy.onrender.com/api/all-products", {
-      headers: {
-        mode: "no-cors",
-      },
-    })
+    await fetch("https://dash-board-sspy.onrender.com/api/all-products", {})
       .then((response) => response.json())
       .then((data) => {
         console.log(data, "data get");
-        console.log(data.data[10].image, "index 30");
         setListOfProducts(data.data);
       })
       .catch((error) => console.log(error, "error"));
@@ -69,42 +65,49 @@ const DashboardProduct = () => {
   //     .catch((error) => console.log(error, "error"));
   // }
 
-  async function createNewProductAPI(productData) {
-    // console.log(listOfProducts[productIndex]._id, "id");
+  // async function createNewProductAPI(productData) {
+  //   // console.log(listOfProducts[productIndex]._id, "id");
 
-    await fetch(`https://dash-board-sspy.onrender.com/api/product`, {
-      mode: "no-cors",
-      method: "POST",
-      body: { ...productData },
-      headers: {
-        "Access-Control-Allow-Origin": "http://localhost:3000",
-        "Content-Type": "application/json",
-      },
-    })
-      .then((response) => response.json())
-      .then((data) => {
-        console.log(data, "data delete");
-      })
-      .catch((error) => console.log(error, "error"));
-  }
+  //   await fetch(`https://dash-board-sspy.onrender.com/api/product`, {
+  //     mode: "no-cors",
+  //     method: "POST",
+  //     body: { ...productData },
+  //     headers: {
+  //       "Access-Control-Allow-Origin": "http://localhost:3000",
+  //       "Content-Type": "application/json",
+  //     },
+  //   })
+  //     .then((response) => response.json())
+  //     .then((data) => {
+  //       console.log(data, "data delete");
+  //     })
+  //     .catch((error) => console.log(error, "error"));
+  // }
 
   return (
     <div className="min-vh-100">
-      {isLoading ? (
-        <div>Loading ..</div>
+      {isLoading || listOfProducts.length == 0 ? (
+        <Loader />
       ) : (
-        <LayoutTableDashboard
+        // <LayoutTableDashboard
+        //   listOfData={listOfProducts}
+        //   headerCells={headersProduct}
+        //   handleDeleteItem={deleteProductsFromAPI}
+        //   // handleUpdateItem={updateProductsToAPI}
+        //   setIsLoading={setIsLoading}
+        //   title={"Products"}
+        // />
+        <TableLayout
           listOfData={listOfProducts}
           headerCells={headersProduct}
           handleDeleteItem={deleteProductsFromAPI}
           // handleUpdateItem={updateProductsToAPI}
-          handleCreateNewItem={createNewProductAPI}
           setIsLoading={setIsLoading}
-          title={"Products"}
+          title={"Product"}
         />
       )}
     </div>
   );
 };
 
-export default DashboardProduct;
+export default ProductTableBoard;

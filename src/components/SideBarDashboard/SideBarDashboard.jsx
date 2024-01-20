@@ -94,10 +94,11 @@ function SideBarDashboard({
 
   const drawerList = [
     { text: "Home", icon: <Home /> },
-    { text: "Products", icon: <PrecisionManufacturing /> },
-    { text: "Projects", icon: <Construction /> },
-    { text: "Sliders", icon: <DoorSliding /> },
-    { text: "Sponsers", icon: <SensorOccupied /> },
+    { text: "Product", icon: <PrecisionManufacturing /> },
+    { text: "Product Category", icon: <PrecisionManufacturing /> },
+    { text: "Project", icon: <Construction /> },
+    { text: "Slider", icon: <DoorSliding /> },
+    { text: "Sponser", icon: <SensorOccupied /> },
   ];
 
   const navigator = useNavigate();
@@ -171,7 +172,15 @@ function SideBarDashboard({
             <ListItem key={`drawer-${index}`} disablePadding>
               <ListItemButton
                 // sx={{ backgroundColor: "yellow" }}
-                onClick={() => navigator(`/admin/${label.text.toLowerCase()}`)}
+                onClick={() => {
+                  if (label.text.toLowerCase() == "home") {
+                    navigator("/admin");
+                  } else {
+                    navigator(
+                      `/admin/${label.text.toLowerCase().replace(" ", "-")}`
+                    );
+                  }
+                }}
               >
                 <ListItemIcon>
                   {label.icon}

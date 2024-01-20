@@ -7,9 +7,12 @@ import Product1 from "./Pages/Product1/Product1";
 import Project1 from "./Pages/projext1/Project1";
 import AdminDashboard from "./Pages/Dashboard/AdminDashboard";
 import DashboardHome from "./Pages/DashboardHome/DashboardHome";
-import DashboardProduct from "./Pages/DashboardProduct/DashboardProduct";
+import DashboardProduct from "./temp/DashboardProduct/DashboardProduct";
 import LayoutForm from "./components/LayoutForm/LayoutForm";
 import AddProduct from "./Pages/AddProduct/AddProduct";
+import AddCategory from "./Pages/AddCategory/AddCategory";
+import CategoryTableBoard from "./Pages/CategoryTableBoard/CategoryTableBoard";
+import ProductTableBoard from "./Pages/ProductTableBoard/ProductTableBoard";
 // import ProjectDetails from "./components/ProjectDetails";
 function App() {
   return (
@@ -28,9 +31,23 @@ function App() {
         {/* <Route path="/admin" element={<AdminDashboard />} /> */}
 
         <Route path="/admin" element={<AdminDashboard />}>
-          <Route path="home" index element={<DashboardHome />} />
-          <Route path="products" element={<DashboardProduct />} />
+          <Route index element={<DashboardHome />} />
+          <Route path="product" element={<ProductTableBoard />} />
           <Route path="add-product" element={<AddProduct />} />
+          <Route path="product-category" element={<CategoryTableBoard />} />
+          <Route path="project-category" element={<CategoryTableBoard />} />
+          <Route
+            path="add-product-category"
+            element={<AddCategory categoryType={"product"} />}
+          />
+          <Route
+            path="add-project-category"
+            element={<AddCategory categoryType={"project"} />}
+          />
+          {/* <Route path="products" element={<DashboardProduct />} /> */}
+          {/* <Route path="categorys" element={<categorytable} /> */}
+          {/* <Route path="add-product" element={<AddProduct />} /> */}
+          {/* <Route path="add-category" element={<AddCategory />} /> */}
           {/* <Route path="account" element={<Account />} /> */}
           {/* <Route path="*" element={<NoMatch />} /> */}
         </Route>

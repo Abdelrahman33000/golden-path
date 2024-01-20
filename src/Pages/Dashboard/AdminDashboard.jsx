@@ -39,9 +39,12 @@ import { styled, useTheme } from "@mui/material/styles";
 import LayoutTableDashboard from "../../components/LayoutTableDashboard/LayoutTableDashboard";
 import { Routes, Route } from "react-router-dom";
 import DashboardHome from "../DashboardHome/DashboardHome";
-import DashboardProduct from "../DashboardProduct/DashboardProduct";
+import DashboardProduct from "../../temp/DashboardProduct/DashboardProduct";
 import AddProduct from "../AddProduct/AddProduct";
 import LayoutForm from "../../components/LayoutForm/LayoutForm";
+import ProductTableBoard from "../ProductTableBoard/ProductTableBoard";
+import AddCategory from "../AddCategory/AddCategory";
+import CategoryTableBoard from "../CategoryTableBoard/CategoryTableBoard";
 
 const AdminDashboard = () => {
   // const [order, setOrder] = useState("asc");
@@ -143,9 +146,20 @@ const AdminDashboard = () => {
         }}
       >
         <Routes>
-          <Route path="home" index element={<DashboardHome />} />
-          <Route path="products" element={<DashboardProduct />} />
+          <Route index element={<DashboardHome />} />
+          <Route index element={<DashboardHome />} />
+          <Route path="product" element={<ProductTableBoard />} />
           <Route path="add-product" element={<AddProduct />} />
+          <Route path="product-category" element={<CategoryTableBoard />} />
+          <Route path="project-category" element={<CategoryTableBoard />} />
+          <Route
+            path="add-product-category"
+            element={<AddCategory categoryType={"product"} />}
+          />
+          <Route
+            path="add-project-category"
+            element={<AddCategory categoryType={"project"} />}
+          />
 
           {/* <Route path="/products/:productsId" element={<ProjectDetails />} /> */}
           {/* <Route path="/admin" element={<AdminDashboard />} /> */}
