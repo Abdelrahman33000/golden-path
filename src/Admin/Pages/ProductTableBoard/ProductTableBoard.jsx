@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from "react";
-import TableLayout from "../../components/TableLayout/TableLayout";
-import Loader from "../../components/Loader/Loader";
+import Loader from "../../Components/Loader/Loader";
+import TableLayout from "../../Components/TableLayout/TableLayout";
 
 const ProductTableBoard = () => {
   const [listOfProducts, setListOfProducts] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
 
-  const headersProduct = ["#id", "name", "name_en", "name_ar", "in_home"];
+  const headersProduct = ["#id", "name_en", "name_ar", "in_home"];
 
   useEffect(() => {
     getProductsFromAPI();

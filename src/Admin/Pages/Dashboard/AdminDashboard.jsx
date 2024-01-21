@@ -1,50 +1,22 @@
-import PropTypes from "prop-types";
-import { alpha } from "@mui/material/styles";
 import Box from "@mui/material/Box";
-import Table from "@mui/material/Table";
-import TableBody from "@mui/material/TableBody";
-import TableCell from "@mui/material/TableCell";
-import TableContainer from "@mui/material/TableContainer";
-import TableHead from "@mui/material/TableHead";
-import TablePagination from "@mui/material/TablePagination";
-import TableRow from "@mui/material/TableRow";
-import TableSortLabel from "@mui/material/TableSortLabel";
-import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
-import Paper from "@mui/material/Paper";
-import Checkbox from "@mui/material/Checkbox";
-import IconButton from "@mui/material/IconButton";
-import Tooltip from "@mui/material/Tooltip";
-import FormControlLabel from "@mui/material/FormControlLabel";
-import Switch from "@mui/material/Switch";
-import DeleteIcon from "@mui/icons-material/Delete";
-import FilterListIcon from "@mui/icons-material/FilterList";
-import { visuallyHidden } from "@mui/utils";
-import HeaderTable from "../../components/HeaderTable/HeaderTable";
-import ToolbarTable from "../../components/ToolbarTable/ToolbarTable";
-import { useEffect, useMemo, useState } from "react";
-import * as React from "react";
-import Collapse from "@mui/material/Collapse";
-import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
-import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
-import { DeleteOutlineOutlined } from "@mui/icons-material";
-import EditNoteIcon from "@mui/icons-material/EditNote";
-import SideBarDashboard from "../../components/SideBarDashboard/SideBarDashboard";
 import MuiAppBar from "@mui/material/AppBar";
 import CssBaseline from "@mui/material/CssBaseline";
-import List from "@mui/material/List";
-import Divider from "@mui/material/Divider";
-import MenuIcon from "@mui/icons-material/Menu";
 import { styled, useTheme } from "@mui/material/styles";
-import LayoutTableDashboard from "../../components/LayoutTableDashboard/LayoutTableDashboard";
+import { useEffect, useState } from "react";
 import { Routes, Route } from "react-router-dom";
-import DashboardHome from "../DashboardHome/DashboardHome";
-import DashboardProduct from "../../temp/DashboardProduct/DashboardProduct";
 import AddProduct from "../AddProduct/AddProduct";
-import LayoutForm from "../../components/LayoutForm/LayoutForm";
 import ProductTableBoard from "../ProductTableBoard/ProductTableBoard";
-import AddCategory from "../AddCategory/AddCategory";
-import CategoryTableBoard from "../CategoryTableBoard/CategoryTableBoard";
+import HomeDashboard from "../HomeDashboard/HomeDashboard";
+import SideBarDashboard from "./../../Components/SideBarDashboard/SideBarDashboard";
+import { MenuIcon } from "@mui/icons-material/Menu";
+import { Menu } from "@mui/icons-material";
+import { IconButton, Toolbar } from "@mui/material";
+import ProjectTableBoard from "../ProjectTableBoard/ProjectTableBoard";
+import AddProject from "../AddProject/AddProject";
+import ProductCategory from "../ProductCategory/ProductCategory";
+import ProjectCategory from "../ProjectCategory/ProjectCategory";
+import AddCategory from "../../Components/AddCategory/AddCategory";
 
 const AdminDashboard = () => {
   // const [order, setOrder] = useState("asc");
@@ -117,9 +89,44 @@ const AdminDashboard = () => {
     setIsDrawerOpen(false);
   };
 
+  // const AppBar = styled(MuiAppBar, {
+  //   shouldForwardProp: (prop) => prop !== "open",
+  // })(({ theme, open }) => ({
+  //   transition: theme.transitions.create(["margin", "width"], {
+  //     easing: theme.transitions.easing.sharp,
+  //     duration: theme.transitions.duration.leavingScreen,
+  //   }),
+  //   ...(open && {
+  //     width: `calc(100% - ${drawerWidth}px)`,
+  //     transition: theme.transitions.create(["margin", "width"], {
+  //       easing: theme.transitions.easing.easeOut,
+  //       duration: theme.transitions.duration.enteringScreen,
+  //     }),
+  //     marginRight: drawerWidth,
+  //   }),
+  // }));
+
   return (
     <Box sx={{ display: "flex" }}>
       <CssBaseline />
+
+      {/* <AppBar position="fixed" open={isDrawerOpen}>
+        <Toolbar>
+          <Typography variant="h6" noWrap sx={{ flexGrow: 1 }} component="div">
+            Persistent drawer
+          </Typography>
+          <IconButton
+            color="inherit"
+            aria-label="open drawer"
+            edge="end"
+            // onClick={handleDrawerOpen}
+            onClick={handleDrawerOpen}
+            sx={{ ...(isDrawerOpen && { display: "none" }) }}
+          >
+            <Menu />
+          </IconButton>
+        </Toolbar>
+      </AppBar> */}
 
       <Typography
         component={"div"}
@@ -145,13 +152,16 @@ const AdminDashboard = () => {
           position: "relative",
         }}
       >
+        <Box sx={{ height: 60, backgroundColor: "transparent" }} />
         <Routes>
-          <Route index element={<DashboardHome />} />
-          <Route index element={<DashboardHome />} />
+          <Route index element={<HomeDashboard />} />
           <Route path="product" element={<ProductTableBoard />} />
+          <Route path="project" element={<ProjectTableBoard />} />
           <Route path="add-product" element={<AddProduct />} />
-          <Route path="product-category" element={<CategoryTableBoard />} />
-          <Route path="project-category" element={<CategoryTableBoard />} />
+          <Route path="add-project" element={<AddProject />} />
+          <Route path="product-category" element={<ProductCategory />} />
+          <Route path="project-category" element={<ProjectCategory />} />
+
           <Route
             path="add-product-category"
             element={<AddCategory categoryType={"product"} />}
@@ -161,8 +171,14 @@ const AdminDashboard = () => {
             element={<AddCategory categoryType={"project"} />}
           />
 
-          {/* <Route path="/products/:productsId" element={<ProjectDetails />} /> */}
-          {/* <Route path="/admin" element={<AdminDashboard />} /> */}
+          <Route
+            path="*"
+            element={
+              <div className="min-vh-100 bg-primary-subtle d-flex align-items-center justify-content-center">
+                <h2 className="fw-bolder">Comming Soon ..</h2>
+              </div>
+            }
+          />
         </Routes>
         {/* <DrawerHeader /> */}
         {/* <LayoutTableDashboard

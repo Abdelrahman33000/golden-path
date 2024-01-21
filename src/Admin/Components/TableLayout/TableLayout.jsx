@@ -23,9 +23,9 @@ import {
   Subtitles,
 } from "@mui/icons-material";
 
-import ToolbarTable from "./../ToolbarTable/ToolbarTable";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import ToolbarTable from "../ToolbarTable/ToolbarTable";
 
 const TableLayout = ({
   listOfData,
@@ -100,7 +100,7 @@ const TableLayout = ({
       }}
     >
       <Paper sx={{ width: "100%", mb: 2 }}>
-        <Box
+        {/* <Box
           sx={{
             display: "flex",
             flexWrap: "wrap",
@@ -118,7 +118,7 @@ const TableLayout = ({
           >
             {`add ${title}`}
           </Button>
-          {/* 
+          
           <TablePagination
             sx={{
               "& .MuiTablePagination-displayedRows": {
@@ -132,8 +132,8 @@ const TableLayout = ({
             rowsPerPage={rowsPerPage}
             page={page}
             onPageChange={handleChangePage}
-          /> */}
-        </Box>
+          />
+        </Box> */}
         <TableContainer>
           <Table
             sx={{ minWidth: 750 }}
@@ -249,10 +249,18 @@ const TableLayout = ({
                                         >
                                           {item[0] == "image" ? (
                                             <img
-                                              src={`https://dash-board-sspy.onrender.com/src/uploads/${item[1]}`}
+                                              src={`${item[1]}`}
                                               width={"auto"}
                                               height={"100px"}
                                             />
+                                          ) : item[0] == "images_list" ? (
+                                            item[1].map((imgItem) => (
+                                              <img
+                                                src={`${imgItem}`}
+                                                width={"auto"}
+                                                height={"100px"}
+                                              />
+                                            ))
                                           ) : (
                                             item[1].toString()
                                           )}
@@ -271,7 +279,7 @@ const TableLayout = ({
               {emptyRows > 0 && (
                 <TableRow
                   style={{
-                    height: 53 * emptyRows,
+                    height: 69 * emptyRows,
                   }}
                 >
                   <TableCell colSpan={6} />
@@ -280,7 +288,8 @@ const TableLayout = ({
             </TableBody>
           </Table>
         </TableContainer>
-        <Typography
+
+        <Box
           sx={{
             display: "flex",
             flexWrap: "wrap",
@@ -289,6 +298,16 @@ const TableLayout = ({
             padding: 1,
           }}
         >
+          {/* <ToolbarTable title={title} /> */}
+          <Button
+            // sx={{ justifySelf: "center" }}
+            variant="contained"
+            endIcon={<Add />}
+            onClick={navigateToAdd}
+          >
+            {`add ${title}`}
+          </Button>
+
           <TablePagination
             sx={{
               "& .MuiTablePagination-displayedRows": {
@@ -303,7 +322,7 @@ const TableLayout = ({
             page={page}
             onPageChange={handleChangePage}
           />
-        </Typography>
+        </Box>
       </Paper>
     </Box>
   );

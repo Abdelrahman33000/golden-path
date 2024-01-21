@@ -3,12 +3,10 @@ import { styled, useTheme } from "@mui/material/styles";
 import Box from "@mui/material/Box";
 import Drawer from "@mui/material/Drawer";
 import MuiAppBar from "@mui/material/AppBar";
-import Toolbar from "@mui/material/Toolbar";
 import CssBaseline from "@mui/material/CssBaseline";
 import List from "@mui/material/List";
 import Typography from "@mui/material/Typography";
 import Divider from "@mui/material/Divider";
-import IconButton from "@mui/material/IconButton";
 import MenuIcon from "@mui/icons-material/Menu";
 import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
 import ChevronRightIcon from "@mui/icons-material/ChevronRight";
@@ -20,6 +18,8 @@ import InboxIcon from "@mui/icons-material/MoveToInbox";
 import MailIcon from "@mui/icons-material/Mail";
 import { useNavigate } from "react-router-dom";
 
+import { Toolbar, IconButton } from "@mui/material";
+
 import {
   ArrowBackIos,
   Construction,
@@ -27,6 +27,7 @@ import {
   Home,
   PrecisionManufacturing,
   SensorOccupied,
+  Menu,
 } from "@mui/icons-material";
 
 // const drawerWidth = 240;
@@ -97,25 +98,43 @@ function SideBarDashboard({
     { text: "Product", icon: <PrecisionManufacturing /> },
     { text: "Product Category", icon: <PrecisionManufacturing /> },
     { text: "Project", icon: <Construction /> },
+    { text: "Project Category", icon: <Construction /> },
     { text: "Slider", icon: <DoorSliding /> },
     { text: "Sponser", icon: <SensorOccupied /> },
   ];
 
   const navigator = useNavigate();
+  const [dashboardTitle, setDashboardTitle] = React.useState("Dashboard Home");
 
   return (
     <>
       <MuiAppBar
         sx={{
+          backgroundColor: "rgba(30,30,30,30)",
           // top: "93px",
           // right: "20px",
-          width: "50px",
-          backgroundColor: "transparent",
-          boxShadow: "none",
+          // width: "50px",
+          // backgroundColor: "transparent",
+          // boxShadow: "none",
           // backgroundColor: "green",
         }}
       >
-        <IconButton
+        <Toolbar>
+          <Typography variant="h6" noWrap sx={{ flexGrow: 1 }} component="div">
+            {dashboardTitle}
+          </Typography>
+          <IconButton
+            color="inherit"
+            aria-label="open drawer"
+            edge="end"
+            // onClick={handleDrawerOpen}
+            onClick={handleDrawerOpen}
+            sx={{ ...(isDrawerOpen && { display: "none" }) }}
+          >
+            <Menu />
+          </IconButton>
+        </Toolbar>
+        {/* <IconButton
           color="inherit"
           aria-label="open drawer"
           edge="end"
@@ -124,13 +143,13 @@ function SideBarDashboard({
             ...(isDrawerOpen && { display: "none" }),
             borderRadius: "50%",
             backgroundColor: "black",
-            height: "50px",
+            // height: "50px",
             // paddingY: "15px",
           }}
         >
           <ArrowBackIos color="primary" />
-          {/* <MenuIcon /> */}
-        </IconButton>
+          <MenuIcon />
+        </IconButton> */}
       </MuiAppBar>
       <Drawer
         sx={{
@@ -138,7 +157,7 @@ function SideBarDashboard({
           flexShrink: 0,
           "& .MuiDrawer-paper": {
             width: drawerWidth,
-            backgroundColor: "black",
+            backgroundColor: "rgba(30,30,30,30)",
             color: "white",
           },
           "& .MuiSvgIcon-root": {
@@ -175,10 +194,12 @@ function SideBarDashboard({
                 onClick={() => {
                   if (label.text.toLowerCase() == "home") {
                     navigator("/admin");
+                    setDashboardTitle("Dashboard Home");
                   } else {
                     navigator(
                       `/admin/${label.text.toLowerCase().replace(" ", "-")}`
                     );
+                    setDashboardTitle(`Dashboard ${label.text}`);
                   }
                 }}
               >
