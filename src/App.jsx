@@ -1,6 +1,6 @@
 import { KeyboardArrowUp } from "@mui/icons-material";
 import "./App.css";
-import { Home, About, Projects, Products, Contact } from "./Pages";
+import { Home, About, Projects, Products, Contact, Login } from "./Pages";
 import { Footer, Header, NavBar } from "./components";
 import { Routes, Route } from "react-router-dom";
 import Product1 from "./Pages/Product1/Product1";
@@ -22,6 +22,7 @@ function App() {
       <NavBar />
       <Routes>
         <Route path="/" element={<Home />} />
+        <Route path="/login" element={<Login />} />
         <Route path="/about" element={<About />} />
         <Route path="/projects" element={<Projects />} />
         <Route path="/products" element={<Products />} />
