@@ -63,6 +63,20 @@ const CategoryTableBoard = ({ itemType }) => {
           handleDeleteItem={deleteCategoriesFromAPI}
           setIsLoading={setIsLoading}
           title={`${itemType} Category`}
+          detailHeaders={[
+            "name",
+            // "name_ar",
+            // "category",
+            // "date",
+            // "client_en",
+            // "client_ar",
+            // "location_en",
+            // "location_ar",
+            // "description_en",
+            // "description_ar",
+            // "in_home",
+            // "image",
+          ]}
         />
       )}
     </div>
