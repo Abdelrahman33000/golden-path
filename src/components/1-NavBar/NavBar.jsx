@@ -9,6 +9,7 @@ const NavBar = () => {
 
   const { t, i18n } = useTranslation();
   document.body.dir = i18n.dir();
+  
   const changeLanguage = (e) => {
     i18n.changeLanguage(e.target.value);
   };
