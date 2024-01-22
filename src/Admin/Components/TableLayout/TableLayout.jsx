@@ -20,16 +20,16 @@ import {
   EditNote,
   KeyboardArrowDown,
   KeyboardArrowUp,
-  Subtitles,
 } from "@mui/icons-material";
 
-import ToolbarTable from "./../ToolbarTable/ToolbarTable";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import ToolbarTable from "../ToolbarTable/ToolbarTable";
 
 const TableLayout = ({
   listOfData,
   headerCells,
+  detailHeaders,
   handleDeleteItem,
   setIsLoading,
   title,
@@ -100,7 +100,7 @@ const TableLayout = ({
       }}
     >
       <Paper sx={{ width: "100%", mb: 2 }}>
-        <Box
+        {/* <Box
           sx={{
             display: "flex",
             flexWrap: "wrap",
@@ -118,7 +118,7 @@ const TableLayout = ({
           >
             {`add ${title}`}
           </Button>
-          {/* 
+          
           <TablePagination
             sx={{
               "& .MuiTablePagination-displayedRows": {
@@ -132,8 +132,8 @@ const TableLayout = ({
             rowsPerPage={rowsPerPage}
             page={page}
             onPageChange={handleChangePage}
-          /> */}
-        </Box>
+          />
+        </Box> */}
         <TableContainer>
           <Table
             sx={{ minWidth: 750 }}
@@ -158,7 +158,11 @@ const TableLayout = ({
                 .slice(rowsPerPage * page, rowsPerPage * (page + 1))
                 .map((row, rowIndex) => (
                   <>
-                    <TableRow hover sx={{ "& > *": { borderBottom: "unset" } }}>
+                    <TableRow
+                      key={`${subTitle}-${rowIndex + 1 + page * rowsPerPage}`}
+                      hover
+                      sx={{ "& > *": { borderBottom: "unset" } }}
+                    >
                       <TableCell>
                         {!title.toLowerCase().includes("category") && (
                           <IconButton
@@ -207,7 +211,11 @@ const TableLayout = ({
                         </IconButton>
                       </TableCell>
                     </TableRow>
-                    <TableRow>
+                    <TableRow
+                      key={`detail-${subTitle}-${
+                        rowIndex + 1 + page * rowsPerPage
+                      }`}
+                    >
                       <TableCell
                         style={{
                           paddingBottom: 0,
@@ -234,32 +242,57 @@ const TableLayout = ({
                               <TableCell sx={{ fontWeight: "bold" }}>Value</TableCell>
                             </TableHead> */}
                               <TableBody>
-                                {Object.entries(row).map(
-                                  (item, entryIndex) =>
-                                    entryIndex !== 0 && (
-                                      <TableRow>
-                                        <TableCell sx={{ fontWeight: "bold" }}>
-                                          {item[0]}
-                                        </TableCell>
-                                        <TableCell
-                                          sx={{
-                                            width: "90%",
-                                            lineBreak: "anywhere",
-                                          }}
-                                        >
-                                          {item[0] == "image" ? (
-                                            <img
-                                              src={`https://dash-board-sspy.onrender.com/src/uploads/${item[1]}`}
-                                              width={"auto"}
-                                              height={"100px"}
-                                            />
-                                          ) : (
-                                            item[1].toString()
-                                          )}
-                                        </TableCell>
-                                      </TableRow>
-                                    )
-                                )}
+                                {detailHeaders.map((rowKey) => (
+                                  <TableRow>
+                                    <TableCell
+                                      sx={{
+                                        fontWeight: "bold",
+                                        minWidth: "200px",
+                                        // backgroundColor: "lightgray",
+                                      }}
+                                    >
+                                      {rowKey
+                                        .replace("_", " ")
+                                        .split(" ")
+                                        .map(
+                                          (sub) =>
+                                            `${sub
+                                              .substring(0, 1)
+                                              .toUpperCase()}${sub
+                                              .substring(1)
+                                              .toLowerCase()} `
+                                        )}
+                                    </TableCell>
+                                    <TableCell
+                                      sx={{
+                                        width: "90%",
+                                        lineBreak: "anywhere",
+                                      }}
+                                    >
+                                      {rowKey == "image" ? (
+                                        <img
+                                          src={`${row[rowKey]}`}
+                                          width={"auto"}
+                                          height={"100px"}
+                                        />
+                                      ) : rowKey == "images_list" ? (
+                                        row[rowKey].map((imgItem) => (
+                                          <img
+                                            src={`${imgItem}`}
+                                            width={"auto"}
+                                            height={"100px"}
+                                          />
+                                        ))
+                                      ) : rowKey == "date" ? (
+                                        new Date(
+                                          row[rowKey]
+                                        ).toLocaleDateString()
+                                      ) : (
+                                        row[rowKey]?.toString()
+                                      )}
+                                    </TableCell>
+                                  </TableRow>
+                                ))}
                               </TableBody>
                             </Table>
                           </Box>
@@ -271,7 +304,7 @@ const TableLayout = ({
               {emptyRows > 0 && (
                 <TableRow
                   style={{
-                    height: 53 * emptyRows,
+                    height: 69 * emptyRows,
                   }}
                 >
                   <TableCell colSpan={6} />
@@ -280,7 +313,8 @@ const TableLayout = ({
             </TableBody>
           </Table>
         </TableContainer>
-        <Typography
+
+        <Box
           sx={{
             display: "flex",
             flexWrap: "wrap",
@@ -289,6 +323,16 @@ const TableLayout = ({
             padding: 1,
           }}
         >
+          {/* <ToolbarTable title={title} /> */}
+          <Button
+            // sx={{ justifySelf: "center" }}
+            variant="contained"
+            endIcon={<Add />}
+            onClick={navigateToAdd}
+          >
+            {`add ${title}`}
+          </Button>
+
           <TablePagination
             sx={{
               "& .MuiTablePagination-displayedRows": {
@@ -303,7 +347,7 @@ const TableLayout = ({
             page={page}
             onPageChange={handleChangePage}
           />
-        </Typography>
+        </Box>
       </Paper>
     </Box>
   );

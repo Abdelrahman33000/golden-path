@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   TextField,
   Button,
@@ -18,24 +18,48 @@ import {
 } from "@mui/material";
 import { useTheme } from "@emotion/react";
 import { Add } from "@mui/icons-material";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
+import ToolbarTable from "../../Components/ToolbarTable/ToolbarTable";
 
-const LayoutForm = ({ data }) => {
+const AddItemPage = ({ itemType, inputsList, updateData, initialData }) => {
+  // const { state } = useLocation();
+  // const updateData = state[itemType] ? { ...state[itemType] } : {};
+
   const [formData, setFormData] = useState({
-    name_en: "",
-    name_ar: "",
-    description_en: "",
-    description_ar: "",
-    category: "",
-    image: "",
-    ...data,
+    ...initialData,
+    // name_en: "",
+    // name_ar: "",
+    // description_en: "",
+    // description_ar: "",
+    // category: "",
+    // image: "",
+    ...updateData,
   });
 
   const navigator = useNavigate();
 
-  const theme = useTheme();
-
   const [errorMessage, setErrorMessage] = useState("");
+  const [categoryList, setCategoryList] = useState([]);
+  const [uploadedFile, setUploadedFile] = useState("");
+
+  useEffect(() => {
+    getCategoryListDataApi();
+    console.log(formData, "sdhgfsdgfsdhgfh");
+  }, []);
+
+  async function getCategoryListDataApi() {
+    await fetch(
+      `https://dash-board-sspy.onrender.com/api/all-category?type=${itemType}`
+    )
+      .then((response) => response.json())
+      .then((data) => {
+        console.log(data, "caregory data");
+        setCategoryList([...data.data]);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }
 
   //   const handleChange = (e) => {
   //     const { name, value, type, checked } = e.target;
@@ -48,27 +72,41 @@ const LayoutForm = ({ data }) => {
   const handleSubmit = (e) => {
     e.preventDefault();
     inputsList.map(({ name }) => {
-      formData[name] = e.target[name].value;
+      if (name == "in_home") {
+        formData[name] = e.target[name].checked;
+      } else {
+        formData[name] = e.target[name].value;
+      }
       console.log(e.target[name].value, name, "target");
       console.log(formData, "target");
       //   setFormData({ ...formData, [name]: e.target[name].value });
     });
     if (formData._id) {
-      updateProductsToAPI();
+      updateItemsToAPI();
     } else {
-      createNewProductAPI();
+      createNewItemAPI();
     }
     // Handle form submission logic here
     // console.log("Form submitted:", formData);
   };
 
-  async function createNewProductAPI() {
-    console.log(formData, "id");
-    await fetch(`https://dash-board-sspy.onrender.com/api/product`, {
-      //   mode: "no-cors",
+  async function createNewItemAPI() {
+    // const formDataObj = new FormData();
+
+    // for (let key in formData) {
+    //   console.log(key, formData[key]);
+    //   formDataObj.append(`${key}`, formData[key]);
+    // }
+
+    // console.log(formDataObj, "id");
+    // console.log(formData.image, "id");
+
+    await fetch(`https://dash-board-sspy.onrender.com/api/${itemType}`, {
+      // mode: "no-cors",
       method: "POST",
       headers: {
         "Content-Type": "application/json",
+        // "Content-Type": "multipart/form-data",
         // "Access-Control-Allow-Origin ": "http://localhost:3000",
       },
       body: JSON.stringify({
@@ -85,7 +123,7 @@ const LayoutForm = ({ data }) => {
       .then((data) => {
         console.log(data, "data create");
         if (data.status == "success") {
-          navigator("/admin/products");
+          navigator(`/admin/${itemType}`);
         } else {
           setErrorMessage(data.message);
         }
@@ -93,12 +131,12 @@ const LayoutForm = ({ data }) => {
       .catch((error) => console.log(error, "error"));
   }
 
-  async function updateProductsToAPI() {
+  async function updateItemsToAPI() {
     // console.log(listOfProducts[productIndex]._id, "id");
     console.log(formData, "id index");
 
     await fetch(
-      `https://dash-board-sspy.onrender.com/api/product?id=${formData._id}`,
+      `https://dash-board-sspy.onrender.com/api/${itemType}?id=${formData._id}`,
       {
         method: "PATCH",
         headers: { "Content-Type": "application/json" },
@@ -111,7 +149,7 @@ const LayoutForm = ({ data }) => {
       .then((data) => {
         console.log(data, "data delete");
         if (data.status == "success") {
-          navigator("/admin/products");
+          navigator(`/admin/${itemType}`);
         } else {
           setErrorMessage(data.message);
         }
@@ -119,19 +157,21 @@ const LayoutForm = ({ data }) => {
       .catch((error) => console.log(error, "error"));
   }
 
-  const inputsList = [
-    { label: "Name In English", name: "name_en", type: "text" },
-    { label: "Name In Arabic", name: "name_ar", type: "text" },
-    { label: "Category", name: "category", type: "text" },
-    { label: "Description In English", name: "description_en", type: "text" },
-    { label: "Description In Arabic", name: "description_ar", type: "text" },
-  ];
+  //   const inputsList = [
+  //     { label: "Name In English", name: "name_en", type: "text" },
+  //     { label: "Name In Arabic", name: "name_ar", type: "text" },
+  //     { label: "Category", name: "category", type: "select" },
+  //     { label: "Description In English", name: "description_en", type: "text" },
+  //     { label: "Description In Arabic", name: "description_ar", type: "text" },
+  //     { label: "Add This Item in Home Page", name: "in_home", type: "checkbox" },
+  //   ];
 
   const handleUploadImage = (e) => {
     const file = e.target.files[0];
     e.target.value = "";
-    const imageUrl = URL.createObjectURL(file);
-    setFormData({ ...formData, image: imageUrl });
+    // const imageUrl = URL.createObjectURL(file);
+    setFormData({ ...formData, image: file });
+    setUploadedFile(URL.createObjectURL(file));
 
     console.log(file, "image");
 
@@ -152,8 +192,16 @@ const LayoutForm = ({ data }) => {
     // </div>
 
     <Box
-      sx={{ display: "flex", alignItems: "center", justifyContent: "center" }}
+      sx={{
+        display: "flex",
+        flexDirection: "column",
+        alignItems: "center",
+        justifyContent: "center",
+      }}
     >
+      {/* <Box sx={{ paddingY: 5 }}>
+        <ToolbarTable title={formData._id ? `Edit Product` : `Add Product`} />
+      </Box> */}
       <form
         onSubmit={handleSubmit}
         className="col-md-10 d-flex flex-wrap justify-content-between align-items-center"
@@ -197,7 +245,8 @@ const LayoutForm = ({ data }) => {
             // }}
           > */}
           {formData.image ? (
-            <img src={`${formData.image}`} width={"100%"} />
+            // <img src={`${formData.image}`} width={"100%"} />
+            <img src={`${uploadedFile}`} width={"100%"} />
           ) : (
             <>
               <Typography
@@ -228,26 +277,71 @@ const LayoutForm = ({ data }) => {
           {/* </Box> */}
         </Button>
 
-        {inputsList.map((input, inputIndex) => (
-          <TextField
-            sx={
-              input.name.includes("name") && {
-                width: "49%",
-              }
-            }
-            label={input.label}
-            name={input.name}
-            defaultValue={formData[input.name]}
-            //   onChange={handleChange}
-            // fullWidth={input.name.includes("description")}
-            fullWidth
-            multiline={input.name.includes("description")}
-            rows={3}
-            type={input.type}
-            margin="normal"
-            FormHelperTextProps={"kdgfsdgfhsdghf"}
-          />
-        ))}
+        {inputsList.map((input, inputIndex) => {
+          if (input.type == "select") {
+            return (
+              <FormControl key={input.name} fullWidth margin="normal">
+                <InputLabel id={input.name}>{input.label}</InputLabel>
+                <Select
+                  labelId={input.name}
+                  label={input.label}
+                  name={input.name}
+                  defaultValue={formData.category}
+                  // onChange={handleChange}
+                >
+                  <MenuItem disabled value="">
+                    {`Select ${input.label}`}
+                  </MenuItem>
+                  {categoryList.map((item) => (
+                    <MenuItem value={item.name}>{item.name}</MenuItem>
+                  ))}
+                </Select>
+              </FormControl>
+            );
+          } else if (input.type == "checkbox") {
+            return (
+              <FormControlLabel
+                key={input.name}
+                sx={{ width: "100%" }}
+                control={
+                  <Checkbox
+                    name={input.name}
+                    defaultChecked={true}
+                    // checked={formData.subscribe}
+                    // onChange={handleChange}
+                  />
+                }
+                label={input.label}
+              />
+            );
+          } else {
+            return (
+              <TextField
+                key={input.name}
+                sx={
+                  (input.name.includes("en") || input.name.includes("ar")) &&
+                  !input.name.includes("description") && {
+                    width: "49%",
+                  }
+                }
+                label={input.label}
+                name={input.name}
+                defaultValue={formData[input.name]}
+                // value={input.name == "date" && "hello"}
+                //   onChange={handleChange}
+                // fullWidth={input.name.includes("description")}
+                fullWidth
+                multiline={input.name.includes("description")}
+                rows={3}
+                type={input.type}
+                margin="normal"
+                InputLabelProps={input.type == "date" && { shrink: true }}
+                // FormHelperTextProps={"kdgfsdgfhsdghf"}
+              />
+            );
+          }
+        })}
+
         {/* <TextField
         label="Name"
         name="name"
@@ -257,36 +351,11 @@ const LayoutForm = ({ data }) => {
         margin="normal"
       />
 
-      <TextField
-        label="Email"
-        type="email"
-        name="email"
-        value={formData.email}
-        onChange={handleChange}
-        fullWidth
-        margin="normal"
-      />
+   
 
-      <TextField
-        label="Password"
-        type="password"
-        name="password"
-        value={formData.password}
-        onChange={handleChange}
-        fullWidth
-        margin="normal"
-      /> */}
+   
 
-        {/* <TextField
-        label="Bio"
-        multiline
-        rows={4}
-        name="bio"
-        value={formData.bio}
-        onChange={handleChange}
-        fullWidth
-        margin="normal"
-      /> */}
+  
 
         {/* <FormControlLabel
         control={
@@ -339,6 +408,7 @@ const LayoutForm = ({ data }) => {
             size="large"
             color="primary"
             type="submit"
+            margin={15}
           >
             Submit
           </Button>
@@ -348,4 +418,4 @@ const LayoutForm = ({ data }) => {
   );
 };
 
-export default LayoutForm;
+export default AddItemPage;

@@ -19,7 +19,7 @@ import {
 import { useTheme } from "@emotion/react";
 import { Add } from "@mui/icons-material";
 import { useNavigate, useLocation } from "react-router-dom";
-import ToolbarTable from "../../components/ToolbarTable/ToolbarTable";
+import ToolbarTable from '../../Components/ToolbarTable/ToolbarTable';
 
 const AddCategory = ({ categoryType }) => {
   const { state } = useLocation();
