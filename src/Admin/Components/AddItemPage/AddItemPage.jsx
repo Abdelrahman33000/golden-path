@@ -21,17 +21,18 @@ import { Add } from "@mui/icons-material";
 import { useNavigate, useLocation } from "react-router-dom";
 import ToolbarTable from "../../Components/ToolbarTable/ToolbarTable";
 
-const AddItemPage = ({ itemType, inputsList, updateData }) => {
+const AddItemPage = ({ itemType, inputsList, updateData, initialData }) => {
   // const { state } = useLocation();
   // const updateData = state[itemType] ? { ...state[itemType] } : {};
 
   const [formData, setFormData] = useState({
-    name_en: "",
-    name_ar: "",
-    description_en: "",
-    description_ar: "",
-    category: "",
-    image: "",
+    ...initialData,
+    // name_en: "",
+    // name_ar: "",
+    // description_en: "",
+    // description_ar: "",
+    // category: "",
+    // image: "",
     ...updateData,
   });
 
@@ -43,6 +44,7 @@ const AddItemPage = ({ itemType, inputsList, updateData }) => {
 
   useEffect(() => {
     getCategoryListDataApi();
+    console.log(formData, "sdhgfsdgfsdhgfh");
   }, []);
 
   async function getCategoryListDataApi() {
@@ -276,9 +278,9 @@ const AddItemPage = ({ itemType, inputsList, updateData }) => {
         </Button>
 
         {inputsList.map((input, inputIndex) => {
-          if (input.name == "category") {
+          if (input.type == "select") {
             return (
-              <FormControl fullWidth margin="normal">
+              <FormControl key={input.name} fullWidth margin="normal">
                 <InputLabel id={input.name}>{input.label}</InputLabel>
                 <Select
                   labelId={input.name}
@@ -296,9 +298,10 @@ const AddItemPage = ({ itemType, inputsList, updateData }) => {
                 </Select>
               </FormControl>
             );
-          } else if (input.name == "in_home") {
+          } else if (input.type == "checkbox") {
             return (
               <FormControlLabel
+                key={input.name}
                 sx={{ width: "100%" }}
                 control={
                   <Checkbox
@@ -314,14 +317,17 @@ const AddItemPage = ({ itemType, inputsList, updateData }) => {
           } else {
             return (
               <TextField
+                key={input.name}
                 sx={
-                  input.name.includes("name") && {
+                  (input.name.includes("en") || input.name.includes("ar")) &&
+                  !input.name.includes("description") && {
                     width: "49%",
                   }
                 }
                 label={input.label}
                 name={input.name}
                 defaultValue={formData[input.name]}
+                // value={input.name == "date" && "hello"}
                 //   onChange={handleChange}
                 // fullWidth={input.name.includes("description")}
                 fullWidth
@@ -329,6 +335,7 @@ const AddItemPage = ({ itemType, inputsList, updateData }) => {
                 rows={3}
                 type={input.type}
                 margin="normal"
+                InputLabelProps={input.type == "date" && { shrink: true }}
                 // FormHelperTextProps={"kdgfsdgfhsdghf"}
               />
             );

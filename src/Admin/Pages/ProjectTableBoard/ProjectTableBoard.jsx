@@ -6,7 +6,7 @@ const ProjectTableBoard = () => {
   const [listOfProjects, setListOfProjects] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
 
-  const headersProject = ["#id",  "name_en", "name_ar", "in_home"];
+  const headersProject = ["#id", "name_en", "name_ar", "in_home"];
 
   useEffect(() => {
     getProjectsFromAPI();
@@ -60,6 +60,20 @@ const ProjectTableBoard = () => {
           // handleUpdateItem={updateProductsToAPI}
           setIsLoading={setIsLoading}
           title={"Project"}
+          detailHeaders={[
+            "name_en",
+            "name_ar",
+            "category",
+            "date",
+            "client_en",
+            "client_ar",
+            "location_en",
+            "location_ar",
+            "description_en",
+            "description_ar",
+            "in_home",
+            "image",
+          ]}
         />
       )}
     </div>

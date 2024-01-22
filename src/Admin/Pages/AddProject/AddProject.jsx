@@ -9,9 +9,15 @@ const AddProject = () => {
   const inputsList = [
     { label: "Name In English", name: "name_en", type: "text" },
     { label: "Name In Arabic", name: "name_ar", type: "text" },
+    { label: "Client Name In Englidh", name: "client_en", type: "text" },
+    { label: "Client Name In Arabic", name: "client_ar", type: "text" },
+    { label: "Loaction In English", name: "location_en", type: "text" },
+    { label: "Loaction In Arabic", name: "location_ar", type: "text" },
     { label: "Project Category", name: "category", type: "select" },
     { label: "Description In English", name: "description_en", type: "text" },
     { label: "Description In Arabic", name: "description_ar", type: "text" },
+    { label: "Date", name: "date", type: "date" },
+
     { label: "Add This Item in Home Page", name: "in_home", type: "checkbox" },
   ];
   return (
@@ -19,6 +25,20 @@ const AddProject = () => {
       itemType={"project"}
       inputsList={inputsList}
       updateData={updateData}
+      initialData={{
+        name_en: "",
+        name_ar: "",
+        client_en: "",
+        client_ar: "",
+        location_en: "",
+        location_ar: "",
+        description_en: "",
+        description_ar: "",
+        date: "",
+        category: "",
+        image: "",
+        in_home: true,
+      }}
     />
   );
 };

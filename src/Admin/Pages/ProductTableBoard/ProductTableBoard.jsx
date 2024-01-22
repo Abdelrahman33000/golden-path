@@ -104,6 +104,15 @@ const ProductTableBoard = () => {
           // handleUpdateItem={updateProductsToAPI}
           setIsLoading={setIsLoading}
           title={"Product"}
+          detailHeaders={[
+            "name_en",
+            "name_ar",
+            "category",
+            "description_en",
+            "description_ar",
+            "in_home",
+            "image",
+          ]}
         />
       )}
     </div>
