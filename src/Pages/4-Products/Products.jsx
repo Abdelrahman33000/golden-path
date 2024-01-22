@@ -164,7 +164,7 @@ const Products = () => {
        <TabPanel value={value} index={0} >
 <div className='d-flex' style={{gap:"30px" , flexWrap:"wrap"}}>
 {products.map((product) =>
-  <div key={product._id} className='card   cd5 rounded-5 shadow-lg' style={{ display:"flex" ,alignItems:"center" }}>
+  <div key={product._id} className='card   cd5 rounded-5 shadow-lg' style={{ display:"flex" ,alignItems:"center" , overflow:"hidden" }}>
   {/* <img src={img7} alt='' width={300} height={300} className='rounded-5 p-2' /> */}
          <img src={img7} alt="" width={300} height={300} className='rounded-5 p-2' />
           {/* {<img src={product?.image} alt="" /> } */}
