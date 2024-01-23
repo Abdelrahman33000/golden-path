@@ -73,7 +73,7 @@ const AddItemPage = ({ itemType, inputsList, updateData, initialData }) => {
     e.preventDefault();
     inputsList.map(({ name }) => {
       if (name == "in_home") {
-        formData[name] = e.target[name].checked;
+        // formData[name] = e.target[name].checked;
       } else {
         formData[name] = e.target[name].value;
       }
@@ -101,17 +101,25 @@ const AddItemPage = ({ itemType, inputsList, updateData, initialData }) => {
     // console.log(formDataObj, "id");
     // console.log(formData.image, "id");
 
+    const formDataObject = new FormData();
+    for (let key in formData) {
+      console.log(key, formData[key]);
+      formDataObject.append(key, formData[key]);
+    }
+    // formDataObject.append("in_home", false);
+
     await fetch(`https://dash-board-sspy.onrender.com/api/${itemType}`, {
       // mode: "no-cors",
       method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        // "Content-Type": "multipart/form-data",
-        // "Access-Control-Allow-Origin ": "http://localhost:3000",
-      },
-      body: JSON.stringify({
-        ...formData,
-      }),
+      body: formDataObject,
+      // headers: {
+      //   "Content-Type": "application/json",
+      //   // "Content-Type": "multipart/form-data",
+      //   // "Access-Control-Allow-Origin ": "http://localhost:3000",
+      // },
+      // body: JSON.stringify({
+      //   ...formData,
+      // }),
       //   method: "POST",
       //   mode: "no-cors",
       //   body: JSON.stringify({ ...formData }),
@@ -135,14 +143,21 @@ const AddItemPage = ({ itemType, inputsList, updateData, initialData }) => {
     // console.log(listOfProducts[productIndex]._id, "id");
     console.log(formData, "id index");
 
+    const formDataObject = new FormData();
+    for (let key in formData) {
+      console.log(key, formData[key]);
+      formDataObject.append(key, formData[key]);
+    }
+
     await fetch(
       `https://dash-board-sspy.onrender.com/api/${itemType}?id=${formData._id}`,
       {
         method: "PATCH",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          ...formData,
-        }),
+        // headers: { "Content-Type": "application/json" },
+        body: formDataObject,
+        // body: JSON.stringify({
+        //   ...formData,
+        // }),
       }
     )
       .then((response) => response.json())
@@ -246,7 +261,14 @@ const AddItemPage = ({ itemType, inputsList, updateData, initialData }) => {
           > */}
           {formData.image ? (
             // <img src={`${formData.image}`} width={"100%"} />
-            <img src={`${uploadedFile}`} width={"100%"} />
+            <img
+              src={
+                typeof formData.image == "string"
+                  ? `${formData.image}`
+                  : `${uploadedFile}`
+              }
+              width={"100%"}
+            />
           ) : (
             <>
               <Typography

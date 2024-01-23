@@ -272,6 +272,7 @@ const TableLayout = ({
                                       {rowKey == "image" ? (
                                         <img
                                           src={`${row[rowKey]}`}
+                                          alt="preview"
                                           width={"auto"}
                                           height={"100px"}
                                         />
