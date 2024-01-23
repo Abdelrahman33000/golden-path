@@ -7,9 +7,9 @@ import {
   Hero,
   Logo,
   ProductCarousel,
-  Products,
   SubScribe,
 } from "../../components";
+import Projects2 from "../../components/5-ProjectsCard/Projects2";
 const Home = () => {
   const { t } = useTranslation();
 
@@ -35,7 +35,7 @@ const Home = () => {
       <h3  className="ps-5 m-5 img2">
        {t('Our Projects')}
       </h3>
-      <Products />
+      <Projects2 />
       <h3 className="ps-5 m-5 img2">
         {t('Our Partners')}
       </h3>

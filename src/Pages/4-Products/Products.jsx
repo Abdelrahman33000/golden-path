@@ -7,7 +7,7 @@ import Box from '@mui/material/Box';
 import { Link } from 'react-router-dom';
 import "./products.css"
 import { useTranslation } from 'react-i18next';
-
+import Component from './Component';
 // import Rating from '@mui/material/Rating';
 import TextField from '@mui/material/TextField';
 import Autocomplete, { createFilterOptions } from '@mui/material/Autocomplete';
@@ -15,6 +15,7 @@ import Autocomplete, { createFilterOptions } from '@mui/material/Autocomplete';
 
 import img7 from '../../components/images/cam3.jpg'
 import { ArrowBackIosNew, ArrowForwardIos, Search } from '@mui/icons-material';
+
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
  
@@ -54,6 +55,10 @@ function a11yProps(index) {
 const Products = () => {
 
   const [products , setProducts] =useState([])
+  const [categories , setCategories] =useState([])
+const [label , setLabel] = useState(0);
+const [productPager , setProductPager] = useState([])
+
 
   const { t, i18n } = useTranslation();
 
@@ -65,35 +70,67 @@ const Products = () => {
       console.log(data.data)
       const data1 = data.data
       setProducts(data1);
+      setProductPager(data1)
       
     })
      
   }, [])
 
-  const top100Films = [
-    { title: 'pro1', year: 1994 },
-    { title: 'pro2', year: 1972 },
-    { title: 'pro3', year: 1974 },
-    { title: 'pro4', year: 2008 },
-    { title: 'pro5', year: 1957 },
-    { title: "pro6", year: 1993 },
-    { title: 'pro7', year: 1994 },
-    {
-      title: 'pro8',
-      year: 2003,
-    },
-  ]
 
-  const filterOptions = createFilterOptions({
-    matchFrom: 'start',
-    stringify: (option) => option.title,
-  });
+  useEffect(() => {
+    fetch('https://dash-board-sspy.onrender.com/api/all-category?type=product')
+    .then(response => response.json())
+    .then(data => {
+      console.log(data.data)
+      const data2 = data.data
+      setCategories(data2);
+    
+    })
+     
+  }, [])
+
+  useEffect(() => {
+    if (label==0 ){
+      setProductPager(products)
+    
+    }else {
+
+      const category= categories[label-1]
+      // عدلى دى يااااا زلفى 
+      const data = products.filter((item) => item.category==category.name_en
+      )
+      setProductPager(data)
+    }
+
+  }, [label])
+  
+
+  // const top100Films = [
+  //   { title: 'pro1', year: 1994 },
+  //   { title: 'pro2', year: 1972 },
+  //   { title: 'pro3', year: 1974 },
+  //   { title: 'pro4', year: 2008 },
+  //   { title: 'pro5', year: 1957 },
+  //   { title: "pro6", year: 1993 },
+  //   { title: 'pro7', year: 1994 },
+  //   {
+  //     title: 'pro8',
+  //     year: 2003,
+  //   },
+  // ]
+
+  // const filterOptions = createFilterOptions({
+  //   matchFrom: 'start',
+  //   stringify: (option) => option.title,
+  // });
 
   const [value, setValue] = React.useState(0);
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
+
+
 
   // const { t} = useTranslation();
   // document.body.dir = i18n.dir();
@@ -120,24 +157,24 @@ const Products = () => {
    
       </div>
 
-      <Autocomplete className='pe-5  ms-5 '
+      {/* <Autocomplete className='pe-5  ms-5 '
       id="filter-demo"
       options={top100Films}
       getOptionLabel={(option) => option.title}
       filterOptions={filterOptions}
       sx={{ width: 300 , zIndex: 0 }}
       renderInput={(params) => <TextField {...params} label="Custom filter" />}
-    />
+    /> */}
 
     
 
 
    </div>
      <Box  className="row"
-       sx={{  bgcolor: 'background.paper', display: 'flex', flexWrap:"wrap" , justifyContent:"space-between" }}
+       sx={{  bgcolor: 'background.paper', display: 'flex', flexWrap:"wrap"  , justifyContent:"space-between" }}
      >
               <h3 className='text-dark mx-5'>{t('Categories')}</h3>
-
+{/* 
        <Tabs
        
        className='col-lg-2 mb-5 mt-4 tabs5 mx-5 '
@@ -156,131 +193,45 @@ const Products = () => {
          <Tab className='categories' label="Item Five" {...a11yProps(4)} />
          <Tab className='categories' label="Item Six" {...a11yProps(5)} />
          <Tab className='categories' label="Item Seven" {...a11yProps(6)} />
-       </Tabs>
+       </Tabs> */}
+      <Box    sx={{ borderColor: 'divider',display:"flex" ,mx:"auto" , justifyContent:"center"  ,  borderBottom:"3px solid #ffa200" , borderTop:"3px solid #ffa200" }}>
 
-       <div className='col-lg-9'>
+<Tabs
+variant="scrollable"
+ value={value} onChange={handleChange}  aria-label="basic tabs example" sx={{ textAlign:"center"  }}>
+          <Tab  className='tab' onClick={() => {
+              setLabel(0)
+          }
+          } label="All" {...a11yProps(0)} />
+          {categories.map((category , index)=> 
+              <Tab  className='tab'  onClick={() => {
+                setLabel(index + 1)
+            }}
+   key={category._id} label={`${i18n.language=== "en" ? category.name_en :  category.name_ar}`} {...a11yProps(`${index+1}`)} />
+)}
+          {/* <Tab className='tab'label="Item one" {...a11yProps(1)} />
+          <Tab className='tab' label="Item Two" {...a11yProps(2)} />
+          <Tab className='tab' label="Item Three" {...a11yProps(3)} />
+          <Tab className='tab' label="Item Four" {...a11yProps(4)} /> */}
+        </Tabs>
+</Box>
 
 
-       <TabPanel value={value} index={0} >
-<div className='d-flex' style={{gap:"30px" , flexWrap:"wrap"}}>
-{products.map((product) =>
-  <div key={product._id} className='card   cd5 rounded-5 shadow-lg' style={{ display:"flex" ,alignItems:"center" , overflow:"hidden" }}>
-  {/* <img src={img7} alt='' width={300} height={300} className='rounded-5 p-2' /> */}
-         <img src={img7} alt="" width={300} height={300} className='rounded-5 p-2' />
-          {/* {<img src={product?.image} alt="" /> } */}
-      <h3>{`${i18n.language=== "en" ? product.name_en :  product.name_ar}`}</h3>
-       <p style={{opacity:".5" , fontSize:"15px"}}>
-       {`${i18n.language=== "en" ? product.description_en :  product.description_ar}`}
-       </p> 
+       <div className='col-lg-9 mx-auto '>
+
+
+       
+
+<Component value={value} products={productPager} index={label} />
+
+
+    
+    
+    
+    
+       
+
 {/* 
-  <h5>Product 1</h5>
-  <p>Lorem ipsum dolor sit amet.</p> */}
-  <p>  
-    <Link to={"/product._id"} style={{textDecoration:"none" , color:"#000"}}  className='btn5 py-1 px-3 rounded-3'>Read More</Link> 
-    </p>
-  
-  </div>
-  )}
-
-  {/* <div className='card  cd5 rounded-5 shadow-lg' style={{ display:"flex" ,alignItems:"center" }}>
-  <img src={img7} alt='' width={300} height={300} className='rounded-5 p-2' />
-  
-  <h5>Product 1</h5>
-  <p>Lorem ipsum dolor sit amet.</p>
-  <p> <button className='btn5 py-1 px-3 rounded-3'>Read More</button></p>
-  
-  </div> */}
-{/* 
-  <div className='card  cd5 rounded-5 shadow-lg' style={{ display:"flex" ,alignItems:"center" }}>
-  <img src={img7} alt='' width={300} height={300} className='rounded-5 p-2' />
-  
-  <h5>Product 1</h5>
-  <p>Lorem ipsum dolor sit amet.</p>
-  <p> <button className='btn5 py-1 px-3 rounded-3'>Read More</button></p>
-  
-  </div>
-
-  <div className='card  cd5 rounded-5 shadow-lg' style={{ display:"flex" ,alignItems:"center" }}>
-  <img src={img7} alt='' width={300} height={300} className='rounded-5 p-2' />
-  
-  <h5>Product 1</h5>
-  <p>Lorem ipsum dolor sit amet.</p>
-  <p> <button className='btn5 py-1 px-3 rounded-3'>Read More</button></p>
-  
-  </div>
-
-
-  <div className='card  cd5 rounded-5 shadow-lg' style={{ display:"flex" ,alignItems:"center" }}>
-  <img src={img7} alt='' width={300} height={300} className='rounded-5 p-2' />
-  
-  <h5>Product 1</h5>
-  <p>Lorem ipsum dolor sit amet.</p>
-  <p> <button className='btn5 py-1 px-3 rounded-3'>Read More</button></p>
-  
-  </div>
-
-  <div className='card  cd5 rounded-5 shadow-lg' style={{ display:"flex" ,alignItems:"center" }}>
-  <img src={img7} alt='' width={300} height={300} className='rounded-5 p-2' />
-  
-  <h5>Product 1</h5>
-  <p>Lorem ipsum dolor sit amet.</p>
-  <p> <button className='btn5 py-1 px-3 rounded-3'>Read More</button></p>
-  
-  </div> */}
-
-
-
-</div>
-
-       </TabPanel>
-
-
-
-
-    
-    
-    
-    
-       <TabPanel value={value} index={1}>
-       
-       
-       
-<div className='d-flex' style={{gap:"30px" , flexWrap:"wrap"}}>
-<div className='card  cd5 rounded-5 shadow-lg' style={{ display:"flex" ,alignItems:"center" }}>
-  <img src={img7} alt='' width={300} height={300} className='rounded-5 p-2' />
-  
-  <h5>Product 1</h5>
-  <p>Lorem ipsum dolor sit amet.</p>
-  <p> <button className='btn5 py-1 px-3 rounded-3'>Read More</button></p>
-  
-  </div>
-
-
-  <div className='card  cd5 rounded-5 shadow-lg' style={{ display:"flex" ,alignItems:"center" }}>
-  <img src={img7} alt='' width={300} height={300} className='rounded-5 p-2' />
-  
-  <h5>Product 1</h5>
-  <p>Lorem ipsum dolor sit amet.</p>
-  <p> <button className='btn5 py-1 px-3 rounded-3'>Read More</button></p>
-  
-  </div>
-
-
-   <div className='card  cd5 rounded-5 shadow-lg' style={{ display:"flex" ,alignItems:"center" }}>
-  <img src={img7} alt='' width={300} height={300} className='rounded-5 p-2' />
-  
-  <h5>Product 1</h5>
-  <p>Lorem ipsum dolor sit amet.</p>
-  <p> <button className='btn5 py-1 px-3 rounded-3'>Read More</button></p>
-  
-  </div>
-
-
-
-</div>
-
-
-       </TabPanel>
        <TabPanel value={value} index={2}>
         
         
@@ -313,15 +264,18 @@ const Products = () => {
        <TabPanel value={value} index={3}>
          Item Four
        </TabPanel>
+
        <TabPanel value={value} index={4}>
          Item Five
        </TabPanel>
+
        <TabPanel value={value} index={5}>
          Item Six
        </TabPanel>
+
        <TabPanel value={value} index={6}>
          Item Seven
-       </TabPanel>
+       </TabPanel> */}
 
        </div>
 
