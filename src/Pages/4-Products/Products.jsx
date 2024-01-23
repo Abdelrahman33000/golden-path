@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import PropTypes from 'prop-types';
 import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
@@ -18,6 +18,8 @@ import { ArrowBackIosNew, ArrowForwardIos, Search } from '@mui/icons-material';
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
  
+
+
   return (
     <div
       role="tabpanel"
@@ -50,6 +52,24 @@ function a11yProps(index) {
 
 
 const Products = () => {
+
+  const [products , setProducts] =useState([])
+
+  const { t, i18n } = useTranslation();
+
+  console.log(i18n.language ,"kjjkj");
+  useEffect(() => {
+    fetch('https://dash-board-sspy.onrender.com/api/all-products')
+    .then(response => response.json())
+    .then(data => {
+      console.log(data.data)
+      const data1 = data.data
+      setProducts(data1);
+      
+    })
+     
+  }, [])
+
   const top100Films = [
     { title: 'pro1', year: 1994 },
     { title: 'pro2', year: 1972 },
@@ -75,7 +95,7 @@ const Products = () => {
     setValue(newValue);
   };
 
-  const { t} = useTranslation();
+  // const { t} = useTranslation();
   // document.body.dir = i18n.dir();
 
   return (
@@ -128,6 +148,7 @@ const Products = () => {
          aria-label="Vertical tabs example"
          
        >
+
          <Tab className='categories' label="Item One" {...a11yProps(0)} />
          <Tab className='categories' label="Item Two" {...a11yProps(1)} />
          <Tab className='categories' label="Item Three" {...a11yProps(2)} />
@@ -142,17 +163,34 @@ const Products = () => {
 
        <TabPanel value={value} index={0} >
 <div className='d-flex' style={{gap:"30px" , flexWrap:"wrap"}}>
-  <div className='card  cd5 rounded-5 shadow-lg' style={{ display:"flex" ,alignItems:"center" }}>
-  <img src={img7} alt='' width={300} height={300} className='rounded-5 p-2' />
-  
+{products.map((product) =>
+  <div key={product._id} className='card   cd5 rounded-5 shadow-lg' style={{ display:"flex" ,alignItems:"center" , overflow:"hidden" }}>
+  {/* <img src={img7} alt='' width={300} height={300} className='rounded-5 p-2' /> */}
+         <img src={img7} alt="" width={300} height={300} className='rounded-5 p-2' />
+          {/* {<img src={product?.image} alt="" /> } */}
+      <h3>{`${i18n.language=== "en" ? product.name_en :  product.name_ar}`}</h3>
+       <p style={{opacity:".5" , fontSize:"15px"}}>
+       {`${i18n.language=== "en" ? product.description_en :  product.description_ar}`}
+       </p> 
+{/* 
   <h5>Product 1</h5>
-  <p>Lorem ipsum dolor sit amet.</p>
+  <p>Lorem ipsum dolor sit amet.</p> */}
   <p>  
-    <Link to={"/product1"} style={{textDecoration:"none" , color:"#000"}}  className='btn5 py-1 px-3 rounded-3'>Read More</Link> 
+    <Link to={"/product._id"} style={{textDecoration:"none" , color:"#000"}}  className='btn5 py-1 px-3 rounded-3'>Read More</Link> 
     </p>
   
   </div>
+  )}
 
+  {/* <div className='card  cd5 rounded-5 shadow-lg' style={{ display:"flex" ,alignItems:"center" }}>
+  <img src={img7} alt='' width={300} height={300} className='rounded-5 p-2' />
+  
+  <h5>Product 1</h5>
+  <p>Lorem ipsum dolor sit amet.</p>
+  <p> <button className='btn5 py-1 px-3 rounded-3'>Read More</button></p>
+  
+  </div> */}
+{/* 
   <div className='card  cd5 rounded-5 shadow-lg' style={{ display:"flex" ,alignItems:"center" }}>
   <img src={img7} alt='' width={300} height={300} className='rounded-5 p-2' />
   
@@ -171,15 +209,6 @@ const Products = () => {
   
   </div>
 
-  <div className='card  cd5 rounded-5 shadow-lg' style={{ display:"flex" ,alignItems:"center" }}>
-  <img src={img7} alt='' width={300} height={300} className='rounded-5 p-2' />
-  
-  <h5>Product 1</h5>
-  <p>Lorem ipsum dolor sit amet.</p>
-  <p> <button className='btn5 py-1 px-3 rounded-3'>Read More</button></p>
-  
-  </div>
-
 
   <div className='card  cd5 rounded-5 shadow-lg' style={{ display:"flex" ,alignItems:"center" }}>
   <img src={img7} alt='' width={300} height={300} className='rounded-5 p-2' />
@@ -197,7 +226,7 @@ const Products = () => {
   <p>Lorem ipsum dolor sit amet.</p>
   <p> <button className='btn5 py-1 px-3 rounded-3'>Read More</button></p>
   
-  </div>
+  </div> */}
 
 
 
@@ -208,6 +237,10 @@ const Products = () => {
 
 
 
+    
+    
+    
+    
        <TabPanel value={value} index={1}>
        
        
