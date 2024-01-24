@@ -5,18 +5,10 @@ import CssBaseline from "@mui/material/CssBaseline";
 import { styled, useTheme } from "@mui/material/styles";
 import { useEffect, useState } from "react";
 import { Routes, Route } from "react-router-dom";
-import AddProduct from "../AddProduct/AddProduct";
-import ProductTableBoard from "../ProductTableBoard/ProductTableBoard";
-import HomeDashboard from "../HomeDashboard/HomeDashboard";
+
 import SideBarDashboard from "./../../Components/SideBarDashboard/SideBarDashboard";
-import { MenuIcon } from "@mui/icons-material/Menu";
-import { Menu } from "@mui/icons-material";
-import { IconButton, Toolbar } from "@mui/material";
-import ProjectTableBoard from "../ProjectTableBoard/ProjectTableBoard";
-import AddProject from "../AddProject/AddProject";
-import ProductCategory from "../ProductCategory/ProductCategory";
-import ProjectCategory from "../ProjectCategory/ProjectCategory";
-import AddCategory from "../../Components/AddCategory/AddCategory";
+
+import { Outlet } from "react-router-dom";
 
 const AdminDashboard = () => {
   // const [order, setOrder] = useState("asc");
@@ -153,33 +145,7 @@ const AdminDashboard = () => {
         }}
       >
         <Box sx={{ height: 60, backgroundColor: "transparent" }} />
-        <Routes>
-          <Route index element={<HomeDashboard />} />
-          <Route path="product" element={<ProductTableBoard />} />
-          <Route path="project" element={<ProjectTableBoard />} />
-          <Route path="add-product" element={<AddProduct />} />
-          <Route path="add-project" element={<AddProject />} />
-          <Route path="product-category" element={<ProductCategory />} />
-          <Route path="project-category" element={<ProjectCategory />} />
-
-          <Route
-            path="add-product-category"
-            element={<AddCategory categoryType={"product"} />}
-          />
-          <Route
-            path="add-project-category"
-            element={<AddCategory categoryType={"project"} />}
-          />
-
-          <Route
-            path="*"
-            element={
-              <div className="min-vh-100 bg-primary-subtle d-flex align-items-center justify-content-center">
-                <h2 className="fw-bolder">Comming Soon ..</h2>
-              </div>
-            }
-          />
-        </Routes>
+        <Outlet />
         {/* <DrawerHeader /> */}
         {/* <LayoutTableDashboard
           listOfData={listOfData}

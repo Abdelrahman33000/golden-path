@@ -1,11 +1,27 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import AddItemPage from "../../Components/AddItemPage/AddItemPage";
 import { useNavigate, useLocation } from "react-router-dom";
 
 const AddProduct = () => {
   const { state } = useLocation();
-  const updateData = state?.product ? { ...state["product"] } : {};
+  const updateData = state?.product ? { ...state.product } : {};
+  // const updateData = state?.productID ? { ...state["product"] } : {};
+  // const [updateData, setUpdateData] = useState({});
 
+  // useEffect(() => {
+  //   console.log(state?.productID, "id product");
+  //   if (state?.productID) {
+  //     fetch(
+  //       `https://dash-board-sspy.onrender.com/api/product?id=${state?.productID}`
+  //     )
+  //       .then((response) => response.json())
+  //       .then((result) => {
+  //         console.log(result, "get product by id");
+  //         setUpdateData({ ...result.data });
+  //       })
+  //       .catch((error) => console.log(error, "error get product by id"));
+  //   }
+  // }, []);
 
   const inputsList = [
     { label: "Name In English", name: "name_en", type: "text" },
@@ -19,7 +35,18 @@ const AddProduct = () => {
     <AddItemPage
       itemType={"product"}
       inputsList={inputsList}
+      // itemID={state?.productID}
       updateData={updateData}
+      // updateData={[]}
+      initialData={{
+        name_en: "",
+        name_ar: "",
+        description_en: "",
+        description_ar: "",
+        category: "",
+        image: "",
+        in_home: true,
+      }}
     />
   );
 };

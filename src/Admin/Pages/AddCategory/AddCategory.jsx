@@ -19,7 +19,6 @@ import {
 import { useTheme } from "@emotion/react";
 import { Add } from "@mui/icons-material";
 import { useNavigate, useLocation } from "react-router-dom";
-import ToolbarTable from '../../Components/ToolbarTable/ToolbarTable';
 
 const AddCategory = ({ categoryType }) => {
   const { state } = useLocation();
@@ -43,7 +42,10 @@ const AddCategory = ({ categoryType }) => {
     //   console.log(formData, "target");
     //   //   setFormData({ ...formData, [name]: e.target[name].value });
     // });
-    formData.name = e.target["category"].value;
+    inputsList.map(({ name }) => {
+      formData[name] = e.target[name].value;
+    });
+    // formData.name = e.target["category"].value;
     if (formData._id) {
       updateCategoryToAPI();
     } else {
@@ -113,7 +115,8 @@ const AddCategory = ({ categoryType }) => {
   const inputsList = [
     // { label: "Name In English", name: "name_en", type: "text" },
     // { label: "Name In Arabic", name: "name_ar", type: "text" },
-    { label: "Category", name: "category", type: "text" },
+    { label: "Category In English", name: "name_en", type: "text" },
+    { label: "Category In Arabic", name: "name_ar", type: "text" },
     // { label: "Description In English", name: "description_en", type: "text" },
     // { label: "Description In Arabic", name: "description_ar", type: "text" },
   ];
@@ -151,7 +154,7 @@ const AddCategory = ({ categoryType }) => {
             // }
             label={input.label}
             name={input.name}
-            defaultValue={formData.name}
+            defaultValue={formData[input.name]}
             //   onChange={handleChange}
             // fullWidth={input.name.includes("description")}
             fullWidth

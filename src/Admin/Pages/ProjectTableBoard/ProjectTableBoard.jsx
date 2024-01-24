@@ -20,11 +20,21 @@ const ProjectTableBoard = () => {
   }, [listOfProjects]);
 
   async function getProjectsFromAPI() {
-    await fetch("https://dash-board-sspy.onrender.com/api/all-projects", {})
+    await fetch("https://dash-board-sspy.onrender.com/api/all-projects")
       .then((response) => response.json())
       .then((data) => {
         console.log(data, "data get");
-        setListOfProjects(data.data);
+
+        const updatedData = data.data.map((project) => {
+          const category = project.category;
+          delete project.category;
+          return {
+            ...project,
+            category_en: category.name_en,
+            category_ar: category.name_ar,
+          };
+        });
+        setListOfProjects(updatedData);
       })
       .catch((error) => console.log(error, "error"));
   }
@@ -63,7 +73,8 @@ const ProjectTableBoard = () => {
           detailHeaders={[
             "name_en",
             "name_ar",
-            "category",
+            "category_en",
+            "category_ar",
             "date",
             "client_en",
             "client_ar",

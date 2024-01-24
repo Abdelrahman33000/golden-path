@@ -24,7 +24,7 @@ import {
 
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import ToolbarTable from "../ToolbarTable/ToolbarTable";
+import ToolbarTable from "../../test/ToolbarTable/ToolbarTable";
 
 const TableLayout = ({
   listOfData,
@@ -77,6 +77,7 @@ const TableLayout = ({
         navigator(`/admin/add-${subTitle}`, {
           state: {
             category: { ...data },
+            // category: {},
           },
         });
       } else {
@@ -289,6 +290,25 @@ const TableLayout = ({
                                           row[rowKey]
                                         ).toLocaleDateString()
                                       ) : (
+                                        // ) : rowKey == "category" ? (
+                                        //   <TableRow>
+                                        //     {Object.entries(row[rowKey]).map(
+                                        //       (categoryItem) => (
+                                        //         <>
+                                        //           <TableCell>
+                                        //             {categoryItem[0].includes(
+                                        //               "en"
+                                        //             )
+                                        //               ? "Category En"
+                                        //               : "Category Ar"}
+                                        //           </TableCell>
+                                        //           <TableCell>
+                                        //             {categoryItem[1]}
+                                        //           </TableCell>
+                                        //         </>
+                                        //       )
+                                        //     )}
+                                        //   </TableRow>
                                         row[rowKey]?.toString()
                                       )}
                                     </TableCell>

@@ -19,11 +19,14 @@ import {
 import { useTheme } from "@emotion/react";
 import { Add } from "@mui/icons-material";
 import { useNavigate, useLocation } from "react-router-dom";
-import ToolbarTable from "../../Components/ToolbarTable/ToolbarTable";
+import ToolbarTable from "../../test/ToolbarTable/ToolbarTable";
+import { useTranslation } from "react-i18next";
 
 const AddItemPage = ({ itemType, inputsList, updateData, initialData }) => {
   // const { state } = useLocation();
   // const updateData = state[itemType] ? { ...state[itemType] } : {};
+
+  const { i18n } = useTranslation();
 
   const [formData, setFormData] = useState({
     ...initialData,
@@ -44,8 +47,21 @@ const AddItemPage = ({ itemType, inputsList, updateData, initialData }) => {
 
   useEffect(() => {
     getCategoryListDataApi();
+    // getItemObjectByID();
     console.log(formData, "sdhgfsdgfsdhgfh");
   }, []);
+
+  // function getItemObjectByID() {
+  //   if (itemID) {
+  //     fetch(`https://dash-board-sspy.onrender.com/api/${itemType}?id=${itemID}`)
+  //       .then((response) => response.json())
+  //       .then((result) => {
+  //         console.log(result, "get product by id");
+  //         setFormData({ ...result.data });
+  //       })
+  //       .catch((error) => console.log(error, "error get product by id"));
+  //   }
+  // }
 
   async function getCategoryListDataApi() {
     await fetch(
@@ -61,6 +77,7 @@ const AddItemPage = ({ itemType, inputsList, updateData, initialData }) => {
       });
   }
 
+  console.log(formData, "form data");
   //   const handleChange = (e) => {
   //     const { name, value, type, checked } = e.target;
   //     setFormData((prevData) => ({
@@ -73,7 +90,8 @@ const AddItemPage = ({ itemType, inputsList, updateData, initialData }) => {
     e.preventDefault();
     inputsList.map(({ name }) => {
       if (name == "in_home") {
-        // formData[name] = e.target[name].checked;
+        formData[name] = e.target[name].checked;
+        // formData[name] = false;
       } else {
         formData[name] = e.target[name].value;
       }
@@ -107,6 +125,8 @@ const AddItemPage = ({ itemType, inputsList, updateData, initialData }) => {
       formDataObject.append(key, formData[key]);
     }
     // formDataObject.append("in_home", false);
+
+    console.log(formDataObject, "object");
 
     await fetch(`https://dash-board-sspy.onrender.com/api/${itemType}`, {
       // mode: "no-cors",
@@ -309,13 +329,21 @@ const AddItemPage = ({ itemType, inputsList, updateData, initialData }) => {
                   label={input.label}
                   name={input.name}
                   defaultValue={formData.category}
+                  // defaultValue={
+                  //   formData.category?._id ? formData.category?._id : ""
+                  //   // i18n.language == "en"
+                  //   //   ? formData.category.name_en
+                  //   //   : formData.category.name_ar
+                  // }
                   // onChange={handleChange}
                 >
                   <MenuItem disabled value="">
                     {`Select ${input.label}`}
                   </MenuItem>
                   {categoryList.map((item) => (
-                    <MenuItem value={item.name}>{item.name}</MenuItem>
+                    <MenuItem value={item?._id}>
+                      {i18n.language == "en" ? item.name_en : item.name_ar}
+                    </MenuItem>
                   ))}
                 </Select>
               </FormControl>

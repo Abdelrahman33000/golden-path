@@ -20,11 +20,20 @@ const ProductTableBoard = () => {
   }, [listOfProducts]);
 
   async function getProductsFromAPI() {
-    await fetch("https://dash-board-sspy.onrender.com/api/all-products", {})
+    await fetch("https://dash-board-sspy.onrender.com/api/all-products")
       .then((response) => response.json())
       .then((data) => {
         console.log(data, "data get");
-        setListOfProducts(data.data);
+        const updatedData = data.data.map((product) => {
+          const category = product.category;
+          delete product.category;
+          return {
+            ...product,
+            category_en: category.name_en,
+            category_ar: category.name_ar,
+          };
+        });
+        setListOfProducts(updatedData);
       })
       .catch((error) => console.log(error, "error"));
   }
@@ -107,7 +116,8 @@ const ProductTableBoard = () => {
           detailHeaders={[
             "name_en",
             "name_ar",
-            "category",
+            "category_en",
+            "category_ar",
             "description_en",
             "description_ar",
             "in_home",
