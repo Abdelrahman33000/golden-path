@@ -19,7 +19,7 @@ import {
 import { useTheme } from "@emotion/react";
 import { Add } from "@mui/icons-material";
 import { useNavigate, useLocation } from "react-router-dom";
-import ToolbarTable from "../../test/ToolbarTable/ToolbarTable";
+import ToolbarTable from "../ToolbarTable/ToolbarTable";
 import { useTranslation } from "react-i18next";
 
 const AddItemPage = ({ itemType, inputsList, updateData, initialData }) => {

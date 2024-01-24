@@ -24,7 +24,7 @@ import {
 
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import ToolbarTable from "../../test/ToolbarTable/ToolbarTable";
+import ToolbarTable from "../ToolbarTable/ToolbarTable";
 
 const TableLayout = ({
   listOfData,
