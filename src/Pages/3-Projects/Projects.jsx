@@ -13,6 +13,7 @@ import { Link } from 'react-router-dom';
 import { AddLink, ArrowBackIosNew, ArrowForwardIos, TravelExplore } from '@mui/icons-material';
 import "./projects.css"
 import { useTranslation } from 'react-i18next';
+import { useState } from 'react';
 
 function CustomTabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -55,8 +56,25 @@ const Projects = () => {
     setValue(newValue);
   };
 
-  const { t } = useTranslation();
+//   const { t } = useTranslation();
 
+
+  const [project , setProject] =useState([])
+
+  const { t, i18n } = useTranslation();
+
+  console.log(i18n.language ,"kjjkj");
+  React.useEffect(() => {
+    fetch('https://dash-board-sspy.onrender.com/api/all-Project?page=1')
+    .then(response => response.json())
+    .then(data => {
+      console.log(data.data)
+      const data1 = data.data
+      setProject(data1);
+      
+    })
+     
+  }, [])
 
   return (
     
