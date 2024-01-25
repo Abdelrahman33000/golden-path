@@ -22,21 +22,28 @@ import { useNavigate, useLocation } from "react-router-dom";
 import ToolbarTable from "../ToolbarTable/ToolbarTable";
 import { useTranslation } from "react-i18next";
 
-const AddItemPage = ({ itemType, inputsList, updateData, initialData }) => {
+const AddItemPage = ({
+  itemType,
+  inputsList,
+  updateData,
+  initialData,
+  itemID,
+}) => {
   // const { state } = useLocation();
   // const updateData = state[itemType] ? { ...state[itemType] } : {};
 
   const { i18n } = useTranslation();
 
   const [formData, setFormData] = useState({
-    ...initialData,
+    isInit: true,
+    // ...initialData,
     // name_en: "",
     // name_ar: "",
     // description_en: "",
     // description_ar: "",
     // category: "",
     // image: "",
-    ...updateData,
+    // ...updateData,
   });
 
   const navigator = useNavigate();
@@ -47,21 +54,24 @@ const AddItemPage = ({ itemType, inputsList, updateData, initialData }) => {
 
   useEffect(() => {
     getCategoryListDataApi();
-    // getItemObjectByID();
+    getItemObjectByID();
     console.log(formData, "sdhgfsdgfsdhgfh");
   }, []);
 
-  // function getItemObjectByID() {
-  //   if (itemID) {
-  //     fetch(`https://dash-board-sspy.onrender.com/api/${itemType}?id=${itemID}`)
-  //       .then((response) => response.json())
-  //       .then((result) => {
-  //         console.log(result, "get product by id");
-  //         setFormData({ ...result.data });
-  //       })
-  //       .catch((error) => console.log(error, "error get product by id"));
-  //   }
-  // }
+  function getItemObjectByID() {
+    if (itemID !== "new") {
+      fetch(`https://dash-board-sspy.onrender.com/api/${itemType}?id=${itemID}`)
+        .then((response) => response.json())
+        .then((result) => {
+          console.log(result, "get product by id");
+          const holder = result.data.category;
+          setFormData({ ...result.data, isInit: false, category: holder._id });
+        })
+        .catch((error) => console.log(error, "error get product by id"));
+    } else {
+      setFormData({ ...initialData, isInit: false });
+    }
+  }
 
   async function getCategoryListDataApi() {
     await fetch(
@@ -70,6 +80,12 @@ const AddItemPage = ({ itemType, inputsList, updateData, initialData }) => {
       .then((response) => response.json())
       .then((data) => {
         console.log(data, "caregory data");
+        // const found = data.data.find(
+        //   ({ name_en }) => name_en === formData.category_en
+        // );
+        // formData.category = found?._id ? found._id : "";
+
+        // console.log("found category");
         setCategoryList([...data.data]);
       })
       .catch((error) => {
@@ -77,7 +93,13 @@ const AddItemPage = ({ itemType, inputsList, updateData, initialData }) => {
       });
   }
 
-  console.log(formData, "form data");
+  // useEffect(() => {
+  //   const x = "8836-12-03T22:00:00.000Z";
+  //   const date = x.split("T")[0];
+  //   console.log(new Date(date).toISOString(), "new date");
+  // }, []);
+  // console.log(formData, "form data");
+  // console.log(formData.image, "form data image");
   //   const handleChange = (e) => {
   //     const { name, value, type, checked } = e.target;
   //     setFormData((prevData) => ({
@@ -237,34 +259,35 @@ const AddItemPage = ({ itemType, inputsList, updateData, initialData }) => {
       {/* <Box sx={{ paddingY: 5 }}>
         <ToolbarTable title={formData._id ? `Edit Product` : `Add Product`} />
       </Box> */}
-      <form
-        onSubmit={handleSubmit}
-        className="col-md-10 d-flex flex-wrap justify-content-between align-items-center"
-      >
-        <Button
-          component="label"
-          //   htmlFor="fileInput"
-          variant=""
-          color="primary"
-          type="file"
-          htmlFor={"image"}
-          sx={{
-            border: "2px dashed gray",
-            borderRadius: "15px",
-            width: "70%",
-            marginX: "auto",
-            marginY: "10px",
-            padding: `${formData.image ? "20px" : "20%"}`,
-            // padding: {formData.image?'10px': "20% 20%"},
-            // paddingX: "20%",
-            // paddingY: "20%",
-            display: "flex",
-            flexDirection: "column",
-            alignItems: "center",
-            justifyContent: "center",
-          }}
+      {!formData.isInit && (
+        <form
+          onSubmit={handleSubmit}
+          className="col-md-10 d-flex flex-wrap justify-content-between align-items-center"
         >
-          {/* <Box
+          <Button
+            component="label"
+            //   htmlFor="fileInput"
+            variant=""
+            color="primary"
+            type="file"
+            htmlFor={"image"}
+            sx={{
+              border: "2px dashed gray",
+              borderRadius: "15px",
+              width: "70%",
+              marginX: "auto",
+              marginY: "10px",
+              padding: `${formData.image ? "20px" : "20%"}`,
+              // padding: {formData.image?'10px': "20% 20%"},
+              // paddingX: "20%",
+              // paddingY: "20%",
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "center",
+              justifyContent: "center",
+            }}
+          >
+            {/* <Box
             // sx={{
             //   border: "2px dashed gray",
             //   borderRadius: "15px",
@@ -279,120 +302,136 @@ const AddItemPage = ({ itemType, inputsList, updateData, initialData }) => {
             //   justifyContent: "center",
             // }}
           > */}
-          {formData.image ? (
-            // <img src={`${formData.image}`} width={"100%"} />
-            <img
-              src={
-                typeof formData.image == "string"
-                  ? `${formData.image}`
-                  : `${uploadedFile}`
-              }
-              width={"100%"}
+            {formData.image ? (
+              <img
+                src={
+                  typeof formData.image == "string"
+                    ? `${formData.image}`
+                    : `${uploadedFile}`
+                }
+                width={"100%"}
+              />
+            ) : (
+              <>
+                <Typography
+                  component="h3"
+                  sx={{ fontWeight: "bold", marginY: 1 }}
+                >
+                  Upload Image
+                </Typography>
+                <Box
+                  sx={{
+                    borderRadius: "50%",
+                    backgroundColor: "royalblue",
+                    padding: 1,
+                    color: "white",
+                  }}
+                >
+                  <Add />
+                </Box>
+              </>
+            )}
+            <input
+              type="file"
+              id="image"
+              accept="image/*"
+              onChange={handleUploadImage}
+              style={{ display: "none" }}
             />
-          ) : (
-            <>
-              <Typography
-                component="h3"
-                sx={{ fontWeight: "bold", marginY: 1 }}
-              >
-                Upload Image
-              </Typography>
-              <Box
-                sx={{
-                  borderRadius: "50%",
-                  backgroundColor: "royalblue",
-                  padding: 1,
-                  color: "white",
-                }}
-              >
-                <Add />
-              </Box>
-            </>
-          )}
-          <input
-            type="file"
-            id="image"
-            accept="image/*"
-            onChange={handleUploadImage}
-            style={{ display: "none" }}
-          />
-          {/* </Box> */}
-        </Button>
+            {/* </Box> */}
+          </Button>
 
-        {inputsList.map((input, inputIndex) => {
-          if (input.type == "select") {
-            return (
-              <FormControl key={input.name} fullWidth margin="normal">
-                <InputLabel id={input.name}>{input.label}</InputLabel>
-                <Select
-                  labelId={input.name}
+          {inputsList.map((input, inputIndex) => {
+            if (input.type == "select") {
+              return (
+                <FormControl key={input.name} fullWidth margin="normal">
+                  <InputLabel id={input.name}>{input.label}</InputLabel>
+                  <Select
+                    labelId={input.name}
+                    label={input.label}
+                    name={input.name}
+                    value={formData.category}
+                    onChange={(e) => {
+                      setFormData({ ...formData, category: e.target.value });
+                    }}
+                    // defaultValue={formData.category}
+                    // placeholder=""
+                    // defaultValue={
+                    //   formData.category?._id ? formData.category?._id : ""
+                    //   // i18n.language == "en"
+                    //   //   ? formData.category.name_en
+                    //   //   : formData.category.name_ar
+                    // }
+                    // onChange={handleChange}
+                  >
+                    <MenuItem disabled value="">
+                      {`Select ${input.label}`}
+                    </MenuItem>
+
+                    {/* <MenuItem selected value={formData.category}>
+                    {formData.category
+                      ? i18n.language == "en"
+                        ? formData.category_en
+                        : formData.category_ar
+                      : `Select ${input.label}`}
+                  </MenuItem> */}
+                    {categoryList.map((item) => (
+                      <MenuItem value={item?._id}>
+                        {i18n.language == "en" ? item.name_en : item.name_ar}
+                      </MenuItem>
+                    ))}
+                  </Select>
+                </FormControl>
+              );
+            } else if (input.type == "checkbox") {
+              return (
+                <FormControlLabel
+                  key={input.name}
+                  sx={{ width: "100%" }}
+                  control={
+                    <Checkbox
+                      name={input.name}
+                      defaultChecked={true}
+                      // checked={formData.subscribe}
+                      // onChange={handleChange}
+                    />
+                  }
+                  label={input.label}
+                />
+              );
+            } else {
+              return (
+                <TextField
+                  key={input.name}
+                  sx={
+                    (input.name.includes("en") || input.name.includes("ar")) &&
+                    !input.name.includes("description") && {
+                      width: "49%",
+                    }
+                  }
                   label={input.label}
                   name={input.name}
-                  defaultValue={formData.category}
-                  // defaultValue={
-                  //   formData.category?._id ? formData.category?._id : ""
-                  //   // i18n.language == "en"
-                  //   //   ? formData.category.name_en
-                  //   //   : formData.category.name_ar
-                  // }
-                  // onChange={handleChange}
-                >
-                  <MenuItem disabled value="">
-                    {`Select ${input.label}`}
-                  </MenuItem>
-                  {categoryList.map((item) => (
-                    <MenuItem value={item?._id}>
-                      {i18n.language == "en" ? item.name_en : item.name_ar}
-                    </MenuItem>
-                  ))}
-                </Select>
-              </FormControl>
-            );
-          } else if (input.type == "checkbox") {
-            return (
-              <FormControlLabel
-                key={input.name}
-                sx={{ width: "100%" }}
-                control={
-                  <Checkbox
-                    name={input.name}
-                    defaultChecked={true}
-                    // checked={formData.subscribe}
-                    // onChange={handleChange}
-                  />
-                }
-                label={input.label}
-              />
-            );
-          } else {
-            return (
-              <TextField
-                key={input.name}
-                sx={
-                  (input.name.includes("en") || input.name.includes("ar")) &&
-                  !input.name.includes("description") && {
-                    width: "49%",
+                  defaultValue={
+                    input.type == "date"
+                      ? formData.date.split("T")[0]
+                      : formData[input.name]
                   }
-                }
-                label={input.label}
-                name={input.name}
-                defaultValue={formData[input.name]}
-                // value={input.name == "date" && "hello"}
-                //   onChange={handleChange}
-                // fullWidth={input.name.includes("description")}
-                fullWidth
-                multiline={input.name.includes("description")}
-                rows={3}
-                type={input.type}
-                margin="normal"
-                InputLabelProps={input.type == "date" && { shrink: true }}
-                // FormHelperTextProps={"kdgfsdgfhsdghf"}
-              />
-            );
-          }
-        })}
+                  // value={input.name == "date" && "hello"}
+                  //   onChange={handleChange}
+                  // fullWidth={input.name.includes("description")}
+                  fullWidth
+                  multiline={input.name.includes("description")}
+                  rows={3}
+                  type={input.type}
+                  margin="normal"
+                  InputLabelProps={input.type == "date" && { shrink: true }}
+                  // FormHelperTextProps={"kdgfsdgfhsdghf"}
+                />
+              );
+            }
+          })}
 
-        {/* <TextField
+          {/* <TextField
         label="Name"
         name="name"
         value={formData.name}
@@ -418,7 +457,7 @@ const AddItemPage = ({ itemType, inputsList, updateData, initialData }) => {
         label="Subscribe to newsletter"
       /> */}
 
-        {/* <FormControl component="fieldset">
+          {/* <FormControl component="fieldset">
         <FormLabel component="legend">Gender</FormLabel>
         <RadioGroup
           name="gender"
@@ -431,7 +470,7 @@ const AddItemPage = ({ itemType, inputsList, updateData, initialData }) => {
         </RadioGroup>
       </FormControl> */}
 
-        {/* <FormControl fullWidth margin="normal">
+          {/* <FormControl fullWidth margin="normal">
         <InputLabel id="country-label">Country</InputLabel>
         <Select
           labelId="country-label"
@@ -446,24 +485,25 @@ const AddItemPage = ({ itemType, inputsList, updateData, initialData }) => {
         </Select>
       </FormControl> */}
 
-        {errorMessage && (
-          <div className="alert alert-danger mx-5 my-2 p-2 w-100 text-center">
-            {errorMessage}
-          </div>
-        )}
+          {errorMessage && (
+            <div className="alert alert-danger mx-5 my-2 p-2 w-100 text-center">
+              {errorMessage}
+            </div>
+          )}
 
-        <Box sx={{ marginX: "auto", marginY: 2 }}>
-          <Button
-            variant="contained"
-            size="large"
-            color="primary"
-            type="submit"
-            margin={15}
-          >
-            Submit
-          </Button>
-        </Box>
-      </form>
+          <Box sx={{ marginX: "auto", marginY: 2 }}>
+            <Button
+              variant="contained"
+              size="large"
+              color="primary"
+              type="submit"
+              margin={15}
+            >
+              Submit
+            </Button>
+          </Box>
+        </form>
+      )}
     </Box>
   );
 };

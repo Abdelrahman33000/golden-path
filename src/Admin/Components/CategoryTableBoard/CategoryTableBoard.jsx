@@ -54,7 +54,7 @@ const CategoryTableBoard = ({ itemType }) => {
 
   return (
     <div className="min-vh-100">
-      {isLoading || listOfCategories.length == 0 ? (
+      {isLoading ? (
         <Loader />
       ) : (
         <TableLayout

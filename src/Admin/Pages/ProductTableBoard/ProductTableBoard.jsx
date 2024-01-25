@@ -95,7 +95,7 @@ const ProductTableBoard = () => {
 
   return (
     <div className="min-vh-100">
-      {isLoading || listOfProducts.length == 0 ? (
+      {isLoading ? (
         <Loader />
       ) : (
         // <LayoutTableDashboard

@@ -60,7 +60,7 @@ const ProjectTableBoard = () => {
 
   return (
     <div className="min-vh-100">
-      {isLoading || listOfProjects.length == 0 ? (
+      {isLoading  ? (
         <Loader />
       ) : (
         <TableLayout

@@ -36,17 +36,17 @@ function App() {
           <Route index element={<HomeDashboard />} />
           <Route path="product" element={<ProductTableBoard />} />
           <Route path="project" element={<ProjectTableBoard />} />
-          <Route path="add-product" element={<AddProduct />} />
-          <Route path="add-project" element={<AddProject />} />
+          <Route path="add-product/:id" element={<AddProduct />} />
+          <Route path="add-project/:id" element={<AddProject />} />
           <Route path="product-category" element={<ProductCategory />} />
           <Route path="project-category" element={<ProjectCategory />} />
 
           <Route
-            path="add-product-category"
+            path="add-product-category/:id"
             element={<AddCategory categoryType={"product"} />}
           />
           <Route
-            path="add-project-category"
+            path="add-project-category/:id"
             element={<AddCategory categoryType={"project"} />}
           />
           <Route

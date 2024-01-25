@@ -1,27 +1,11 @@
 import React, { useEffect, useState } from "react";
 import AddItemPage from "../../Components/AddItemPage/AddItemPage";
-import { useNavigate, useLocation } from "react-router-dom";
+import { useNavigate, useLocation, useParams } from "react-router-dom";
 
 const AddProduct = () => {
   const { state } = useLocation();
-  const updateData = state?.product ? { ...state.product } : {};
-  // const updateData = state?.productID ? { ...state["product"] } : {};
-  // const [updateData, setUpdateData] = useState({});
-
-  // useEffect(() => {
-  //   console.log(state?.productID, "id product");
-  //   if (state?.productID) {
-  //     fetch(
-  //       `https://dash-board-sspy.onrender.com/api/product?id=${state?.productID}`
-  //     )
-  //       .then((response) => response.json())
-  //       .then((result) => {
-  //         console.log(result, "get product by id");
-  //         setUpdateData({ ...result.data });
-  //       })
-  //       .catch((error) => console.log(error, "error get product by id"));
-  //   }
-  // }, []);
+  const { id } = useParams();
+  // const updateData = state?.product ? { ...state.product } : {};
 
   const inputsList = [
     { label: "Name In English", name: "name_en", type: "text" },
@@ -31,21 +15,37 @@ const AddProduct = () => {
     { label: "Description In Arabic", name: "description_ar", type: "text" },
     { label: "Add This Item in Home Page", name: "in_home", type: "checkbox" },
   ];
+
+  // function getItemObjectByID() {
+  //   if (id) {
+  //     fetch(`https://dash-board-sspy.onrender.com/api/product?id=${id}`)
+  //       .then((response) => response.json())
+  //       .then((result) => {
+  //         console.log(result, "get product by id");
+  //         setChangeData({ ...result.data, isInit: false });
+  //       })
+  //       .catch((error) => console.log(error, "error get product by id"));
+  //   }
+  // }
+
+  // useEffect(() => {
+  //   getItemObjectByID();
+  // }, []);
+
   return (
     <AddItemPage
       itemType={"product"}
+      itemID={id}
       inputsList={inputsList}
-      // itemID={state?.productID}
-      updateData={updateData}
-      // updateData={[]}
+      // updateData={updateData}
       initialData={{
         name_en: "",
         name_ar: "",
+        category: "",
         description_en: "",
         description_ar: "",
-        category: "",
-        image: "",
-        in_home: true,
+        in_home: "",
+        // ...changeData,
       }}
     />
   );

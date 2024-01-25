@@ -148,6 +148,7 @@ const AddCategory = ({ categoryType }) => {
       >
         {inputsList.map((input) => (
           <TextField
+            key={input.name}
             // sx={
             //   input.name.includes("name") && {
             //     width: "49%",

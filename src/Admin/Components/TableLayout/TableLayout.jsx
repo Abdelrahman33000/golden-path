@@ -60,37 +60,19 @@ const TableLayout = ({
     page > 0 ? Math.max(0, (1 + page) * rowsPerPage - listOfData.length) : 0;
 
   const navigateToAdd = (type, data) => {
-    // if (subTitle.includes("-")) {
-    //   // category
-    //   if (type == "edit") {
-    //     navigator(`/admin/add-${subTitle.split("-")[1]}`, {
-    //       state: {
-    //         category: { ...data },
-    //       },
-    //     });
-    //   } else {
-    //     navigator(`/admin/add-${subTitle.split("-")[1]}`);
-    //   }
-    // } else {
     if (type == "edit") {
       if (subTitle.includes("category")) {
-        navigator(`/admin/add-${subTitle}`, {
+        navigator(`/admin/add-${subTitle}/${data._id}`, {
           state: {
             category: { ...data },
-            // category: {},
           },
         });
       } else {
-        navigator(`/admin/add-${subTitle}`, {
-          state: {
-            [subTitle]: { ...data },
-          },
-        });
+        navigator(`/admin/add-${subTitle}/${data._id}`);
       }
     } else {
-      navigator(`/admin/add-${subTitle}`);
+      navigator(`/admin/add-${subTitle}/new`);
     }
-    // }
     console.log(title, subTitle, "title");
   };
 
@@ -102,39 +84,39 @@ const TableLayout = ({
     >
       <Paper sx={{ width: "100%", mb: 2 }}>
         {/* <Box
-          sx={{
-            display: "flex",
-            flexWrap: "wrap",
-            justifyContent: "space-between",
-            alignItems: "center",
-            padding: 1,
-          }}
-        >
-          <ToolbarTable title={title} />
-          <Button
-            // sx={{ justifySelf: "center" }}
-            variant="contained"
-            endIcon={<Add />}
-            onClick={navigateToAdd}
-          >
-            {`add ${title}`}
-          </Button>
-          
-          <TablePagination
-            sx={{
-              "& .MuiTablePagination-displayedRows": {
-                margin: 0,
-                fontWeight: "bold",
-              },
-            }}
-            component="div"
-            count={listOfData.length}
-            rowsPerPageOptions={[8]}
-            rowsPerPage={rowsPerPage}
-            page={page}
-            onPageChange={handleChangePage}
-          />
-        </Box> */}
+       sx={{
+         display: "flex",
+         flexWrap: "wrap",
+         justifyContent: "space-between",
+         alignItems: "center",
+         padding: 1,
+       }}
+     >
+       <ToolbarTable title={title} />
+       <Button
+         // sx={{ justifySelf: "center" }}
+         variant="contained"
+         endIcon={<Add />}
+         onClick={navigateToAdd}
+       >
+         {`add ${title}`}
+       </Button>
+       
+       <TablePagination
+         sx={{
+           "& .MuiTablePagination-displayedRows": {
+             margin: 0,
+             fontWeight: "bold",
+           },
+         }}
+         component="div"
+         count={listOfData.length}
+         rowsPerPageOptions={[8]}
+         rowsPerPage={rowsPerPage}
+         page={page}
+         onPageChange={handleChangePage}
+       />
+     </Box> */}
         <TableContainer>
           <Table
             sx={{ minWidth: 750 }}
@@ -155,173 +137,191 @@ const TableLayout = ({
               </TableRow>
             </TableHead>
             <TableBody>
-              {listOfData
-                .slice(rowsPerPage * page, rowsPerPage * (page + 1))
-                .map((row, rowIndex) => (
-                  <>
-                    <TableRow
-                      key={`${subTitle}-${rowIndex + 1 + page * rowsPerPage}`}
-                      hover
-                      sx={{ "& > *": { borderBottom: "unset" } }}
+              {listOfData.length == 0 ? (
+                <TableRow>
+                  <TableCell colSpan={headerCells.length + 1}>
+                    <h2
+                      className="d-flex align-items-center justify-content-center"
+                      style={{ height: 8 * 60 }}
                     >
-                      <TableCell>
-                        {!title.toLowerCase().includes("category") && (
-                          <IconButton
-                            aria-label="expand row"
-                            size="small"
-                            onClick={() => handleColapse(rowIndex)}
-                          >
-                            {rowIndex == colapseIndex ? (
-                              <KeyboardArrowUp />
-                            ) : (
-                              <KeyboardArrowDown />
-                            )}
-                          </IconButton>
-                        )}
-                      </TableCell>
-
-                      {headerCells.map((head, headIndex) => (
-                        <TableCell
-                          onClick={() =>
-                            title.toLowerCase().includes("category")
-                              ? null
-                              : handleColapse(rowIndex)
-                          }
-                          align="center"
-                        >
-                          {head == "#id"
-                            ? rowIndex + 1 + page * rowsPerPage
-                            : row[head]?.toString()}
-                        </TableCell>
-                      ))}
-                      <TableCell
-                        padding="none"
-                        align="center"
-                        sx={{ backgroundColor: "lightgray", minWidth: "100px" }}
+                      You do not have any data yet
+                    </h2>
+                  </TableCell>
+                </TableRow>
+              ) : (
+                listOfData
+                  .slice(rowsPerPage * page, rowsPerPage * (page + 1))
+                  .map((row, rowIndex) => (
+                    <>
+                      <TableRow
+                        key={`${subTitle}-${rowIndex + 1 + page * rowsPerPage}`}
+                        hover
+                        sx={{ "& > *": { borderBottom: "unset" } }}
                       >
-                        <IconButton
-                          onClick={() => {
-                            handleDeleteItem(row._id);
-                            setIsLoading(true);
+                        <TableCell>
+                          {!title.toLowerCase().includes("category") && (
+                            <IconButton
+                              aria-label="expand row"
+                              size="small"
+                              onClick={() => handleColapse(rowIndex)}
+                            >
+                              {rowIndex == colapseIndex ? (
+                                <KeyboardArrowUp />
+                              ) : (
+                                <KeyboardArrowDown />
+                              )}
+                            </IconButton>
+                          )}
+                        </TableCell>
+
+                        {headerCells.map((head, headIndex) => (
+                          <TableCell
+                            onClick={() =>
+                              title.toLowerCase().includes("category")
+                                ? null
+                                : handleColapse(rowIndex)
+                            }
+                            align="center"
+                          >
+                            {head == "#id"
+                              ? rowIndex + 1 + page * rowsPerPage
+                              : row[head]?.toString()}
+                          </TableCell>
+                        ))}
+                        <TableCell
+                          padding="none"
+                          align="center"
+                          sx={{
+                            backgroundColor: "lightgray",
+                            minWidth: "100px",
                           }}
                         >
-                          <DeleteOutlineOutlined />
-                        </IconButton>
-                        <IconButton onClick={() => navigateToAdd("edit", row)}>
-                          <EditNote />
-                        </IconButton>
-                      </TableCell>
-                    </TableRow>
-                    <TableRow
-                      key={`detail-${subTitle}-${
-                        rowIndex + 1 + page * rowsPerPage
-                      }`}
-                    >
-                      <TableCell
-                        style={{
-                          paddingBottom: 0,
-                          paddingTop: 0,
-                        }}
-                        colSpan={7}
+                          <IconButton
+                            onClick={() => {
+                              handleDeleteItem(row._id);
+                              setIsLoading(true);
+                            }}
+                          >
+                            <DeleteOutlineOutlined />
+                          </IconButton>
+                          <IconButton
+                            onClick={() => navigateToAdd("edit", row)}
+                          >
+                            <EditNote />
+                          </IconButton>
+                        </TableCell>
+                      </TableRow>
+                      <TableRow
+                        key={`detail-${subTitle}-${
+                          rowIndex + 1 + page * rowsPerPage
+                        }`}
                       >
-                        <Collapse
-                          in={rowIndex == colapseIndex}
-                          timeout="auto"
-                          unmountOnExit
+                        <TableCell
+                          style={{
+                            paddingBottom: 0,
+                            paddingTop: 0,
+                          }}
+                          colSpan={headerCells.length + 3}
                         >
-                          <Box sx={{ margin: 1 }}>
-                            <Typography
-                              variant="h4"
-                              gutterBottom
-                              component="div"
-                            >
-                              Details
-                            </Typography>
-                            <Table size="small" aria-label="purchases">
-                              {/* <TableHead>
-                              <TableCell sx={{ fontWeight: "bold" }}>Key</TableCell>
-                              <TableCell sx={{ fontWeight: "bold" }}>Value</TableCell>
-                            </TableHead> */}
-                              <TableBody>
-                                {detailHeaders.map((rowKey) => (
-                                  <TableRow>
-                                    <TableCell
-                                      sx={{
-                                        fontWeight: "bold",
-                                        minWidth: "200px",
-                                        // backgroundColor: "lightgray",
-                                      }}
-                                    >
-                                      {rowKey
-                                        .replace("_", " ")
-                                        .split(" ")
-                                        .map(
-                                          (sub) =>
-                                            `${sub
-                                              .substring(0, 1)
-                                              .toUpperCase()}${sub
-                                              .substring(1)
-                                              .toLowerCase()} `
-                                        )}
-                                    </TableCell>
-                                    <TableCell
-                                      sx={{
-                                        width: "90%",
-                                        lineBreak: "anywhere",
-                                      }}
-                                    >
-                                      {rowKey == "image" ? (
-                                        <img
-                                          src={`${row[rowKey]}`}
-                                          alt="preview"
-                                          width={"auto"}
-                                          height={"100px"}
-                                        />
-                                      ) : rowKey == "images_list" ? (
-                                        row[rowKey].map((imgItem) => (
+                          <Collapse
+                            in={rowIndex == colapseIndex}
+                            timeout="auto"
+                            unmountOnExit
+                          >
+                            <Box sx={{ margin: 1 }}>
+                              <Typography
+                                variant="h4"
+                                gutterBottom
+                                component="div"
+                              >
+                                Details
+                              </Typography>
+                              <Table size="small" aria-label="purchases">
+                                {/* <TableHead>
+                           <TableCell sx={{ fontWeight: "bold" }}>Key</TableCell>
+                           <TableCell sx={{ fontWeight: "bold" }}>Value</TableCell>
+                         </TableHead> */}
+                                <TableBody>
+                                  {detailHeaders.map((rowKey) => (
+                                    <TableRow>
+                                      <TableCell
+                                        sx={{
+                                          fontWeight: "bold",
+                                          minWidth: "200px",
+                                          // backgroundColor: "lightgray",
+                                        }}
+                                      >
+                                        {rowKey
+                                          .replace("_", " ")
+                                          .split(" ")
+                                          .map(
+                                            (sub) =>
+                                              `${sub
+                                                .substring(0, 1)
+                                                .toUpperCase()}${sub
+                                                .substring(1)
+                                                .toLowerCase()} `
+                                          )}
+                                      </TableCell>
+                                      <TableCell
+                                        sx={{
+                                          width: "90%",
+                                          lineBreak: "anywhere",
+                                        }}
+                                      >
+                                        {rowKey == "image" ? (
                                           <img
-                                            src={`${imgItem}`}
+                                            src={`${row[rowKey]}`}
+                                            alt="preview"
                                             width={"auto"}
                                             height={"100px"}
                                           />
-                                        ))
-                                      ) : rowKey == "date" ? (
-                                        new Date(
-                                          row[rowKey]
-                                        ).toLocaleDateString()
-                                      ) : (
-                                        // ) : rowKey == "category" ? (
-                                        //   <TableRow>
-                                        //     {Object.entries(row[rowKey]).map(
-                                        //       (categoryItem) => (
-                                        //         <>
-                                        //           <TableCell>
-                                        //             {categoryItem[0].includes(
-                                        //               "en"
-                                        //             )
-                                        //               ? "Category En"
-                                        //               : "Category Ar"}
-                                        //           </TableCell>
-                                        //           <TableCell>
-                                        //             {categoryItem[1]}
-                                        //           </TableCell>
-                                        //         </>
-                                        //       )
-                                        //     )}
-                                        //   </TableRow>
-                                        row[rowKey]?.toString()
-                                      )}
-                                    </TableCell>
-                                  </TableRow>
-                                ))}
-                              </TableBody>
-                            </Table>
-                          </Box>
-                        </Collapse>
-                      </TableCell>
-                    </TableRow>
-                  </>
-                ))}
+                                        ) : rowKey == "images_list" ? (
+                                          row[rowKey].map((imgItem) => (
+                                            <img
+                                              src={`${imgItem}`}
+                                              width={"auto"}
+                                              height={"100px"}
+                                            />
+                                          ))
+                                        ) : rowKey == "date" ? (
+                                          new Date(
+                                            row[rowKey]
+                                          ).toLocaleDateString()
+                                        ) : (
+                                          // ) : rowKey == "category" ? (
+                                          //   <TableRow>
+                                          //     {Object.entries(row[rowKey]).map(
+                                          //       (categoryItem) => (
+                                          //         <>
+                                          //           <TableCell>
+                                          //             {categoryItem[0].includes(
+                                          //               "en"
+                                          //             )
+                                          //               ? "Category En"
+                                          //               : "Category Ar"}
+                                          //           </TableCell>
+                                          //           <TableCell>
+                                          //             {categoryItem[1]}
+                                          //           </TableCell>
+                                          //         </>
+                                          //       )
+                                          //     )}
+                                          //   </TableRow>
+                                          row[rowKey]?.toString()
+                                        )}
+                                      </TableCell>
+                                    </TableRow>
+                                  ))}
+                                </TableBody>
+                              </Table>
+                            </Box>
+                          </Collapse>
+                        </TableCell>
+                      </TableRow>
+                    </>
+                  ))
+              )}
               {emptyRows > 0 && (
                 <TableRow
                   style={{

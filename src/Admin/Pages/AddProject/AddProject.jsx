@@ -1,10 +1,12 @@
 import React from "react";
 import AddItemPage from "../../Components/AddItemPage/AddItemPage";
-import { useNavigate, useLocation } from "react-router-dom";
+import { useNavigate, useLocation, useParams } from "react-router-dom";
 
 const AddProject = () => {
   const { state } = useLocation();
-  const updateData = state?.project ? { ...state["project"] } : {};
+  const { id } = useParams();
+
+  // const updateData = state?.project ? { ...state["project"] } : {};
 
   const inputsList = [
     { label: "Name In English", name: "name_en", type: "text" },
@@ -24,7 +26,7 @@ const AddProject = () => {
     <AddItemPage
       itemType={"project"}
       inputsList={inputsList}
-      updateData={updateData}
+      itemID={id}
       initialData={{
         name_en: "",
         name_ar: "",
