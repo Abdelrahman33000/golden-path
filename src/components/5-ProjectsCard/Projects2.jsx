@@ -43,7 +43,7 @@ export default function Projects2() {
         disableOnInteraction: false,
       }}
       spaceBetween={30}
-      slidesPerView={4}
+      slidesPerView={3}
       breakpoints={{
         0: {
           slidesPerView: 1,

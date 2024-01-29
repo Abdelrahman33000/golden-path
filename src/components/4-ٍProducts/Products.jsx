@@ -84,7 +84,7 @@ export default function App() {
 
        modules={[FreeMode, Pagination , EffectCoverflow ,Autoplay, Navigation]}
        spaceBetween={30}
-       slidesPerView={4}
+       slidesPerView={3}
         effect={'coverflow'}
         grabCursor={true}
         coverflowEffect={{

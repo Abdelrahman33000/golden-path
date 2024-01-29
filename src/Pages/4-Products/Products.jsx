@@ -96,8 +96,11 @@ const [productPager , setProductPager] = useState([])
     }else {
 
       const category= categories[label-1]
+      console.log(category ,"jjjjjjjjjjjjjj")
+      console.log(products ,"jjjjjjjkkkkkkkkkk")
+
       // عدلى دى يااااا زلفى 
-      const data = products.filter((item) => item.category==category.name_en
+      const data = products.filter((item) => item.category._id===category._id
       )
       setProductPager(data)
     }
