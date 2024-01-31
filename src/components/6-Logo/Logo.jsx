@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 // Import Swiper React components
 import { Swiper, SwiperSlide } from 'swiper/react';
 
@@ -11,7 +11,33 @@ import Came1 from '../images/clients-logo-3.png'
 import Came2 from '../images/clients-logo-4 (1).png'
 import Came3 from '../images/clients-logo-4.png'
 import Came4 from '../images/clients-logo-5.png'
+import { useTranslation } from "react-i18next";
+import { useState } from 'react';
+
+
 export default function App() {
+
+
+
+
+  const { t, i18n } = useTranslation();
+
+  const [ partners , setPartners] =useState([])
+
+  useEffect(() => {
+    fetch('https://dash-board-sspy.onrender.com/api/all-partners')
+    .then(response => response.json())
+    .then(data =>{
+      console.log(data.data ,"jjjjjjjjjjjjj")
+      
+      setPartners(data.data)
+
+    } 
+    )
+  },[])
+
+
+
   return (
     <>
       <Swiper
@@ -23,7 +49,7 @@ export default function App() {
         disableOnInteraction: false,
       }}
       spaceBetween={30}
-      slidesPerView={4}
+      slidesPerView={3}
       breakpoints={{
         0: {
           slidesPerView: 1,
@@ -57,9 +83,16 @@ export default function App() {
         modules={[FreeMode, Pagination ,Autoplay, Navigation]}
         className="mySwip"
       >
-        <SwiperSlide className='swipee'><div>
-            <img src={Came1} alt="" />
+        {partners.map((partner)=>
+        
+        <SwiperSlide className='swipee'>
+          <div>
+            <img src={partner.image} alt="" />
         </div>  </SwiperSlide>
+
+        )}
+
+{/*         
         <SwiperSlide className='swipee'><div>
             <img src={Came2} alt="" />
         </div></SwiperSlide>
@@ -84,7 +117,7 @@ export default function App() {
             <img src={Came4} alt="" />
         </div></SwiperSlide> <SwiperSlide className='swipee'><div>
             <img src={Came1} alt="" />
-        </div></SwiperSlide>
+        </div></SwiperSlide> */}
       </Swiper>
     </>
   );
