@@ -7,7 +7,7 @@ const CategoryTableBoard = ({ itemType }) => {
   const [listOfCategories, setListOfCategories] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
 
-  const headersCategory = ["#id", "name_en", "name_ar"];
+  const headersCategory = ["#_id", "name_en", "name_ar"];
 
   useEffect(() => {
     getCategoriesFromAPI();

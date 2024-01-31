@@ -17,10 +17,24 @@ import {
   IconButton,
 } from "@mui/material";
 import { useTheme } from "@emotion/react";
-import { Add } from "@mui/icons-material";
+import { Add, CloudUpload, Delete } from "@mui/icons-material";
 import { useNavigate, useLocation } from "react-router-dom";
 import ToolbarTable from "../ToolbarTable/ToolbarTable";
 import { useTranslation } from "react-i18next";
+import Loader from "../Loader/Loader";
+import { Swiper, SwiperSlide } from "swiper/react";
+// import "swiper/css";
+// import "swiper/css/free-mode";
+// import "swiper/css/pagination";
+
+import {
+  FreeMode,
+  Pagination,
+  Navigation,
+  Autoplay,
+  EffectCoverflow,
+} from "swiper/modules";
+import styles from "./AddItemPage.module.css";
 
 const AddItemPage = ({
   itemType,
@@ -51,8 +65,13 @@ const AddItemPage = ({
   const [errorMessage, setErrorMessage] = useState("");
   const [categoryList, setCategoryList] = useState([]);
   const [uploadedFile, setUploadedFile] = useState("");
+  const [uploadedFilesList, setUploadedFilesList] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
+    console.log("has category");
+    console.log(formData.category, "has category");
+
     getCategoryListDataApi();
     getItemObjectByID();
     console.log(formData, "sdhgfsdgfsdhgfh");
@@ -64,8 +83,17 @@ const AddItemPage = ({
         .then((response) => response.json())
         .then((result) => {
           console.log(result, "get product by id");
-          const holder = result.data.category;
-          setFormData({ ...result.data, isInit: false, category: holder._id });
+          if (formData.hasOwnProperty("category")) {
+            const holder = result.data.category;
+
+            setFormData({
+              ...result.data,
+              isInit: false,
+              category: holder?._id,
+            });
+          } else {
+            setFormData({ ...result.data, isInit: false });
+          }
         })
         .catch((error) => console.log(error, "error get product by id"));
     } else {
@@ -74,23 +102,26 @@ const AddItemPage = ({
   }
 
   async function getCategoryListDataApi() {
-    await fetch(
-      `https://dash-board-sspy.onrender.com/api/all-category?type=${itemType}`
-    )
-      .then((response) => response.json())
-      .then((data) => {
-        console.log(data, "caregory data");
-        // const found = data.data.find(
-        //   ({ name_en }) => name_en === formData.category_en
-        // );
-        // formData.category = found?._id ? found._id : "";
+    console.log("hihi");
+    if (itemType) {
+      await fetch(
+        `https://dash-board-sspy.onrender.com/api/all-category?type=${itemType}`
+      )
+        .then((response) => response.json())
+        .then((data) => {
+          console.log(data, "caregory data");
+          // const found = data.data.find(
+          //   ({ name_en }) => name_en === formData.category_en
+          // );
+          // formData.category = found?._id ? found._id : "";
 
-        // console.log("found category");
-        setCategoryList([...data.data]);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
+          // console.log("found category");
+          setCategoryList([...data.data]);
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    }
   }
 
   // useEffect(() => {
@@ -110,6 +141,7 @@ const AddItemPage = ({
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    setIsLoading(true);
     inputsList.map(({ name }) => {
       if (name == "in_home") {
         formData[name] = e.target[name].checked;
@@ -176,6 +208,7 @@ const AddItemPage = ({
           navigator(`/admin/${itemType}`);
         } else {
           setErrorMessage(data.message);
+          setIsLoading(false);
         }
       })
       .catch((error) => console.log(error, "error"));
@@ -209,19 +242,11 @@ const AddItemPage = ({
           navigator(`/admin/${itemType}`);
         } else {
           setErrorMessage(data.message);
+          setIsLoading(false);
         }
       })
       .catch((error) => console.log(error, "error"));
   }
-
-  //   const inputsList = [
-  //     { label: "Name In English", name: "name_en", type: "text" },
-  //     { label: "Name In Arabic", name: "name_ar", type: "text" },
-  //     { label: "Category", name: "category", type: "select" },
-  //     { label: "Description In English", name: "description_en", type: "text" },
-  //     { label: "Description In Arabic", name: "description_ar", type: "text" },
-  //     { label: "Add This Item in Home Page", name: "in_home", type: "checkbox" },
-  //   ];
 
   const handleUploadImage = (e) => {
     const file = e.target.files[0];
@@ -239,15 +264,32 @@ const AddItemPage = ({
     //   alert("You can upload up to 10 images only.");
     // }
   };
+
+  const handleUploadImagesList = (e) => {
+    const file = e.target.files[0];
+    e.target.value = "";
+    const imageUrl = URL.createObjectURL(file);
+    setUploadedFilesList([...uploadedFilesList, imageUrl]);
+    setFormData({ ...formData, images_list: [...formData.images_list, file] });
+    // setUploadedFile(URL.createObjectURL(file));
+
+    // console.log(file, "image");
+
+    // if (file && uploadedImages.length < 10) {
+    //   const imageUrl = URL.createObjectURL(file);
+    //   setUploadedImages((prevImages) => [...prevImages, imageUrl]);
+    // } else {
+    //   alert("You can upload up to 10 images only.");
+    // }
+  };
+
   //   const isSmallScreen = useMediaQuery(theme.breakpoints.down("sm"));
   //   const isMediumScreen = useMediaQuery(theme.breakpoints.between("md", "lg"));
   //   const isLargeScreen = useMediaQuery(theme.breakpoints.up("xl"));
 
-  return (
-    // <div className="d-flex align-items-center justify-content-center">
-
-    // </div>
-
+  return isLoading ? (
+    <Loader />
+  ) : (
     <Box
       sx={{
         display: "flex",
@@ -257,9 +299,11 @@ const AddItemPage = ({
       }}
     >
       {/* <Box sx={{ paddingY: 5 }}>
-        <ToolbarTable title={formData._id ? `Edit Product` : `Add Product`} />
-      </Box> */}
-      {!formData.isInit && (
+    <ToolbarTable title={formData._id ? `Edit Product` : `Add Product`} />
+  </Box> */}
+      {formData.isInit ? (
+        <Loader />
+      ) : (
         <form
           onSubmit={handleSubmit}
           className="col-md-10 d-flex flex-wrap justify-content-between align-items-center"
@@ -278,6 +322,7 @@ const AddItemPage = ({
               marginX: "auto",
               marginY: "10px",
               padding: `${formData.image ? "20px" : "20%"}`,
+              textAlign: "center",
               // padding: {formData.image?'10px': "20% 20%"},
               // paddingX: "20%",
               // paddingY: "20%",
@@ -288,20 +333,20 @@ const AddItemPage = ({
             }}
           >
             {/* <Box
-            // sx={{
-            //   border: "2px dashed gray",
-            //   borderRadius: "15px",
-            //   width: "70%",
-            //   marginX: "auto",
-            //   marginY: "10px",
-            //   paddingX: "20%",
-            //   paddingY: "20%",
-            //   display: "flex",
-            //   flexDirection: "column",
-            //   alignItems: "center",
-            //   justifyContent: "center",
-            // }}
-          > */}
+        // sx={{
+        //   border: "2px dashed gray",
+        //   borderRadius: "15px",
+        //   width: "70%",
+        //   marginX: "auto",
+        //   marginY: "10px",
+        //   paddingX: "20%",
+        //   paddingY: "20%",
+        //   display: "flex",
+        //   flexDirection: "column",
+        //   alignItems: "center",
+        //   justifyContent: "center",
+        // }}
+      > */}
             {formData.image ? (
               <img
                 src={
@@ -317,7 +362,7 @@ const AddItemPage = ({
                   component="h3"
                   sx={{ fontWeight: "bold", marginY: 1 }}
                 >
-                  Upload Image
+                  Upload Main Image
                 </Typography>
                 <Box
                   sx={{
@@ -369,12 +414,12 @@ const AddItemPage = ({
                     </MenuItem>
 
                     {/* <MenuItem selected value={formData.category}>
-                    {formData.category
-                      ? i18n.language == "en"
-                        ? formData.category_en
-                        : formData.category_ar
-                      : `Select ${input.label}`}
-                  </MenuItem> */}
+                {formData.category
+                  ? i18n.language == "en"
+                    ? formData.category_en
+                    : formData.category_ar
+                  : `Select ${input.label}`}
+              </MenuItem> */}
                     {categoryList.map((item) => (
                       <MenuItem value={item?._id}>
                         {i18n.language == "en" ? item.name_en : item.name_ar}
@@ -387,7 +432,7 @@ const AddItemPage = ({
               return (
                 <FormControlLabel
                   key={input.name}
-                  sx={{ width: "100%" }}
+                  // sx={{ width: "100%" }}
                   control={
                     <Checkbox
                       name={input.name}
@@ -431,67 +476,145 @@ const AddItemPage = ({
             }
           })}
 
-          {/* <TextField
-        label="Name"
-        name="name"
-        value={formData.name}
-        onChange={handleChange}
-        fullWidth
-        margin="normal"
-      />
+          {/* --------------------------------------------------------------- */}
 
-   
+          {(itemType == "product" || itemType == "project") && (
+            <>
+              <Button
+                component="label"
+                type="file"
+                htmlFor={"images_list"}
+                variant="contained"
+                startIcon={<CloudUpload />}
+              >
+                Upload Mulitible Images
+                <input
+                  type="file"
+                  id="images_list"
+                  accept="image/*"
+                  onChange={handleUploadImagesList}
+                  style={{ display: "none" }}
+                />
+              </Button>
 
-   
+              {uploadedFilesList.length !== 0 && (
+                <div className={`container ${styles.swiperContainer}`}>
+                  <Swiper
+                    className="bg-light shadow-none p-2 m-0 border rounded-2 my-4 pb-5"
+                    dir="ltr"
+                    pagination={{
+                      clickable: true,
+                    }}
+                    freeMode={true}
+                    modules={[FreeMode, Pagination]}
+                    spaceBetween={10}
+                    slidesPerView={1}
+                    breakpoints={{
+                      320: {
+                        slidesPerView: 1,
+                      },
+                      576: {
+                        slidesPerView: 2,
+                      },
+                      768: {
+                        slidesPerView: 2,
+                      },
+                      768: {
+                        slidesPerView: 3,
+                      },
+                      1024: {
+                        slidesPerView: 4,
+                      },
+                      1280: {
+                        slidesPerView: 4,
+                      },
+                    }}
+                  >
+                    {uploadedFilesList.map((image, imageIndex) => (
+                      <SwiperSlide
+                        key={`img-swipe-${imageIndex}`}
+                        className="align-self-center"
+                        style={{ maxWidth: "300px" }}
+                      >
+                        <div className="w-100 position-relative">
+                          <img
+                            src={image}
+                            width={"100%"}
+                            height={"auto"}
+                            className="border-0 rounded-2 shadow p-0 align-self-center "
+                          />
 
-  
+                          <IconButton
+                            sx={{
+                              color: "red",
+                              position: "absolute",
+                              top: "5px",
+                              right: "5px",
+                            }}
+                            onClick={() => {
+                              const editedImages = formData.images_list.filter(
+                                (img) =>
+                                  formData.images_list.indexOf(img) !==
+                                  imageIndex
+                              );
 
-        {/* <FormControlLabel
-        control={
-          <Checkbox
-            name="subscribe"
-            checked={formData.subscribe}
-            onChange={handleChange}
-          />
-        }
-        label="Subscribe to newsletter"
-      /> */}
+                              const editedFiles = uploadedFilesList.filter(
+                                (img) =>
+                                  uploadedFilesList.indexOf(img) !== imageIndex
+                              );
+                              console.log(editedImages, "images");
 
-          {/* <FormControl component="fieldset">
-        <FormLabel component="legend">Gender</FormLabel>
-        <RadioGroup
-          name="gender"
-          value={formData.gender}
-          onChange={handleChange}
-          row
-        >
-          <FormControlLabel value="male" control={<Radio />} label="Male" />
-          <FormControlLabel value="female" control={<Radio />} label="Female" />
-        </RadioGroup>
-      </FormControl> */}
+                              setFormData({
+                                ...formData,
+                                images_list: [...editedImages],
+                              });
 
-          {/* <FormControl fullWidth margin="normal">
-        <InputLabel id="country-label">Country</InputLabel>
-        <Select
-          labelId="country-label"
-          label="Country"
-          name="country"
-          value={formData.country}
-          onChange={handleChange}
-        >
-          <MenuItem value="us">United States</MenuItem>
-          <MenuItem value="ca">Canada</MenuItem>
-          Add more countries as needed
-        </Select>
-      </FormControl> */}
-
-          {errorMessage && (
-            <div className="alert alert-danger mx-5 my-2 p-2 w-100 text-center">
-              {errorMessage}
-            </div>
+                              setUploadedFilesList([...editedFiles]);
+                            }}
+                          >
+                            <Delete />
+                          </IconButton>
+                        </div>
+                      </SwiperSlide>
+                      // <SwiperSlide
+                      //   className="sd2"
+                      //   // key={project._id}
+                      //   style={{
+                      //     maxHeight: "400px",
+                      //     minHeight: "400px",
+                      //     maxWidth: "300px",
+                      //   }}
+                      // >
+                      //   <div>
+                      //     <img src={image} width={"100%"} alt="" />
+                      //   </div>
+                      // </SwiperSlide>
+                    ))}
+                  </Swiper>
+                </div>
+              )}
+            </>
           )}
 
-          <Box sx={{ marginX: "auto", marginY: 2 }}>
+          <Box sx={{ marginY: 5, width: "100%" }}>
+            {errorMessage && (
+              <div className="alert alert-danger p-2 w-100 text-center">
+                {errorMessage}
+              </div>
+            )}
+          </Box>
+
+          <Box
+            sx={{
+              marginX: "auto",
+              // marginTop: 2,
+              marginBottom: 10,
+              width: "100%",
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+            }}
+          >
             <Button
               variant="contained"
               size="large"

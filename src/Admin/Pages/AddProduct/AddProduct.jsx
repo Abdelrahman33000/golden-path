@@ -45,6 +45,9 @@ const AddProduct = () => {
         description_en: "",
         description_ar: "",
         in_home: "",
+        image: "",
+        images_list: [],
+
         // ...changeData,
       }}
     />

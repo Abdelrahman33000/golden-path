@@ -1,52 +1,58 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import AddItemPage from "../../Components/AddItemPage/AddItemPage";
 import { useNavigate, useLocation, useParams } from "react-router-dom";
 
-const AddProject = () => {
+const AddSlider = () => {
   const { state } = useLocation();
   const { id } = useParams();
-
-  // const updateData = state?.project ? { ...state["project"] } : {};
+  // const updateData = state?.product ? { ...state.product } : {};
 
   const inputsList = [
-    { label: "Name In English", name: "name_en", type: "text" },
-    { label: "Name In Arabic", name: "name_ar", type: "text" },
-    { label: "Client Name In Englidh", name: "client_en", type: "text" },
-    { label: "Client Name In Arabic", name: "client_ar", type: "text" },
-    { label: "Loaction In English", name: "location_en", type: "text" },
-    { label: "Loaction In Arabic", name: "location_ar", type: "text" },
-    { label: "Project Category", name: "category", type: "select" },
+    { label: "Title In English", name: "title_en", type: "text" },
+    { label: "Title In Arabic", name: "title_ar", type: "text" },
+    // { label: "Product Category", name: "category", type: "select" },
     { label: "Description In English", name: "description_en", type: "text" },
     { label: "Description In Arabic", name: "description_ar", type: "text" },
-    { label: "Date", name: "date", type: "date" },
-
-    { label: "Add This Item in Home Page", name: "in_home", type: "checkbox" },
+    // { label: "Add This Item in Home Page", name: "in_home", type: "checkbox" },
   ];
+
+  // function getItemObjectByID() {
+  //   if (id) {
+  //     fetch(`https://dash-board-sspy.onrender.com/api/product?id=${id}`)
+  //       .then((response) => response.json())
+  //       .then((result) => {
+  //         console.log(result, "get product by id");
+  //         setChangeData({ ...result.data, isInit: false });
+  //       })
+  //       .catch((error) => console.log(error, "error get product by id"));
+  //   }
+  // }
+
+  // useEffect(() => {
+  //   getItemObjectByID();
+  // }, []);
+
   return (
     <AddItemPage
-      itemType={"project"}
-      inputsList={inputsList}
+      itemType={"slider"}
       itemID={id}
+      inputsList={inputsList}
+      // updateData={updateData}
       initialData={{
-        name_en: "",
-        name_ar: "",
-        client_en: "",
-        client_ar: "",
-        location_en: "",
-        location_ar: "",
+        title_en: "",
+        title_ar: "",
+        // category: "",
         description_en: "",
         description_ar: "",
-        date: "",
-        category: "",
         image: "",
-        images_list: [],
-        in_home: true,
+        // in_home: "",
+        // ...changeData,
       }}
     />
   );
 };
 
-export default AddProject;
+export default AddSlider;
 
 // import React, { useEffect, useState } from "react";
 // import {
@@ -71,7 +77,7 @@ export default AddProject;
 // import { useNavigate, useLocation } from "react-router-dom";
 // import ToolbarTable from "../../Components/ToolbarTable/ToolbarTable";
 
-// const AddProject = () => {
+// const AddProduct = () => {
 //   const { state } = useLocation();
 //   const [formData, setFormData] = useState({
 //     name_en: "",
@@ -80,10 +86,12 @@ export default AddProject;
 //     description_ar: "",
 //     category: "",
 //     image: "",
-//     ...state?.project,
+//     ...state?.product,
 //   });
 
 //   const navigator = useNavigate();
+
+//   const theme = useTheme();
 
 //   const [errorMessage, setErrorMessage] = useState("");
 //   const [categoryList, setCategoryList] = useState([]);
@@ -95,7 +103,7 @@ export default AddProject;
 
 //   async function getCategoryListDataApi() {
 //     await fetch(
-//       "https://dash-board-sspy.onrender.com/api/all-category?type=project"
+//       "https://dash-board-sspy.onrender.com/api/all-category?type=product"
 //     )
 //       .then((response) => response.json())
 //       .then((data) => {
@@ -453,4 +461,4 @@ export default AddProject;
 //   );
 // };
 
-// export default AddProject;
+// export default AddProduct;

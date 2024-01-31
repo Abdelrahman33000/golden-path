@@ -6,7 +6,7 @@ const ProjectTableBoard = () => {
   const [listOfProjects, setListOfProjects] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
 
-  const headersProject = ["#id", "name_en", "name_ar", "in_home"];
+  const headersProject = ["#_id", "name_en", "name_ar", "in_home"];
 
   useEffect(() => {
     getProjectsFromAPI();
@@ -16,7 +16,7 @@ const ProjectTableBoard = () => {
   useEffect(() => {
     setTimeout(() => {
       setIsLoading(false);
-    }, 1000);
+    }, 2000);
   }, [listOfProjects]);
 
   async function getProjectsFromAPI() {
@@ -60,7 +60,7 @@ const ProjectTableBoard = () => {
 
   return (
     <div className="min-vh-100">
-      {isLoading  ? (
+      {isLoading ? (
         <Loader />
       ) : (
         <TableLayout
@@ -84,6 +84,7 @@ const ProjectTableBoard = () => {
             "description_ar",
             "in_home",
             "image",
+            "images_list",
           ]}
         />
       )}

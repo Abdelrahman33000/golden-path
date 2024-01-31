@@ -4,18 +4,39 @@ import MuiAppBar from "@mui/material/AppBar";
 import CssBaseline from "@mui/material/CssBaseline";
 import { styled, useTheme } from "@mui/material/styles";
 import { useEffect, useState } from "react";
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, useLocation, useNavigate } from "react-router-dom";
 
 import SideBarDashboard from "./../../Components/SideBarDashboard/SideBarDashboard";
 
 import { Outlet } from "react-router-dom";
 
 const AdminDashboard = () => {
+  const navigate = useNavigate();
   const [page, setPage] = useState(0);
-  const [isDrawerOpen, setIsDrawerOpen] = useState(false);
+  const [isDrawerOpen, setIsDrawerOpen] = useState(true);
   const [isOnline, setIsOnline] = useState(navigator.onLine);
+  const [dashboardTitle, setDashboardTitle] = useState("Dashboard Home");
 
   const theme = useTheme();
+  const { pathname } = useLocation();
+
+  useEffect(() => {
+    console.log(pathname.split("/"), "tempX routing");
+    console.log(pathname.split("/").length, "tempX routing");
+    const pathSplit = pathname.split("/");
+    if (pathSplit.length <= 2) {
+      setDashboardTitle("Dashboard Home");
+    } else {
+      const title = pathSplit[2].split("-");
+      const finalValue = title
+        .map(
+          (item) =>
+            item.substring(0, 1).toUpperCase() + item.substring(1).toLowerCase()
+        )
+        .join(" ");
+      setDashboardTitle(`Dashboard ${finalValue}`);
+    }
+  }, [pathname]);
 
   console.log(navigator.onLine, "online");
   const rowsPerPage = 8;
@@ -32,6 +53,8 @@ const AdminDashboard = () => {
   useEffect(() => {
     window.scrollTo(0, 0);
 
+    checkLoggedUserAuth();
+
     const handleOnlineStatusChange = () => {
       setIsOnline(navigator.onLine);
     };
@@ -46,6 +69,36 @@ const AdminDashboard = () => {
       window.removeEventListener("offline", handleOnlineStatusChange);
     };
   }, []);
+
+  async function checkLoggedUserAuth() {
+    const savedToken = JSON.parse(localStorage.getItem("Token"));
+    console.log(savedToken, "token");
+    await fetch(`https://dash-board-sspy.onrender.com/auth`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        token: savedToken,
+      }),
+    })
+      .then((response) => response.json())
+      .then((result) => {
+        console.log(result, "data create");
+
+        if (result.status == "error") {
+          navigate("/login");
+          // localStorage.setItem("Token", JSON.stringify(result.token));
+          // navigator(`/admin`);
+          // save token to local storage
+        }
+        // else {
+        //   setErrorMsg(result.message);
+        //   // setIsLoading(false);
+        // }
+      })
+      .catch((error) => console.log(error, "error"));
+  }
 
   // const handleClick = (event, id) => {
   //   const selectedIndex = selected.indexOf(id);
@@ -180,6 +233,7 @@ const AdminDashboard = () => {
         handleDrawerOpen={handleDrawerOpen}
         handleDrawerClose={handleDrawerClose}
         isDrawerOpen={isDrawerOpen}
+        dashboardTitle={dashboardTitle}
       />
     </Box>
   );

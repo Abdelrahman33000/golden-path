@@ -1,4 +1,3 @@
-import * as React from "react";
 import { styled, useTheme } from "@mui/material/styles";
 import Box from "@mui/material/Box";
 import Drawer from "@mui/material/Drawer";
@@ -17,8 +16,9 @@ import ListItemText from "@mui/material/ListItemText";
 import InboxIcon from "@mui/icons-material/MoveToInbox";
 import MailIcon from "@mui/icons-material/Mail";
 import { useNavigate } from "react-router-dom";
+import { useContext, useState } from "react";
 
-import { Toolbar, IconButton } from "@mui/material";
+import { Toolbar, IconButton, Button } from "@mui/material";
 
 import {
   ArrowBackIos,
@@ -28,6 +28,8 @@ import {
   PrecisionManufacturing,
   SensorOccupied,
   Menu,
+  Logout,
+  LockPerson,
 } from "@mui/icons-material";
 
 // const drawerWidth = 240;
@@ -90,6 +92,7 @@ function SideBarDashboard({
   handleDrawerClose,
   isDrawerOpen,
   setActiveSideLabel,
+  dashboardTitle,
 }) {
   //   const theme = useTheme();
 
@@ -100,17 +103,43 @@ function SideBarDashboard({
     { text: "Project", icon: <Construction /> },
     { text: "Project Category", icon: <Construction /> },
     { text: "Slider", icon: <DoorSliding /> },
-    { text: "Sponser", icon: <SensorOccupied /> },
+    { text: "Partner", icon: <SensorOccupied /> },
   ];
 
-  const navigator = useNavigate();
-  const [dashboardTitle, setDashboardTitle] = React.useState("Dashboard Home");
+  const controlsList = [
+    {
+      text: "Change Password",
+      icon: <LockPerson />,
+      handle: handleChangePassword,
+    },
+    { text: "Log Out", icon: <Logout />, handle: handleLogOut },
+    // { text: "Product Category", icon: <PrecisionManufacturing /> },
+    // { text: "Project", icon: <Construction /> },
+    // { text: "Project Category", icon: <Construction /> },
+    // { text: "Slider", icon: <DoorSliding /> },
+    // { text: "Partner", icon: <SensorOccupied /> },
+  ];
 
+  // const { dashboardTitle, setDashboardTitle } = useContext(DashboardContext);
+
+  const navigator = useNavigate();
+  // const [dashboardTitle, setDashboardTitle] = useState("Dashboard Home");
+
+  function handleChangePassword() {
+    navigator("/admin/change-password");
+  }
+
+  function handleLogOut() {
+    localStorage.removeItem("Token");
+    navigator("/");
+  }
   return (
     <>
       <MuiAppBar
         sx={{
-          backgroundColor: "rgba(30,30,30,30)",
+          backgroundColor: "white",
+          color: "black",
+          // backgroundColor: "rgba(30,30,30,30)",
           // top: "93px",
           // right: "20px",
           // width: "50px",
@@ -120,9 +149,17 @@ function SideBarDashboard({
         }}
       >
         <Toolbar>
-          <Typography variant="h6" noWrap sx={{ flexGrow: 1 }} component="div">
+          <Typography
+            variant="h6"
+            noWrap
+            sx={{ flexGrow: 1, fontWeight: "bold" }}
+            component="div"
+          >
             {dashboardTitle}
           </Typography>
+
+          {/* <Typography>hfjdshfdjksfhsdjk</Typography> */}
+
           <IconButton
             color="inherit"
             aria-label="open drawer"
@@ -155,13 +192,29 @@ function SideBarDashboard({
         sx={{
           width: drawerWidth,
           flexShrink: 0,
+
           "& .MuiDrawer-paper": {
             width: drawerWidth,
-            backgroundColor: "rgba(30,30,30,30)",
-            color: "white",
+            minHeight: "100vh",
+            // display: "flex",
+            // flexDirection: "column",
+            // alignItems: "center",
+            // justifyContent: "space-between",
+            // backgroundColor: "red",
+            // boxShadow: "-1px 0px 5px lightgray",
+            boxShadow:
+              "0px 2px 4px -1px rgba(0,0,0,0.2), 0px 4px 5px 0px rgba(0,0,0,0.14), 0px 1px 10px 0px rgba(0,0,0,0.12)",
+            color: "black",
+
+            // backgroundColor: "rgba(30,30,30,30)",
+            // color: "white",
+            // boxShadow:'50px 50px #888888'
           },
           "& .MuiSvgIcon-root": {
-            color: "white",
+            color: "#1976d2",
+            minWidth: "30px",
+            minHeight: "30px",
+            // color: "white",
           },
         }}
         variant="persistent"
@@ -190,16 +243,16 @@ function SideBarDashboard({
           {drawerList.map((label, index) => (
             <ListItem key={`drawer-${index}`} disablePadding>
               <ListItemButton
-                // sx={{ backgroundColor: "yellow" }}
+                // sx={{    fontWeight: "bold", }}
                 onClick={() => {
                   if (label.text.toLowerCase() == "home") {
                     navigator("/admin");
-                    setDashboardTitle("Dashboard Home");
+                    // setDashboardTitle("Dashboard Home");
                   } else {
                     navigator(
                       `/admin/${label.text.toLowerCase().replace(" ", "-")}`
                     );
-                    setDashboardTitle(`Dashboard ${label.text}`);
+                    // setDashboardTitle(`Dashboard ${label.text}`);
                   }
                 }}
               >
@@ -207,11 +260,77 @@ function SideBarDashboard({
                   {label.icon}
                   {/* {index % 2 === 0 ? <InboxIcon /> : <MailIcon />} */}
                 </ListItemIcon>
-                <ListItemText primary={label.text} />
+                <ListItemText
+                  sx={{ "& .MuiTypography-root ": { fontWeight: "600" } }}
+                  primary={label.text}
+                />
               </ListItemButton>
             </ListItem>
           ))}
         </List>
+        <Divider
+          variant="middle"
+          sx={{
+            borderColor: "rgba(0, 0, 0, 0.3)",
+            borderWidth: "1px",
+            marginTop: "auto",
+          }}
+        />
+
+        <List sx={{ marginBottom: "30px" }}>
+          {controlsList.map((label, index) => (
+            <ListItem key={`control-${index}`} disablePadding>
+              <ListItemButton
+                onClick={label.handle}
+                // sx={{    fontWeight: "bold", }}
+                // onClick={() => {
+                // if (label.text.toLowerCase() == "home") {
+                //   navigator("/admin");
+                //   // setDashboardTitle("Dashboard Home");
+                // } else {
+                //   navigator(
+                //     `/admin/${label.text.toLowerCase().replace(" ", "-")}`
+                //   );
+                //   // setDashboardTitle(`Dashboard ${label.text}`);
+                // }
+                // }}
+              >
+                <ListItemIcon>
+                  {label.icon}
+                  {/* {index % 2 === 0 ? <InboxIcon /> : <MailIcon />} */}
+                </ListItemIcon>
+                <ListItemText
+                  sx={{ "& .MuiTypography-root ": { fontWeight: "600" } }}
+                  primary={label.text}
+                />
+              </ListItemButton>
+            </ListItem>
+          ))}
+        </List>
+
+        {/* <Typography
+          sx={{
+            alignSelf: "center",
+            // justifySelf: "end",
+            marginTop: "auto",
+            marginBottom: "15px",
+          }}
+        >
+          <Button
+            variant="contained"
+            size="meduim"
+            color="primary"
+            type="button"
+            onClick={() => {
+              navigator("/admin/change-password");
+            }}
+            sx={{ textTransform: "none" }}
+
+            // margin={20}
+          >
+            <span>Change Password</span>
+          </Button>
+        </Typography> */}
       </Drawer>
     </>
   );

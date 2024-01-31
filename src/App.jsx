@@ -14,6 +14,11 @@ import AddProject from "./Admin/Pages/AddProject/AddProject";
 import ProductCategory from "./Admin/Pages/ProductCategory/ProductCategory";
 import ProjectCategory from "./Admin/Pages/ProjectCategory/ProjectCategory";
 import AddCategory from "./Admin/Pages/AddCategory/AddCategory";
+import SliderTableBoard from "./Admin/Pages/SliderTableBoard/SliderTableBoard";
+import AddSlider from "./Admin/Pages/AddSlider/AddSlider";
+import PartnerTableBoard from "./Admin/Pages/PartnerTableBoard/PartnerTableBoard";
+import AddPartner from "./Admin/Pages/AddPartner/AddPartner";
+import ChangePassword from "./Admin/Pages/ChangePassword/ChangePassword";
 // import ProjectDetails from "./components/ProjectDetails";
 function App() {
   return (
@@ -34,10 +39,17 @@ function App() {
 
         <Route path="/admin" element={<AdminDashboard />}>
           <Route index element={<HomeDashboard />} />
+          <Route path="change-password" element={<ChangePassword />} />
           <Route path="product" element={<ProductTableBoard />} />
           <Route path="project" element={<ProjectTableBoard />} />
+          <Route path="slider" element={<SliderTableBoard />} />
+          <Route path="partner" element={<PartnerTableBoard />} />
+
           <Route path="add-product/:id" element={<AddProduct />} />
           <Route path="add-project/:id" element={<AddProject />} />
+          <Route path="add-slider/:id" element={<AddSlider />} />
+          <Route path="add-partner/:id" element={<AddPartner />} />
+
           <Route path="product-category" element={<ProductCategory />} />
           <Route path="project-category" element={<ProjectCategory />} />
 
@@ -49,6 +61,7 @@ function App() {
             path="add-project-category/:id"
             element={<AddCategory categoryType={"project"} />}
           />
+
           <Route
             path="*"
             element={

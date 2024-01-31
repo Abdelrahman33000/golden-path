@@ -2,14 +2,14 @@ import React, { useEffect, useState } from "react";
 import Loader from "../../Components/Loader/Loader";
 import TableLayout from "../../Components/TableLayout/TableLayout";
 
-const ProductTableBoard = () => {
-  const [listOfProducts, setListOfProducts] = useState([]);
+const SliderTableBoard = () => {
+  const [listOfSliders, setListOfSliders] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
 
-  const headersProduct = ["#_id", "name_en", "name_ar", "in_home"];
+  const headersSlider = ["#_id", "title_en", "title_ar", "image"];
 
   useEffect(() => {
-    getProductsFromAPI();
+    getSlidersFromAPI();
     window.scrollTo(0, 0);
   }, []);
 
@@ -17,32 +17,34 @@ const ProductTableBoard = () => {
     setTimeout(() => {
       setIsLoading(false);
     }, 2000);
-  }, [listOfProducts]);
+  }, [listOfSliders]);
 
-  async function getProductsFromAPI() {
-    await fetch("https://dash-board-sspy.onrender.com/api/all-products")
+  async function getSlidersFromAPI() {
+    await fetch("https://dash-board-sspy.onrender.com/api/all-sliders")
       .then((response) => response.json())
-      .then((data) => {
-        console.log(data, "data get");
-        const updatedData = data.data.map((product) => {
-          const category = product.category;
-          delete product.category;
-          return {
-            ...product,
-            category_en: category.name_en,
-            category_ar: category.name_ar,
-          };
-        });
-        setListOfProducts(updatedData);
+      .then((result) => {
+        console.log(result, "data get");
+        // const updatedData = data.data.map((product) => {
+        //   const category = product.category;
+        //   delete product.category;
+        //   return {
+        //     ...product,
+        //     category_en: category.name_en,
+        //     category_ar: category.name_ar,
+        //   };
+        // });
+        setListOfSliders(result.data);
       })
+
+     
       .catch((error) => console.log(error, "error"));
   }
 
-  async function deleteProductsFromAPI(productID) {
+  async function deleteSliderFromAPI(sliderID) {
     // console.log(listOfProducts[productIndex]._id, "id");
-    console.log(productID, "id index");
+    console.log(sliderID, "id index");
     await fetch(
-      `https://dash-board-sspy.onrender.com/api/product?id=${productID}`,
+      `https://dash-board-sspy.onrender.com/api/slider?id=${sliderID}`,
       {
         method: "DELETE",
       }
@@ -50,8 +52,8 @@ const ProductTableBoard = () => {
       .then((response) => response.json())
       .then((data) => {
         console.log(data, "data delete");
-        setListOfProducts(
-          listOfProducts.filter((product) => product._id !== productID)
+        setListOfSliders(
+          listOfSliders.filter((slider) => slider._id !== sliderID)
         );
       })
       .catch((error) => console.log(error, "error"));
@@ -107,22 +109,21 @@ const ProductTableBoard = () => {
         //   title={"Products"}
         // />
         <TableLayout
-          listOfData={listOfProducts}
-          headerCells={headersProduct}
-          handleDeleteItem={deleteProductsFromAPI}
+          listOfData={listOfSliders}
+          headerCells={headersSlider}
+          handleDeleteItem={deleteSliderFromAPI}
           // handleUpdateItem={updateProductsToAPI}
           setIsLoading={setIsLoading}
-          title={"Product"}
+          title={"Slider"}
           detailHeaders={[
-            "name_en",
-            "name_ar",
-            "category_en",
-            "category_ar",
+            "title_en",
+            "title_ar",
+            // "category_en",
+            // "category_ar",
             "description_en",
             "description_ar",
-            "in_home",
+            // "in_home",
             "image",
-            "images_list",
           ]}
         />
       )}
@@ -130,4 +131,4 @@ const ProductTableBoard = () => {
   );
 };
 
-export default ProductTableBoard;
+export default SliderTableBoard;
