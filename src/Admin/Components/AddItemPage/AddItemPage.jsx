@@ -83,17 +83,17 @@ const AddItemPage = ({
         .then((response) => response.json())
         .then((result) => {
           console.log(result, "get product by id");
-          if (formData.hasOwnProperty("category")) {
-            const holder = result.data.category;
+          // if (formData.hasOwnProperty("category")) {
+          const holder = result.data?.category;
 
-            setFormData({
-              ...result.data,
-              isInit: false,
-              category: holder?._id,
-            });
-          } else {
-            setFormData({ ...result.data, isInit: false });
-          }
+          setFormData({
+            ...result.data,
+            isInit: false,
+            category: holder?._id,
+          });
+          // } else {
+          //   setFormData({ ...result.data, isInit: false });
+          // }
         })
         .catch((error) => console.log(error, "error get product by id"));
     } else {
@@ -420,7 +420,7 @@ const AddItemPage = ({
                     : formData.category_ar
                   : `Select ${input.label}`}
               </MenuItem> */}
-                    {categoryList.map((item) => (
+                    {categoryList?.map((item) => (
                       <MenuItem value={item?._id}>
                         {i18n.language == "en" ? item.name_en : item.name_ar}
                       </MenuItem>
@@ -458,7 +458,7 @@ const AddItemPage = ({
                   name={input.name}
                   defaultValue={
                     input.type == "date"
-                      ? formData.date.split("T")[0]
+                      ? formData?.date?.split("T")[0]
                       : formData[input.name]
                   }
                   // value={input.name == "date" && "hello"}
