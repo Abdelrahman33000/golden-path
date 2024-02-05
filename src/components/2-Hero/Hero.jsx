@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useContext, useEffect } from "react";
 import "./Hero.css";
 import Carousel from "react-bootstrap/Carousel";
 import img from "../../components/images/Photographer.jpg";
@@ -7,40 +7,23 @@ import img3 from "../../components/images/photograph5.jpg";
 import { useState } from "react";
 import { Diversity1 } from "@mui/icons-material";
 import { useTranslation } from "react-i18next";
+import { GlobalContext } from "../../Context/GlobalContext";
 
 const Hero = () => {
   const [slidersList, setSlidersList] = useState([]);
-  const [sliders, setSliders] = useState([]);
   const { t, i18n } = useTranslation();
+  const { dealWithAPIData } = useContext(GlobalContext);
 
   useEffect(() => {
-    getSlidersList();
-    // fetch("https://dash-board-sspy.onrender.com/api/all-sliders")
-    //   .then((response) => response.json())
-    //   .then((data) => {
-    //     console.log(data.data, "jjjjjjjjjjjjj");
-
-    //     setSliders(data.data);
-    //   });
+    console.log("getting sliders");
+    dealWithAPIData({ endpoint: "sliders" }).then((result) => {
+      console.log(result, "result sliders xxx");
+      setSlidersList([...result.data]);
+    });
   }, []);
 
-  async function getSlidersList() {
-    fetch("https://hyateka7la.com/api/sliders", {
-      method: "GET",
-      headers: {
-        // "Content"
-      },
-      body: JSON.stringify({}),
-    })
-      .then((response) => response.json())
-      .then((result) => {
-        console.log(result, "result getting data");
-      })
-      .catch((error) => console.log(error, "error getting data"));
-  }
-
   return (
-    <main className="min-vh-100 border border-danger">
+    <main>
       {/* <div className=' p-5'>
        <h1>Capture Life's <br /> Brilliance</h1><br />
        Lorem ipsum dolor sit amet consectetur adipisicing elit. <br />
@@ -50,28 +33,33 @@ const Hero = () => {
       {/* <button className='bg-dark text-light px-5 py-2 rounded-5' > Check More</button> */}
       {/* </div> */}
       <Carousel fade className="Carousel ">
-        {sliders.map((slider) => (
+        {slidersList.map((slider) => (
           <Carousel.Item>
-            <img
-              src={slider.image}
-              alt=""
-              text="First slide"
-              style={{ width: "100%", height: "550px" }}
-            />
+            <div className="bg-dark">
+              <img
+                // src={slider.background}
+                src={slider.img}
+                alt=""
+                text="First slide"
+                style={{
+                  width: "100%",
+                  height: "550px",
+
+                  opacity: "0.5",
+                  // backgroundColor: "black",
+                }}
+              />
+            </div>
+
             <Carousel.Caption
-              style={{ textAlign: "left", paddingBottom: "100px" }}
+              style={{
+                textAlign: "left",
+                paddingBottom: "100px",
+              }}
             >
-              <h1 style={{ width: "60%" }}>
-                {" "}
-                {i18n.language === "en" ? slider.title_en : slider.title_ar}
-              </h1>
+              <h1 style={{ width: "60%" }}>{slider.title}</h1>
               <br />
-              <p style={{ width: "50%" }}>
-                {" "}
-                {i18n.language === "en"
-                  ? slider.description_en
-                  : slider.description_ar}
-              </p>
+              <p style={{ width: "50%" }}>{slider.text}</p>
 
               {/* Lorem ipsum dolor sit amet consectetur adipisicing elit. <br />
         Eligendi deleniti obcaecati veritatis officia aperiam  <br />
