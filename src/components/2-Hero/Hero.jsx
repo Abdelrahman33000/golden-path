@@ -16,10 +16,9 @@ const Hero = () => {
 
   useEffect(() => {
     console.log("getting sliders");
-    dealWithAPIData({ endpoint: "sliders" }).then((result) => {
-      console.log(result, "result sliders xxx");
-      setSlidersList([...result.data]);
-    });
+    dealWithAPIData({ endpoint: "sliders" }).then((result) =>
+      setSlidersList([...result?.data])
+    );
   }, []);
 
   return (
@@ -53,7 +52,7 @@ const Hero = () => {
 
             <Carousel.Caption
               style={{
-                textAlign: "left",
+                textAlign: i18n.language == "en" ? "left" : "right",
                 paddingBottom: "100px",
               }}
             >

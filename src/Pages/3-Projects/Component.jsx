@@ -6,6 +6,7 @@ import PropTypes from "prop-types";
 import Typography from "@mui/material/Typography";
 import { AddLink, TravelExplore } from "@mui/icons-material";
 import "./projects.css";
+import imageTest from "../../components/images/cam1.jpeg";
 
 function CustomTabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -74,24 +75,30 @@ const Component1 = (props) => {
           className="d-flex container"
           style={{ gap: "30px", flexWrap: "wrap" }}
         >
-          <div class="row">
+          <div className="row">
             {props.projects.map((project) => (
               <>
-                {/* <div className="d-flex" style={{ gap: "30px", flexWrap: "wrap" }}> */}
-                <div class="col-md-4 col-sm-6 mx-auto">
-                  <div class="box">
-                    <img src={project.image} alt="" />
-                    <div class="box-content">
-                      <h3 class="title">
-                        {i18n.language === "en"
-                          ? project.name_en
-                          : project.name_ar}
-                      </h3>
-                      {/* <span class="post">Web designer</span> */}
+                {/* <div classNameName="d-flex" style={{ gap: "30px", flexWrap: "wrap" }}> */}
+                <div className="col-md-4 col-sm-6 mx-auto my-3">
+                  <div className="box">
+                    <img
+                      src={project.img}
+                      alt=""
+                      width={"100%"}
+                      onError={(e) => {
+                        e.target.src =
+                          "https://user-images.githubusercontent.com/24848110/33519396-7e56363c-d79d-11e7-969b-09782f5ccbab.png";
+                        e.target.onError = null;
+                      }}
+                    />
+                    {/* <img src={imageTest} alt="" width={"100%"} /> */}
+                    <div className="box-content">
+                      <h3 className="title">{project.name}</h3>
+                      {/* <span className="post">Web designer</span> */}
                     </div>
-                    <ul class="icon">
+                    <ul className="icon">
                       <li>
-                        <Link to={`/ProjectDetails/${project._id}`}>
+                        <Link to={`/ProjectDetails/${project.id}`}>
                           <AddLink />
                         </Link>
                       </li>

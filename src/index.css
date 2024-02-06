@@ -1,37 +1,46 @@
-@import url('https://fonts.googleapis.com/css2?family=Abril+Fatface&family=Amiri+Quran&family=Bebas+Neue&family=Bodoni+Moda:ital,opsz,wght@1,6..96,600&family=Lobster&family=Oswald:wght@200&family=Reem+Kufi+Fun:wght@400;500;600;700&family=Roboto+Slab:wght@100;300;400;700&family=Roboto:wght@300&family=Rubik+Maps&family=Ruwudu&family=Tilt+Prism&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Abril+Fatface&family=Amiri+Quran&family=Bebas+Neue&family=Bodoni+Moda:ital,opsz,wght@1,6..96,600&family=Lobster&family=Oswald:wght@200&family=Reem+Kufi+Fun:wght@400;500;600;700&family=Roboto+Slab:wght@100;300;400;700&family=Roboto:wght@300&family=Rubik+Maps&family=Ruwudu&family=Tilt+Prism&display=swap");
 
-html{
+html {
   scroll-behavior: smooth;
 }
 
 body {
   margin: 0;
   padding: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
+    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
     sans-serif;
   /* -webkit-font-smoothing: antialiased; */
   /* -moz-osx-font-smoothing: grayscale; */
   overflow-x: hidden;
   box-sizing: border-box;
-  
-  
 }
 
-
-
-.scroll2Top{
+.scroll2Top {
   position: fixed;
   bottom: 20px;
   right: 20px;
-/* background-color: aqua; */
-border-radius: 15px ;
+  /* background-color: aqua; */
+  border-radius: 15px;
   z-index: 5;
   /* opacity: .5; */
- }
- .scroll2Top:hover{
+}
+.scroll2Top:hover {
   opacity: 1;
- }
+}
 
+.btn5 {
+  transition: 0.5s;
+  background-color: #ff8d03;
+  color: #000;
+}
 
+.btn5:hover {
+  background-color: #786464;
+  color: #fff;
+}
 
+.btn5-active {
+  background-color: #786464 !important;
+  color: #fff !important;
+}

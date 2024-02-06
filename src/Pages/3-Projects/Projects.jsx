@@ -1,4 +1,3 @@
-import * as React from "react";
 import PropTypes from "prop-types";
 import Tabs from "@mui/material/Tabs";
 import Tab from "@mui/material/Tab";
@@ -18,9 +17,11 @@ import {
 } from "@mui/icons-material";
 import "./projects.css";
 import { useTranslation } from "react-i18next";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { useEffect } from "react";
 import Component1 from "./Component";
+import { GlobalContext } from "../../Context/GlobalContext";
+import PaginateComponent from "../../components/PaginateComponent/PaginateComponent";
 
 function CustomTabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -56,7 +57,7 @@ function a11yProps(index) {
 }
 
 const Projects = () => {
-  const [value, setValue] = React.useState(0);
+  const [value, setValue] = useState(0);
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
@@ -81,50 +82,70 @@ const Projects = () => {
 
   //   }, [])
 
-  const [projects, setProjects] = useState([]);
-  const [categories, setCategories] = useState([]);
-  const [label, setLabel] = useState(0);
-  const [projectPager, setProjectPager] = useState([]);
+  // const [projectsList, setProjects] = useState([]);
+
+  // const [projectPager, setProjectPager] = useState([]);
 
   const { t, i18n } = useTranslation();
 
-  console.log(i18n.language, "kjjkj");
-  useEffect(() => {
-    fetch("https://dash-board-sspy.onrender.com/api/all-projects")
-      .then((response) => response.json())
-      .then((data) => {
-        console.log(data.data, "hello");
-        const data1 = data.data;
-        setProjects(data1);
-        setProjectPager(data1);
-      });
-  }, []);
+  const [pageNumber, setPageNumber] = useState(1);
+  const [paginatePageCount, setPaginateCount] = useState(1);
+  const [projectsSliceList, setProjectsSliceList] = useState([]);
+  const [categories, setCategories] = useState([]);
+  const [label, setLabel] = useState(0);
+  const [productPager, setProductPager] = useState([]);
+
+  const { dealWithAPIData } = useContext(GlobalContext);
+
+  // console.log(i18n.language, "kjjkj");
 
   useEffect(() => {
-    fetch("https://dash-board-sspy.onrender.com/api/all-category?type=project")
-      .then((response) => response.json())
-      .then((data) => {
-        console.log(data.data);
-        const data2 = data.data;
-        setCategories(data2);
-      });
-  }, []);
+    dealWithAPIData({
+      endpoint: `paginate/projects?page=${pageNumber}`,
+    }).then((result) => {
+      console.log(result, "result projects slice");
+      setProjectsSliceList([...result?.data.data]);
+      setPaginateCount(result.data.meta.last_page);
+    });
+  }, [pageNumber]);
 
-  useEffect(() => {
-    if (label == 0) {
-      setProjectPager(projects);
-    } else {
-      const category = categories[label - 1];
-      console.log(category, "jjjjjjjjjjjjjj");
-      console.log(projects, "jjjjjjjkkkkkkkkkk");
+  // console.log(i18n.language, "kjjkj");
+  // useEffect(() => {
+  //   fetch("https://dash-board-sspy.onrender.com/api/all-projects")
+  //     .then((response) => response.json())
+  //     .then((data) => {
+  //       console.log(data.data, "hello");
+  //       const data1 = data.data;
+  //       setProjects(data1);
+  //       setProjectPager(data1);
+  //     });
+  // }, []);
 
-      // عدلى دى يااااا زلفى
-      const data = projects.filter(
-        (item) => item.category._id === category._id
-      );
-      setProjectPager(data);
-    }
-  }, [label]);
+  // useEffect(() => {
+  //   fetch("https://dash-board-sspy.onrender.com/api/all-category?type=project")
+  //     .then((response) => response.json())
+  //     .then((data) => {
+  //       console.log(data.data);
+  //       const data2 = data.data;
+  //       setCategories(data2);
+  //     });
+  // }, []);
+
+  // useEffect(() => {
+  //   if (label == 0) {
+  //     setProjectPager(projects);
+  //   } else {
+  //     const category = categories[label - 1];
+  //     console.log(category, "jjjjjjjjjjjjjj");
+  //     console.log(projects, "jjjjjjjkkkkkkkkkk");
+
+  //     // عدلى دى يااااا زلفى
+  //     const data = projects.filter(
+  //       (item) => item.category._id === category._id
+  //     );
+  //     setProjectPager(data);
+  //   }
+  // }, [label]);
 
   return (
     <Box
@@ -138,7 +159,6 @@ const Projects = () => {
       }}
     >
       <h1 className="project" style={{ fontFamily: "Bodoni Moda" }}>
-        {" "}
         {t("Our Projects")}
       </h1>
       <Box
@@ -180,11 +200,39 @@ const Projects = () => {
         </Tabs>
       </Box>
 
-      <div className="col-lg-9 mx-auto ">
-        <Component1 value={value} projects={projectPager} index={label} />
+      <div className="col-lg-9 mx-auto border border-success-subtle">
+        <Component1 value={value} projects={projectsSliceList} index={label} />
       </div>
 
-      {/* <CustomTabPanel value={value}  index={0}>
+      <div className="my-2">
+          <PaginateComponent
+            pageCount={paginatePageCount}
+            // pageCount={5}
+            onPageChange={(page) => {
+              console.log(page, "page");
+              setPageNumber(page.selected + 1);
+            }}
+          />
+        </div>
+
+      {/* <div className="my-5" style={{ textAlign: "center" }}>
+        <button className="btn5 mx-3 p-2">
+          <ArrowBackIosNew />
+        </button>
+        <button className="btn5 mx-3 py-3 px-4"> 01 </button>
+        <button className="btn5 mx-3 py-3 px-4"> 02 </button>
+        <button className="btn5 mx-3 p-2">
+          <ArrowForwardIos />
+        </button>
+      </div> */}
+    </Box>
+  );
+};
+
+export default Projects;
+
+{
+  /* <CustomTabPanel value={value}  index={0}>
         
         
       <div class="container">
@@ -491,20 +539,5 @@ const Projects = () => {
   
   
     </div>
-      </CustomTabPanel> */}
-
-      <div className="my-5" style={{ textAlign: "center" }}>
-        <button className="btn5 mx-3 p-2">
-          <ArrowBackIosNew />
-        </button>
-        <button className="btn5 mx-3 py-3 px-4"> 01 </button>
-        <button className="btn5 mx-3 py-3 px-4"> 02 </button>
-        <button className="btn5 mx-3 p-2">
-          <ArrowForwardIos />
-        </button>
-      </div>
-    </Box>
-  );
-};
-
-export default Projects;
+      </CustomTabPanel> */
+}

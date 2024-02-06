@@ -31,16 +31,15 @@ export default function App() {
 
   const { dealWithAPIData } = useContext(GlobalContext);
 
-  console.log(i18n.language, "kjjkj");
+  // console.log(i18n.language, "kjjkj");
 
   useEffect(() => {
     console.log("getting products");
-    dealWithAPIData({ endpoint: "products" }).then((result) => {
-      console.log(result, "result products xxx");
+    dealWithAPIData({ endpoint: "products" }).then((result) =>
       setProductsList([
-        ...result.data.filter((item) => item.add_item_in_home == "1"),
-      ]);
-    });
+        ...result?.data.filter((item) => item.add_item_in_home == "1"),
+      ])
+    );
   }, []);
 
   return (
@@ -100,12 +99,20 @@ export default function App() {
           <SwiperSlide
             className="sd2"
             key={product.id}
-            style={{ maxHeight: "400px", minHeight: "400px" }}
+            style={{ maxHeight: "500px", minHeight: "400px" }}
           >
             <div>
               <img
-                src="https://hyateka7la.com/assets/web/images/products/golden-path_1706831260.jpg"
+                src={product.img}
+                // src="https://user-images.githubusercontent.com/24848110/33519396-7e56363c-d79d-11e7-969b-09782f5ccbab.png"
                 alt=""
+                height={250}
+                className="object-fit-cover"
+                onError={(e) => {
+                  e.target.src =
+                    "https://user-images.githubusercontent.com/24848110/33519396-7e56363c-d79d-11e7-969b-09782f5ccbab.png";
+                  e.target.onError = null;
+                }}
               />
             </div>
             <br />

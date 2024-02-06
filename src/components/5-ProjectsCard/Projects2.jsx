@@ -13,20 +13,20 @@ import Came3 from "../images/cam3.jpg";
 import Came4 from "../images/cam4.jpg";
 import { useContext, useEffect, useState } from "react";
 import { GlobalContext } from "../../Context/GlobalContext";
+
 export default function Projects2() {
   const [projectsList, setProjectsList] = useState([]);
   const { dealWithAPIData } = useContext(GlobalContext);
 
   const { t, i18n } = useTranslation();
 
-  console.log(i18n.language, "kjjkj");
+  // console.log(i18n.language, "kjjkj");
 
   useEffect(() => {
-    console.log("getting products");
-    dealWithAPIData({ endpoint: "projects" }).then((result) => {
-      console.log(result, "result projects xxx");
-      setProjectsList([...result.data]);
-    });
+    console.log("getting projects ..");
+    dealWithAPIData({ endpoint: "projects" }).then((result) =>
+      setProjectsList([...result?.data])
+    );
   }, []);
 
   return (
@@ -78,10 +78,20 @@ export default function Projects2() {
           <SwiperSlide
             className="sd2"
             key={project.id}
-            style={{ maxHeight: "400px", minHeight: "400px" }}
+            style={{ maxHeight: "500px", minHeight: "400px" }}
           >
             <div>
-              <img src={project.img} alt="" />
+              <img
+                src={project.img }
+                alt=""
+                height={250}
+                className="object-fit-cover"
+                onError={(e) => {
+                  e.target.src =
+                    "https://user-images.githubusercontent.com/24848110/33519396-7e56363c-d79d-11e7-969b-09782f5ccbab.png";
+                  e.target.onError = null;
+                }}
+              />
             </div>
             <br />
             <h3>{project.name}</h3>
