@@ -12,16 +12,18 @@ import { Button } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 
 const Hero = () => {
-  const navigation = useNavigate();
-  const [slidersList, setSlidersList] = useState([]);
-  const { t, i18n } = useTranslation();
-  const { dealWithAPIData } = useContext(GlobalContext);
+  const { slidersList } = useContext(GlobalContext);
 
-  useEffect(() => {
-    dealWithAPIData({ endpoint: "sliders" }).then((result) =>
-      setSlidersList([...result?.data])
-    );
-  }, [i18n.language]);
+  // const navigation = useNavigate();
+  // const [slidersList, setSlidersList] = useState([]);
+  const { i18n } = useTranslation();
+  // const { dealWithAPIData } = useContext(GlobalContext);
+
+  // useEffect(() => {
+  //   dealWithAPIData({ endpoint: "sliders" }).then((result) =>
+  //     setSlidersList([...result?.data])
+  //   );
+  // }, [i18n.language]);
 
   return (
     <main className="min-vh-100">

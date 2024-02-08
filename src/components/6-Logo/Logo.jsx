@@ -16,18 +16,20 @@ import { useState } from "react";
 import { GlobalContext } from "../../Context/GlobalContext";
 
 export default function App() {
-  const { t, i18n } = useTranslation();
+  const { partnersList } = useContext(GlobalContext);
 
-  const [partnersList, setPartnersList] = useState([]);
-  const { dealWithAPIData } = useContext(GlobalContext);
+  // const { t, i18n } = useTranslation();
 
-  useEffect(() => {
-    console.log("getting partners");
-    dealWithAPIData({ endpoint: "partners" }).then((result) => {
-      console.log(result, "result partners xxx");
-      setPartnersList([...result.data]);
-    });
-  }, []);
+  // const [partnersList, setPartnersList] = useState([]);
+  // const { dealWithAPIData } = useContext(GlobalContext);
+
+  // useEffect(() => {
+  //   console.log("getting partners");
+  //   dealWithAPIData({ endpoint: "partners" }).then((result) => {
+  //     console.log(result, "result partners xxx");
+  //     setPartnersList([...result.data]);
+  //   });
+  // }, []);
 
   // useEffect(() => {
   //   fetch('https://dash-board-sspy.onrender.com/api/all-partners')

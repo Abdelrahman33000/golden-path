@@ -10,7 +10,10 @@ import "../../index.css";
 
 const PaginateComponent = ({ pageCount, onPageChange }) => {
   return (
-    <div className="w-100 position-sticky bottom-0 d-flex justify-content-center align-items-center p-2 ">
+    <div
+      dir="ltr"
+      className="w-100 position-sticky bottom-0 d-flex justify-content-center align-items-center p-2 "
+    >
       <ReactPaginate
         pageCount={pageCount}
         pageRangeDisplayed={2}

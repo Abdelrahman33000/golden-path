@@ -1,38 +1,53 @@
-import React, { useContext, useEffect } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import img7 from "../../components/images/cam3.jpg";
 import { GlobalContext } from "../../Context/GlobalContext";
-// import { Link } from 'react-router-dom'
+import { useTranslation } from "react-i18next";
+import Loader from "../../components/Loader/Loader";
+
 const Product1 = () => {
   const { product_id } = useParams();
-  const { dealWithAPIData } = useContext(GlobalContext);
+  const [productDetail, setProductDetail] = useState({});
+  const { dealWithAPIData, isLoading } = useContext(GlobalContext);
+  const { t, i18n } = useTranslation();
 
   useEffect(() => {
     dealWithAPIData({ endpoint: `products/${product_id}` }).then((result) => {
       console.log(result, "product detail");
+      setProductDetail(result?.data);
     });
-  }, []);
+  }, [i18n.language]);
 
-  return (
+  return isLoading ? (
+    <Loader />
+  ) : (
     <>
       <h1
         className="project bg-dark text-light text-center p-5"
         style={{ fontFamily: "Bodoni Moda" }}
       >
-        product Details
+        {t("ProductDetails")}
       </h1>
 
       <div className="my-5 d-flex justify-content-center text-center">
         <div className=" rounded-5 mx-5  " style={{ width: "70%" }}>
           <img
-            src={img7}
+            src={productDetail.img}
+            width={"100%"}
             alt=""
-            className="rounded-5 p-2  "
-            style={{ width: "100%" }}
+            className="rounded-5 p-2 "
+            onError={(e) => {
+              e.target.src =
+                "https://user-images.githubusercontent.com/24848110/33519396-7e56363c-d79d-11e7-969b-09782f5ccbab.png";
+              e.target.onError = null;
+            }}
           />
 
-          <h5>Product 1</h5>
-          <p>Lorem ipsum dolor sit amet.</p>
+          <h5>{productDetail.name}</h5>
+          <p>
+            {(productDetail.description && !productDetail.shortDescription) ||
+              (!productDetail.description && productDetail.shortDescription)}
+          </p>
           {/* <p>  
     <Link to={"#"} style={{textDecoration:"none" , color:"#000"}}  className='btn5 py-1 px-3 rounded-3'>Read More</Link> 
     </p> */}

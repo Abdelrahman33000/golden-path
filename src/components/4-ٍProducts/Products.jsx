@@ -25,17 +25,20 @@ import "./Products.css";
 // import { EffectCoverflow, Pagination } from 'swiper/modules';
 
 export default function App() {
-  const [productsList, setProductsList] = useState([]);
+  const { productsList } = useContext(GlobalContext);
 
-  const { dealWithAPIData } = useContext(GlobalContext);
+  // const [productsList, setProductsList] = useState([]);
 
-  useEffect(() => {
-    dealWithAPIData({ endpoint: "products" }).then((result) =>
-      setProductsList([
-        ...result?.data.filter((item) => item.add_item_in_home == "1"),
-      ])
-    );
-  }, []);
+  // const { dealWithAPIData } = useContext(GlobalContext);
+  // const { i18n } = useTranslation();
+
+  // useEffect(() => {
+  //   dealWithAPIData({ endpoint: "products" }).then((result) =>
+  //     setProductsList([
+  //       ...result?.data.filter((item) => item.add_item_in_home == "1"),
+  //     ])
+  //   );
+  // }, [i18n.language]);
 
   return (
     <>
@@ -90,33 +93,35 @@ export default function App() {
         }}
         className="mySwiper5"
       >
-        {productsList.map((product) => (
-          <SwiperSlide
-            className="sd2"
-            key={product.id}
-            style={{ maxHeight: "500px", minHeight: "400px" }}
-          >
-            <div>
-              <img
-                src={product.img}
-                // src="https://user-images.githubusercontent.com/24848110/33519396-7e56363c-d79d-11e7-969b-09782f5ccbab.png"
-                alt=""
-                height={250}
-                className="object-fit-cover"
-                onError={(e) => {
-                  e.target.src =
-                    "https://user-images.githubusercontent.com/24848110/33519396-7e56363c-d79d-11e7-969b-09782f5ccbab.png";
-                  e.target.onError = null;
-                }}
-              />
-            </div>
-            <br />
-            <h3>{product.name}</h3>
-            <p style={{ opacity: ".5", fontSize: "15px" }}>
-              {product.shortDescription}
-            </p>
-          </SwiperSlide>
-        ))}
+        {productsList
+          .filter((item) => item.add_item_in_home == "1")
+          .map((product) => (
+            <SwiperSlide
+              className="sd2"
+              key={product.id}
+              style={{ maxHeight: "500px", minHeight: "400px" }}
+            >
+              <div>
+                <img
+                  src={product.img}
+                  // src="https://user-images.githubusercontent.com/24848110/33519396-7e56363c-d79d-11e7-969b-09782f5ccbab.png"
+                  alt=""
+                  height={250}
+                  className="object-fit-cover"
+                  onError={(e) => {
+                    e.target.src =
+                      "https://user-images.githubusercontent.com/24848110/33519396-7e56363c-d79d-11e7-969b-09782f5ccbab.png";
+                    e.target.onError = null;
+                  }}
+                />
+              </div>
+              <br />
+              <h3>{product.name}</h3>
+              <p style={{ opacity: ".5", fontSize: "15px" }}>
+                {product.shortDescription}
+              </p>
+            </SwiperSlide>
+          ))}
 
         {/* 
       <SwiperSlide className='sd2'><div>

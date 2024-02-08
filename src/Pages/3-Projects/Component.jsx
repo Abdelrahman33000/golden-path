@@ -79,7 +79,7 @@ const Component1 = (props) => {
             {props.projects.map((project) => (
               <>
                 {/* <div classNameName="d-flex" style={{ gap: "30px", flexWrap: "wrap" }}> */}
-                <div className="col-md-4 col-sm-6 mx-auto my-3">
+                <div className="col-md-5 col-12 col-lg-4 mx-auto my-3">
                   <div className="box">
                     <img
                       src={project.img}

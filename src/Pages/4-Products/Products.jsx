@@ -16,6 +16,7 @@ import img7 from "../../components/images/cam3.jpg";
 import { ArrowBackIosNew, ArrowForwardIos, Search } from "@mui/icons-material";
 import { GlobalContext } from "../../Context/GlobalContext";
 import PaginateComponent from "../../components/PaginateComponent/PaginateComponent";
+import Loader from "../../components/Loader/Loader";
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -54,25 +55,59 @@ const Products = () => {
   const [pageNumber, setPageNumber] = useState(1);
   const [paginatePageCount, setPaginateCount] = useState(1);
   const [productsSliceList, setProductsSliceList] = useState([]);
-  const [categories, setCategories] = useState([]);
+  // const [productsList, setProductsList] = useState([]);
+  // const [categoryList, setCategoryList] = useState([]);
   const [label, setLabel] = useState(0);
-  const [productPager, setProductPager] = useState([]);
+  const [value, setValue] = React.useState(0);
 
-  const { t, i18n } = useTranslation();
-  const { dealWithAPIData } = useContext(GlobalContext);
+  const { t } = useTranslation();
+  const { dealWithAPIData, isLoading, productsList, categoryProductsList } =
+    useContext(GlobalContext);
 
-  // console.log(i18n.language, "kjjkj");
+  const pageItemsCount = 8;
+
+  // useEffect(() => {
+  //   dealWithAPIData({
+  //     endpoint: `categories-for-products`,
+  //   }).then((result) => setCategoryList([...result?.data]));
+
+  //   dealWithAPIData({
+  //     endpoint: `products`,
+  //   }).then((result) => {
+  //     setProductsList([...result?.data]);
+  //     setProductsSliceList([...result?.data]);
+  //     setPaginateCount(Math.ceil(result?.data?.length / pageItemsCount));
+  //   });
+  // }, []);
 
   useEffect(() => {
-    dealWithAPIData({
-      endpoint: `paginate/products?page=${pageNumber}`,
-      // version: 0,
-    }).then((result) => {
-      console.log(result, "result products slice");
-      setProductsSliceList([...result?.data.data]);
-      setPaginateCount(result.data.meta.last_page);
-    });
-  }, [pageNumber]);
+    setProductsSliceList([...productsList]);
+    setPaginateCount(Math.ceil(productsList.length / pageItemsCount));
+  }, [productsList]);
+
+  useEffect(() => {
+    if (label == 0 && productsList.length !== 0) {
+      setProductsSliceList([...productsList]);
+    } else {
+      setProductsSliceList([
+        ...productsList.filter(
+          ({ category_id }) => category_id == categoryProductsList[label - 1].id
+        ),
+      ]);
+    }
+    setPaginateCount(Math.ceil(productsSliceList.length / pageItemsCount));
+  }, [label]);
+
+  // useEffect(() => {
+  //   dealWithAPIData({
+  //     endpoint: `paginate/products?page=${pageNumber}`,
+  //     // version: 0,
+  //   }).then((result) => {
+  //     console.log(result, "result products slice");
+  //     setProductsSliceList([...result?.data.data]);
+  //     setPaginateCount(result.data.meta.last_page);
+  //   });
+  // }, [pageNumber]);
 
   // useEffect(() => {
   //   fetch("https://dash-board-sspy.onrender.com/api/all-products")
@@ -130,8 +165,6 @@ const Products = () => {
   //   stringify: (option) => option.title,
   // });
 
-  const [value, setValue] = React.useState(0);
-
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
@@ -139,13 +172,14 @@ const Products = () => {
   // const { t} = useTranslation();
   // document.body.dir = i18n.dir();
 
-  return (
+  return isLoading ? (
+    <Loader />
+  ) : (
     <div className="my-5" style={{ flexWrap: "wrap" }}>
       <h1
         className="products text-center"
         style={{ fontFamily: "Bodoni Moda" }}
       >
-        
         {t("Our Products")}
       </h1>
       <div
@@ -209,19 +243,17 @@ const Products = () => {
               onClick={() => {
                 setLabel(0);
               }}
-              label="All"
+              label={t("CategoryAll")}
               {...a11yProps(0)}
             />
-            {categories.map((category, index) => (
+            {categoryProductsList.map((category, index) => (
               <Tab
                 className="tab"
                 onClick={() => {
                   setLabel(index + 1);
                 }}
-                key={category._id}
-                label={`${
-                  i18n.language === "en" ? category.name_en : category.name_ar
-                }`}
+                key={category.id}
+                label={category.name}
                 {...a11yProps(`${index + 1}`)}
               />
             ))}
@@ -232,20 +264,32 @@ const Products = () => {
           </Tabs>
         </Box>
 
-        <div className="col-lg-9 mx-auto">
-          <Component value={value} products={productsSliceList} index={label} />
-        </div>
+        {productsList.length == 0 ? (
+          <Loader />
+        ) : (
+          <>
+            <div className="col-lg-9 mx-auto">
+              <Component
+                value={value}
+                products={productsSliceList.slice(
+                  pageItemsCount * (pageNumber - 1),
+                  pageItemsCount * pageNumber
+                )}
+                index={label}
+              />
+            </div>
 
-        <div className="my-2">
-          <PaginateComponent
-            pageCount={paginatePageCount}
-            // pageCount={5}
-            onPageChange={(page) => {
-              console.log(page, "page");
-              setPageNumber(page.selected + 1);
-            }}
-          />
-        </div>
+            <div className="my-2">
+              <PaginateComponent
+                pageCount={paginatePageCount}
+                // pageCount={5}
+                onPageChange={(page) => {
+                  setPageNumber(page.selected + 1);
+                }}
+              />
+            </div>
+          </>
+        )}
 
         {/* <div
           className="my-5 border border-success"

@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import img7 from "../../components/images/cam3.jpg";
 // import { Link } from 'react-router-dom'
 import { Swiper, SwiperSlide } from "swiper/react";
@@ -18,30 +18,37 @@ import {
   Person4,
 } from "@mui/icons-material";
 import { GlobalContext } from "../../Context/GlobalContext";
+import { useTranslation } from "react-i18next";
 import { useParams } from "react-router-dom";
+import Loader from "../../components/Loader/Loader";
 
 const Project1 = () => {
-  const { product_id } = useParams();
-  const { dealWithAPIData } = useContext(GlobalContext);
+  const { project_id } = useParams();
+  const [projectDetail, setProjectDetail] = useState({});
+  const { dealWithAPIData, isLoading } = useContext(GlobalContext);
+  const { t, i18n } = useTranslation();
 
   useEffect(() => {
-    dealWithAPIData({ endpoint: `projects/${product_id}` }).then((result) => {
+    dealWithAPIData({ endpoint: `projects/${project_id}` }).then((result) => {
       console.log(result, "project detail");
+      setProjectDetail(result?.data);
     });
-  }, []);
+  }, [i18n.language]);
 
-  return (
+  return isLoading ? (
+    <Loader />
+  ) : (
     <>
       <h1
         className="project bg-dark text-light text-center p-5"
         style={{ fontFamily: "Bodoni Moda" }}
       >
-        project Details
+        {t("ProjectDetails")}
       </h1>
 
       <div className="my-5 d-flex justify-content-center text-center ">
         <div className=" rounded-5 mx-5  " style={{ width: "100%" }}>
-          <h1> Project 1</h1>
+          <h1>{projectDetail?.name}</h1>
 
           <div className="bg-dark  text-light p-3  text-start mx-3 my-5">
             <p>
@@ -62,27 +69,12 @@ const Project1 = () => {
             </p>
           </div>
           <p className="mx-3  my-4" style={{ textAlign: "left" }}>
-            Lorem ipsum dolor sit amet consectetur, adipisicing elit. Odio iusto
-            distinctio magni natus fuga! Fuga atque iusto nihil culpa beatae!
-            Sapiente, quo tempore. Consequuntur tenetur perferendis
-            reprehenderit! Nostrum, molestias repellendus! Eius sapiente
-            voluptate perspiciatis saepe consequuntur ex quibusdam excepturi
-            nihil maiores beatae suscipit, ipsam quam doloribus consectetur
-            ullam quia eligendi repudiandae eveniet quae! Explicabo hic eveniet
-            libero quas, quia vero illo at iste atque officiis accusamus
-            eligendi totam minima odit corrupti neque in sint quae earum
-            excepturi autem deleniti. Esse omnis odit quas ut magni deleniti
-            repellat? Blanditiis ea fugit ut unde, illum nobis, dicta voluptate
-            commodi officiis impedit voluptatem atque autem dolores! Voluptates
-            enim officia molestias et eligendi voluptate modi distinctio
-            excepturi? Expedita, alias? Illum et iusto qui impedit, iure tempore
-            optio amet eaque ipsam adipisci voluptatibus dolorum veritatis fugit
-            ratione atque laboriosam aperiam repellendus dolor neque voluptate
-            deleniti doloremque, sunt iure optio. Deserunt.
+            {(projectDetail?.description && !projectDetail?.shortDescription) ||
+              (!projectDetail?.description && projectDetail?.shortDescription)}
           </p>
           <div className="mx-3 my-5">
             <img
-              src={img7}
+              src={projectDetail?.img}
               alt=""
               className="rounded-5 p-2  "
               style={{ width: "100%" }}
@@ -131,7 +123,15 @@ const Project1 = () => {
             modules={[FreeMode, Pagination, Autoplay, Navigation]}
             className="mySwiper"
           >
-            <SwiperSlide className="swip">
+            {projectDetail?.gallery?.map((swipe) => (
+              <SwiperSlide className="swip">
+                <div>
+                  <img src={Came2} alt="" />
+                </div>
+                <br />
+              </SwiperSlide>
+            ))}
+            {/* <SwiperSlide className="swip">
               <div>
                 <img src={Came1} alt="" />
               </div>
@@ -189,7 +189,7 @@ const Project1 = () => {
                 <img src={Came1} alt="" />
               </div>
               <br />
-            </SwiperSlide>
+            </SwiperSlide> */}
           </Swiper>
         </div>
       </div>

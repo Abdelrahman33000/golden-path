@@ -15,19 +15,24 @@ import { useContext, useEffect, useState } from "react";
 import { GlobalContext } from "../../Context/GlobalContext";
 
 export default function Projects2() {
-  const [projectsList, setProjectsList] = useState([]);
-  const { dealWithAPIData } = useContext(GlobalContext);
+  const { projectsList } = useContext(GlobalContext);
 
-  const { t, i18n } = useTranslation();
+  // const [projectsList, setProjectsList] = useState([]);
+  // const { dealWithAPIData } = useContext(GlobalContext);
 
-  // console.log(i18n.language, "kjjkj");
+  // const { t, i18n } = useTranslation();
 
-  useEffect(() => {
-    console.log("getting projects ..");
-    dealWithAPIData({ endpoint: "projects" }).then((result) =>
-      setProjectsList([...result?.data])
-    );
-  }, []);
+  // // console.log(i18n.language, "kjjkj");
+
+  // useEffect(() => {
+  //   console.log("getting projects ..");
+  //   dealWithAPIData({ endpoint: "projects" }).then((result) =>
+  //     // setProjectsList([...result?.data])
+  //     setProjectsList([
+  //       ...result?.data.filter((item) => item.add_item_in_home == "1"),
+  //     ])
+  //   );
+  // }, []);
 
   return (
     <>
@@ -82,7 +87,7 @@ export default function Projects2() {
           >
             <div>
               <img
-                src={project.img }
+                src={project.img}
                 alt=""
                 height={250}
                 className="object-fit-cover"

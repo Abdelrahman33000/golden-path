@@ -22,6 +22,7 @@ import { useEffect } from "react";
 import Component1 from "./Component";
 import { GlobalContext } from "../../Context/GlobalContext";
 import PaginateComponent from "../../components/PaginateComponent/PaginateComponent";
+import Loader from "../../components/Loader/Loader";
 
 function CustomTabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -57,12 +58,6 @@ function a11yProps(index) {
 }
 
 const Projects = () => {
-  const [value, setValue] = useState(0);
-
-  const handleChange = (event, newValue) => {
-    setValue(newValue);
-  };
-
   //   const { t } = useTranslation();
 
   //   const [project , setProject] =useState([])
@@ -91,23 +86,35 @@ const Projects = () => {
   const [pageNumber, setPageNumber] = useState(1);
   const [paginatePageCount, setPaginateCount] = useState(1);
   const [projectsSliceList, setProjectsSliceList] = useState([]);
-  const [categories, setCategories] = useState([]);
   const [label, setLabel] = useState(0);
-  const [productPager, setProductPager] = useState([]);
+  const [value, setValue] = useState(0);
 
-  const { dealWithAPIData } = useContext(GlobalContext);
+  const { dealWithAPIData, isLoading, projectsList, categoryProjectsList } =
+    useContext(GlobalContext);
 
-  // console.log(i18n.language, "kjjkj");
+  const pageItemsCount = 8;
 
   useEffect(() => {
-    dealWithAPIData({
-      endpoint: `paginate/projects?page=${pageNumber}`,
-    }).then((result) => {
-      console.log(result, "result projects slice");
-      setProjectsSliceList([...result?.data.data]);
-      setPaginateCount(result.data.meta.last_page);
-    });
-  }, [pageNumber]);
+    setProjectsSliceList([...projectsList]);
+    setPaginateCount(Math.ceil(projectsList.length / pageItemsCount));
+  }, [projectsList]);
+
+  useEffect(() => {
+    if (label == 0 && projectsList.length !== 0) {
+      setProjectsSliceList([...projectsList]);
+    } else {
+      setProjectsSliceList([
+        ...projectsList.filter(
+          ({ category_id }) => category_id == categoryProjectsList[label - 1].id
+        ),
+      ]);
+    }
+    setPaginateCount(Math.ceil(projectsSliceList.length / pageItemsCount));
+  }, [label]);
+
+  const handleChange = (event, newValue) => {
+    setValue(newValue);
+  };
 
   // console.log(i18n.language, "kjjkj");
   // useEffect(() => {
@@ -181,39 +188,50 @@ const Projects = () => {
             onClick={() => {
               setLabel(0);
             }}
-            label="All"
+            label={t("CategoryAll")}
             {...a11yProps(0)}
           />
-          {categories.map((category, index) => (
+          {categoryProjectsList.map((category, index) => (
             <Tab
               className="tab"
               onClick={() => {
                 setLabel(index + 1);
               }}
-              key={category._id}
-              label={`${
-                i18n.language === "en" ? category.name_en : category.name_ar
-              }`}
+              key={category.id}
+              label={category.name}
               {...a11yProps(`${index + 1}`)}
             />
           ))}
         </Tabs>
       </Box>
 
-      <div className="col-lg-9 mx-auto border border-success-subtle">
-        <Component1 value={value} projects={projectsSliceList} index={label} />
-      </div>
+      {projectsList.length == 0 ? (
+        <Loader />
+      ) : (
+        <>
+          <div className="col-lg-9 mx-auto">
+            <Component1
+              value={value}
+              projects={projectsSliceList.slice(
+                pageItemsCount * (pageNumber - 1),
+                pageItemsCount * pageNumber
+              )}
+              index={label}
+            />
+          </div>
 
-      <div className="my-2">
-          <PaginateComponent
-            pageCount={paginatePageCount}
-            // pageCount={5}
-            onPageChange={(page) => {
-              console.log(page, "page");
-              setPageNumber(page.selected + 1);
-            }}
-          />
-        </div>
+          <div className="my-2">
+            <PaginateComponent
+              pageCount={paginatePageCount}
+              // pageCount={5}
+              onPageChange={(page) => {
+                console.log(page, "page");
+                setPageNumber(page.selected + 1);
+              }}
+            />
+          </div>
+        </>
+      )}
 
       {/* <div className="my-5" style={{ textAlign: "center" }}>
         <button className="btn5 mx-3 p-2">
