@@ -27,14 +27,9 @@ import "./Products.css";
 export default function App() {
   const [productsList, setProductsList] = useState([]);
 
-  const { t, i18n } = useTranslation();
-
   const { dealWithAPIData } = useContext(GlobalContext);
 
-  // console.log(i18n.language, "kjjkj");
-
   useEffect(() => {
-    console.log("getting products");
     dealWithAPIData({ endpoint: "products" }).then((result) =>
       setProductsList([
         ...result?.data.filter((item) => item.add_item_in_home == "1"),
