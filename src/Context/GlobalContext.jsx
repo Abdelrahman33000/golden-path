@@ -1,23 +1,20 @@
 import { createContext, useEffect, useState } from "react";
+import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 export const GlobalContext = createContext(0);
 
 const GlobalContextProvider = (props) => {
-  // const [slidersList, setSlidersList] = useState();
-  // const [partnersList, setPartnersList] = useState();
-  // const [productsList, setProductsList] = useState();
-  // const [projectsList, setProjectsList] = useState();
-  // const [categoryProductsList, setCategoryProductsList] = useState();
-  // const [categoryProjectsList, setCategoryProjectsList] = useState();
+  const { i18n } = useTranslation();
+  const [isLoading, setIsLoading] = useState(true);
+
+  console.log(i18n.language, "langiage");
 
   useEffect(() => {
-    // getSlidersListApi();
-    // getPartnersListApi();
-    // getProductsListApi();
-    // getProjectsListApi();
-    // getCategoryProductsListApi();
-    // getCategoryProjectsListApi();
-  }, []);
+    setIsLoading(true);
+    setTimeout(() => {
+      setIsLoading(false);
+    }, 3000);
+  }, [i18n.language]);
 
   async function dealWithAPIData({ endpoint, version = "v1" }) {
     const baseUrl = "https://hyateka7la.com/api";
@@ -32,12 +29,9 @@ const GlobalContextProvider = (props) => {
         ? [baseUrl, endpoint].join("/")
         : [baseUrl, version, endpoint].join("/"),
       {
-        // method: method ? method : "GET",
-        // headers: headers,
-        // headers: {
-        //   // "Content"
-        // },
-        // body: method ? JSON.stringify({ ...bodyObj }) : null,
+        headers: {
+          lang: i18n.language,
+        },
       }
     )
       .then((response) => response.json())
@@ -47,6 +41,22 @@ const GlobalContextProvider = (props) => {
       })
       .catch((error) => console.log(error, "error getting data"));
   }
+
+  // const [slidersList, setSlidersList] = useState();
+  // const [partnersList, setPartnersList] = useState();
+  // const [productsList, setProductsList] = useState();
+  // const [projectsList, setProjectsList] = useState();
+  // const [categoryProductsList, setCategoryProductsList] = useState();
+  // const [categoryProjectsList, setCategoryProjectsList] = useState();
+
+  // useEffect(() => {
+  // getSlidersListApi();
+  // getPartnersListApi();
+  // getProductsListApi();
+  // getProjectsListApi();
+  // getCategoryProductsListApi();
+  // getCategoryProjectsListApi();
+  // }, []);
 
   // function getSlidersListApi() {
   //   dealWithAPIData({ endpoint: "sliders" }).then((result) => {
@@ -88,6 +98,7 @@ const GlobalContextProvider = (props) => {
     <GlobalContext.Provider
       value={{
         dealWithAPIData,
+        isLoading,
         // slidersList,
         // partnersList,
         // productsList,

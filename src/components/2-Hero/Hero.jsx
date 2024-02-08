@@ -8,21 +8,23 @@ import { useState } from "react";
 import { Diversity1 } from "@mui/icons-material";
 import { useTranslation } from "react-i18next";
 import { GlobalContext } from "../../Context/GlobalContext";
+import { Button } from "@mui/material";
+import { useNavigate } from "react-router-dom";
 
 const Hero = () => {
+  const navigation = useNavigate();
   const [slidersList, setSlidersList] = useState([]);
   const { t, i18n } = useTranslation();
   const { dealWithAPIData } = useContext(GlobalContext);
 
   useEffect(() => {
-    console.log("getting sliders");
     dealWithAPIData({ endpoint: "sliders" }).then((result) =>
       setSlidersList([...result?.data])
     );
-  }, []);
+  }, [i18n.language]);
 
   return (
-    <main>
+    <main className="min-vh-100">
       {/* <div className=' p-5'>
        <h1>Capture Life's <br /> Brilliance</h1><br />
        Lorem ipsum dolor sit amet consectetur adipisicing elit. <br />
@@ -31,10 +33,15 @@ const Hero = () => {
          dolorem eveniet at minima, iusto quas mollitia labore ipsa? <br /><br /> */}
       {/* <button className='bg-dark text-light px-5 py-2 rounded-5' > Check More</button> */}
       {/* </div> */}
-      <Carousel fade className="Carousel ">
+      <Carousel fade className="Carousel">
         {slidersList.map((slider) => (
           <Carousel.Item>
-            <div className="bg-dark">
+            <div
+              className="bg-dark"
+              style={{
+                height: "calc(100vh - 150px)",
+              }}
+            >
               <img
                 // src={slider.background}
                 src={slider.img}
@@ -42,7 +49,8 @@ const Hero = () => {
                 text="First slide"
                 style={{
                   width: "100%",
-                  height: "550px",
+                  height: "100%",
+                  // height: "550px",
 
                   opacity: "0.5",
                   // backgroundColor: "black",
@@ -57,8 +65,18 @@ const Hero = () => {
               }}
             >
               <h1 style={{ width: "60%" }}>{slider.title}</h1>
-              <br />
+              {/* <br /> */}
               <p style={{ width: "50%" }}>{slider.text}</p>
+              {slider.btn_text && (
+                <button
+                  className="btn btn5 position-absolute bottom-0 mb-4"
+                  onClick={() => {
+                    window.location.replace(slider.url);
+                  }}
+                >
+                  {slider.btn_text}
+                </button>
+              )}
 
               {/* Lorem ipsum dolor sit amet consectetur adipisicing elit. <br />
         Eligendi deleniti obcaecati veritatis officia aperiam  <br />

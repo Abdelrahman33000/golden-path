@@ -30,14 +30,14 @@ body {
 }
 
 .btn5 {
-  transition: 0.5s;
-  background-color: #ff8d03;
-  color: #000;
+  transition: 0.5s !important;
+  background-color: #ff8d03 !important;
+  color: #000 !important;
 }
 
 .btn5:hover {
-  background-color: #786464;
-  color: #fff;
+  background-color: #786464 !important;
+  color: #fff !important;
 }
 
 .btn5-active {
