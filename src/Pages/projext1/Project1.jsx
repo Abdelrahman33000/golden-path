@@ -81,10 +81,7 @@ const Project1 = () => {
               className="m-0 text-center col-11 col-lg-7 col-md-8"
               style={{ textAlign: "left" }}
             >
-              {(projectDetail?.description &&
-                !projectDetail?.shortDescription) ||
-                (!projectDetail?.description &&
-                  projectDetail?.shortDescription)}
+              {projectDetail?.shortDescription}
             </p>
           </div>
           <div className=" my-5">

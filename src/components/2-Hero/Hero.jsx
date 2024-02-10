@@ -46,7 +46,7 @@ const Hero = () => {
             >
               <img
                 // src={slider.background}
-                src={slider.img}
+                src={slider.background}
                 alt=""
                 text="First slide"
                 style={{
