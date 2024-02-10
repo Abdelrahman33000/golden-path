@@ -26,7 +26,7 @@ const Hero = () => {
   // }, [i18n.language]);
 
   return (
-    <main className="min-vh-100">
+    <main style={{ minHeight: "calc(100vh - 150px)" }}>
       {/* <div className=' p-5'>
        <h1>Capture Life's <br /> Brilliance</h1><br />
        Lorem ipsum dolor sit amet consectetur adipisicing elit. <br />

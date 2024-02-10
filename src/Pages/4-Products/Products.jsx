@@ -52,19 +52,19 @@ function a11yProps(index) {
 }
 
 const Products = () => {
+  const pageItemsCount = 8;
+  const { dealWithAPIData, isLoading, productsList, categoryProductsList } =
+    useContext(GlobalContext);
   const [pageNumber, setPageNumber] = useState(1);
-  const [paginatePageCount, setPaginateCount] = useState(1);
+  const [paginatePageCount, setPaginateCount] = useState(
+    Math.ceil(productsList.length / pageItemsCount)
+  );
   const [productsSliceList, setProductsSliceList] = useState([]);
-  // const [productsList, setProductsList] = useState([]);
-  // const [categoryList, setCategoryList] = useState([]);
+
   const [label, setLabel] = useState(0);
   const [value, setValue] = React.useState(0);
 
   const { t } = useTranslation();
-  const { dealWithAPIData, isLoading, productsList, categoryProductsList } =
-    useContext(GlobalContext);
-
-  const pageItemsCount = 8;
 
   // useEffect(() => {
   //   dealWithAPIData({
@@ -81,22 +81,31 @@ const Products = () => {
   // }, []);
 
   useEffect(() => {
+    // setPaginateCount(Math.ceil(productsList.length / pageItemsCount));
     setProductsSliceList([...productsList]);
-    setPaginateCount(Math.ceil(productsList.length / pageItemsCount));
   }, [productsList]);
 
   useEffect(() => {
     if (label == 0 && productsList.length !== 0) {
       setProductsSliceList([...productsList]);
+      // setPaginateCount(Math.ceil(productsList.length / pageItemsCount));
     } else {
       setProductsSliceList([
         ...productsList.filter(
           ({ category_id }) => category_id == categoryProductsList[label - 1].id
         ),
       ]);
+      // setPaginateCount(Math.ceil(productsSliceList.length / pageItemsCount));
     }
-    setPaginateCount(Math.ceil(productsSliceList.length / pageItemsCount));
   }, [label]);
+
+  useEffect(() => {
+    if (productsSliceList.length !== 0) {
+      setPaginateCount(Math.ceil(productsSliceList.length / pageItemsCount));
+    } else {
+      setPaginateCount(1);
+    }
+  }, [label, productsSliceList]);
 
   // useEffect(() => {
   //   dealWithAPIData({

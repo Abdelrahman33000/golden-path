@@ -71,10 +71,7 @@ const Component1 = (props) => {
   
     </div> */}
 
-        <div
-          className="d-flex container"
-          style={{ gap: "30px", flexWrap: "wrap" }}
-        >
+        <div className=" container" style={{ gap: "30px", flexWrap: "wrap" }}>
           <div className="row">
             {props.projects.map((project) => (
               <>

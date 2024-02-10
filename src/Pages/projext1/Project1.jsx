@@ -35,7 +35,7 @@ const Project1 = () => {
     });
   }, [i18n.language]);
 
-  return isLoading ? (
+  return isLoading || !projectDetail.id ? (
     <Loader />
   ) : (
     <>
@@ -46,33 +46,48 @@ const Project1 = () => {
         {t("ProjectDetails")}
       </h1>
 
-      <div className="my-5 d-flex justify-content-center text-center ">
-        <div className=" rounded-5 mx-5  " style={{ width: "100%" }}>
+      <div className="my-5 d-flex justify-content-center text-center container">
+        <div className="mx-2 mx-lg-5 mx-md-5 " style={{ width: "100%" }}>
           <h1>{projectDetail?.name}</h1>
 
           <div className="bg-dark  text-light p-3  text-start mx-3 my-5">
             <p>
               <Person4 /> Client :
-              <span className="opacity-50"> Stanford university</span>
+              <span className="opacity-50 px-2 text-nowrap">
+                {projectDetail?.customer_name}
+              </span>
             </p>
             <p>
               <CalendarMonth /> Date :
-              <span className="opacity-50"> sep 28 , 2020 </span>
+              <span className="opacity-50 px-2 text-nowrap">
+                {projectDetail?.date}
+              </span>
             </p>
             <p>
               <CardMembership /> Category :
-              <span className="opacity-50"> Outdoor Wiring</span>
+              <span className="opacity-50 px-2 text-nowrap">
+                {projectDetail?.category_name}
+              </span>
             </p>
             <p>
               <MyLocation /> Location :
-              <span className="opacity-50"> California USA</span>
+              <span className="opacity-50 px-2 text-nowrap">
+                {projectDetail?.location}
+              </span>
             </p>
           </div>
-          <p className="mx-3  my-4" style={{ textAlign: "left" }}>
-            {(projectDetail?.description && !projectDetail?.shortDescription) ||
-              (!projectDetail?.description && projectDetail?.shortDescription)}
-          </p>
-          <div className="mx-3 my-5">
+          <div className="container d-flex align-items-center justify-content-center">
+            <p
+              className="m-0 text-center col-11 col-lg-7 col-md-8"
+              style={{ textAlign: "left" }}
+            >
+              {(projectDetail?.description &&
+                !projectDetail?.shortDescription) ||
+                (!projectDetail?.description &&
+                  projectDetail?.shortDescription)}
+            </p>
+          </div>
+          <div className=" my-5">
             <img
               src={projectDetail?.img}
               alt=""

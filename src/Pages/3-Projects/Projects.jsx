@@ -81,22 +81,23 @@ const Projects = () => {
 
   // const [projectPager, setProjectPager] = useState([]);
 
-  const { t, i18n } = useTranslation();
-
-  const [pageNumber, setPageNumber] = useState(1);
-  const [paginatePageCount, setPaginateCount] = useState(1);
-  const [projectsSliceList, setProjectsSliceList] = useState([]);
-  const [label, setLabel] = useState(0);
-  const [value, setValue] = useState(0);
-
   const { dealWithAPIData, isLoading, projectsList, categoryProjectsList } =
     useContext(GlobalContext);
 
   const pageItemsCount = 8;
+  const [paginatePageCount, setPaginateCount] = useState(
+    Math.ceil(projectsList.length / pageItemsCount)
+  );
+  const { t, i18n } = useTranslation();
+
+  const [pageNumber, setPageNumber] = useState(1);
+  const [projectsSliceList, setProjectsSliceList] = useState([]);
+  const [label, setLabel] = useState(0);
+  const [value, setValue] = useState(0);
 
   useEffect(() => {
     setProjectsSliceList([...projectsList]);
-    setPaginateCount(Math.ceil(projectsList.length / pageItemsCount));
+    // setPaginateCount(Math.ceil(projectsList.length / pageItemsCount));
   }, [projectsList]);
 
   useEffect(() => {
@@ -109,8 +110,16 @@ const Projects = () => {
         ),
       ]);
     }
-    setPaginateCount(Math.ceil(projectsSliceList.length / pageItemsCount));
+    // setPaginateCount(Math.ceil(projectsSliceList.length / pageItemsCount));
   }, [label]);
+
+  useEffect(() => {
+    if (projectsSliceList.length !== 0) {
+      setPaginateCount(Math.ceil(projectsSliceList.length / pageItemsCount));
+    } else {
+      setPaginateCount(1);
+    }
+  }, [label, projectsSliceList]);
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
