@@ -1,27 +1,18 @@
-
-header{
-    overflow-x: hidden;
-}
-.icon-phone ,.icon-email{
-    color: #093266;
-    font-size: 20px;
-}
-/* header{
-    padding: 0 10px;
-    margin: auto 5px;
-} */
-
-@media (max-width: 380px){
 header {
+  overflow-x: hidden;
+}
+.icon-phone,
+.icon-email {
+  color: #093266;
+  font-size: 20px;
+}
+
+@media (max-width: 380px) {
+  header {
     overflow-x: hidden;
+  }
+  .mail,
+  .img {
+    scale: 0.7;
+  }
 }
-.mail , .img{
-    scale: .7;
-
-}
-
-
-
-}
-
-

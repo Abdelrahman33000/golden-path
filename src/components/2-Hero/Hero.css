@@ -1,15 +1,7 @@
-main{
-    width: 100%;
-    /* background-image: url("../images/Photographer.jpg");
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: cover;
-    color: azure; */
+main {
+  width: 100%;
 }
 
-.Carousel{
-    display: flex;
-
-    /* justify-content: center; */
-   /* text-align: end; */
+.Carousel {
+  display: flex;
 }

@@ -10,8 +10,7 @@ body {
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
     "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
     sans-serif;
-  /* -webkit-font-smoothing: antialiased; */
-  /* -moz-osx-font-smoothing: grayscale; */
+
   overflow-x: hidden;
   box-sizing: border-box;
 }
@@ -20,10 +19,8 @@ body {
   position: fixed;
   bottom: 20px;
   right: 20px;
-  /* background-color: aqua; */
   border-radius: 15px;
   z-index: 5;
-  /* opacity: .5; */
 }
 .scroll2Top:hover {
   opacity: 1;

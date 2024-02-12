@@ -1,0 +1,10 @@
+.inp {
+  border: none;
+  border-bottom: 3px solid black;
+  width: 100%;
+  background-color: rgb(185, 185, 183);
+  outline: none;
+  height: 50px;
+  border-radius: 20px;
+  padding: 5px 15px;
+}

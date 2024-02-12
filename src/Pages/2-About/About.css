@@ -1,48 +1,43 @@
-.Carousel{
-    width: 100vw;
-    z-index: 0;
+.Carousel {
+  width: 100vw;
+  z-index: 0;
 }
 
-.card0{
-    width: 200px;
-    padding: 7px 1px;
-    /* margin: auto; */
-    /* flex-direction: column; */
-    /* margin: auto; */
-    /* padding: 25px; */
-    text-align: center;
-    transition: .5s;
+.card0 {
+  width: 200px;
+  padding: 7px 1px;
+  text-align: center;
+  transition: 0.5s;
 }
 
 .card0 p {
-    text-align: left;
-    padding: 0px 15px;
+  text-align: left;
+  padding: 0px 15px;
 }
-.card0:hover{
-    scale: 1.1;
-    background-color: rgb(255, 154, 3);
-    rotate: -5deg;
-}
-
-.count{
-    background-image: url(../../components/images/cam4.jpg);
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: cover;
-    background-attachment: fixed;
-    flex-wrap: wrap;
-    margin: 50px auto;
-    color: azure;
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
+.card0:hover {
+  scale: 1.1;
+  background-color: rgb(255, 154, 3);
+  rotate: -5deg;
 }
 
-.count1{
-    transition: .5s;
+.count {
+  background-image: url(../../components/images/cam4.jpg);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-attachment: fixed;
+  flex-wrap: wrap;
+  margin: 50px auto;
+  color: azure;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
 }
 
-.count1:hover{
-    scale: 1.1;
+.count1 {
+  transition: 0.5s;
+}
 
+.count1:hover {
+  scale: 1.1;
 }

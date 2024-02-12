@@ -1,5 +1,4 @@
-import React, { useContext, useEffect, useState } from "react";
-// Import Swiper React components
+import React, { useContext } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import {
   FreeMode,
@@ -8,37 +7,16 @@ import {
   Autoplay,
   EffectCoverflow,
 } from "swiper/modules";
-import { useTranslation } from "react-i18next";
 
-// Import Swiper styles
 import "swiper/css";
 import "swiper/css/effect-coverflow";
 import { GlobalContext } from "../../Context/GlobalContext";
 import "swiper/css/pagination";
-import Came1 from "../images/cam1.jpeg";
-import Came2 from "../images/cam2.jpg";
-import Came3 from "../images/cam3.jpg";
-import Came4 from "../images/cam4.jpg";
-import "./Products.css";
 
-// import required modules
-// import { EffectCoverflow, Pagination } from 'swiper/modules';
+import "./Products.css";
 
 export default function App() {
   const { productsList } = useContext(GlobalContext);
-
-  // const [productsList, setProductsList] = useState([]);
-
-  // const { dealWithAPIData } = useContext(GlobalContext);
-  // const { i18n } = useTranslation();
-
-  // useEffect(() => {
-  //   dealWithAPIData({ endpoint: "products" }).then((result) =>
-  //     setProductsList([
-  //       ...result?.data.filter((item) => item.add_item_in_home == "1"),
-  //     ])
-  //   );
-  // }, [i18n.language]);
 
   return (
     <>
@@ -104,7 +82,6 @@ export default function App() {
               <div>
                 <img
                   src={product.img}
-                  // src="https://user-images.githubusercontent.com/24848110/33519396-7e56363c-d79d-11e7-969b-09782f5ccbab.png"
                   alt=""
                   height={250}
                   className="object-fit-cover"
@@ -122,57 +99,6 @@ export default function App() {
               </p>
             </SwiperSlide>
           ))}
-
-        {/* 
-      <SwiperSlide className='sd2'><div>
-          <img src={Came2} alt="" />
-      </div><br />   <h3>Camera</h3>
-       <p style={{opacity:".5"}}>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aspernatur commodi ab amet
-           mollitia in ut quod velit officiis eos nesciunt?</p></SwiperSlide>
-      
-      <SwiperSlide className='sd2'>
-        
-        <div>
-          <img src={Came3} alt="" />
-      </div><br />   <h3>Camera</h3>
-       <p style={{opacity:".5"}}>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aspernatur commodi ab amet
-           mollitia in ut quod velit officiis eos nesciunt?</p></SwiperSlide>
-      <SwiperSlide className='sd2'><div>
-          <img src={Came4} alt="" />
-      </div><br />   <h3>Camera</h3>
-       <p style={{opacity:".5"}}>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aspernatur commodi ab amet
-           mollitia in ut quod velit officiis eos nesciunt?</p></SwiperSlide> <SwiperSlide className='sd2'><div>
-          <img src={Came1} alt="" />
-      </div><br />   <h3>Camera</h3>
-       <p style={{opacity:".5"}}>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aspernatur commodi ab amet
-           mollitia in ut quod velit officiis eos nesciunt?</p></SwiperSlide>
-           <SwiperSlide className='sd2 rounded-5'><div>
-          <img src={Came1} alt="" />
-      </div> <br />
-      <h3>Camera</h3>
-       <p style={{opacity:".5"}}>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aspernatur commodi ab amet
-           mollitia in ut quod velit officiis eos nesciunt?</p> </SwiperSlide>
-      <SwiperSlide className='sd2'><div>
-          <img src={Came2} alt="" />
-      </div><br />   <h3>Camera</h3>
-       <p style={{opacity:".5"}}>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aspernatur commodi ab amet
-           mollitia in ut quod velit officiis eos nesciunt?</p></SwiperSlide>
-      <SwiperSlide className='sd2'><div>
-          <img src={Came3} alt="" />
-      </div><br />    <h3>Camera</h3>
-       <p style={{opacity:".5"}}>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aspernatur commodi ab amet
-           mollitia in ut quod velit officiis eos nesciunt?</p></SwiperSlide>
-      <SwiperSlide className='sd2'><div>
-          <img src={Came4} alt="" />
-      </div><br />   <h3>Camera</h3>
-       <p style={{opacity:".5"}}>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aspernatur commodi ab amet
-           mollitia in ut quod velit officiis eos nesciunt?</p></SwiperSlide> <SwiperSlide className='sd2'><div>
-          <img src={Came1} alt="" />
-      </div><br />   <h3>Camera</h3>
-       <p style={{opacity:".5"}}>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aspernatur commodi ab amet
-           mollitia in ut quod velit officiis eos nesciunt?</p></SwiperSlide>
-
-            */}
       </Swiper>
     </>
   );

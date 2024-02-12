@@ -16,14 +16,6 @@ const Home = () => {
   const { t } = useTranslation();
   const { isLoading } = useContext(GlobalContext);
 
-  // const lists = [
-  //   { name: " Home", id: "/" },
-  //   { name: " About", id: "#About" },
-  //   { name: " Service", id: "#Service " },
-  //   { name: " Product", id: "#Product " },
-  //   { name: " Partners", id: "#Partners " },
-  //   { name: " Contact", id: "#Contact" },
-  // ];
   return isLoading ? (
     <Loader />
   ) : (

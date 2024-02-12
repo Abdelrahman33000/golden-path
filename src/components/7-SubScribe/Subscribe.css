@@ -1,9 +1,8 @@
-.icon{
-    transition: .5s;
+.icon {
+  transition: 0.5s;
 }
 
-
-.icon:hover{
-cursor: pointer;
-font-size: larger;
+.icon:hover {
+  cursor: pointer;
+  font-size: larger;
 }

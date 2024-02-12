@@ -1,14 +1,13 @@
-footer{
-    width: 100%;
+footer {
+  width: 100%;
 }
 
-footer p{
-    opacity: .5;
-    transition: .5s;
+footer p {
+  opacity: 0.5;
+  transition: 0.5s;
 }
-footer p:hover{
-    opacity: 1;
-    cursor: pointer;
-   color: #ec6f08;
+footer p:hover {
+  opacity: 1;
+  cursor: pointer;
+  color: #ec6f08;
 }
-

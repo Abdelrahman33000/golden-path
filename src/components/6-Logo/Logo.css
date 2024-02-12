@@ -1,33 +1,25 @@
+.swiper {
+  width: 100%;
+}
+.mySwip {
+  background-color: #bbbab9;
+}
 
-  
-  .swiper {
-    /* margin-top: 10px; */
-    width: 100%;
-    
-  }
-  .mySwip{
-    background-color: #bbbab9;
-  }
+.swipee img {
+  width: 100%;
+  height: 250px;
+  background-color: #fa8109;
+  opacity: 0.5;
+  border-radius: 30px 0;
+  padding: 15px;
+  margin: auto;
+  transition: 1s;
+}
 
-  
-
-  
-
-  .swipee img{
-    width: 100%;
-    height: 250px;
-    background-color: #fa8109;
-opacity: .5;
-    border-radius: 30px 0;
-    padding: 15px;
-    margin: auto;
-    transition: 1s;
-  }
-
-  .swipee img:hover{
-    opacity: 1;
-    cursor: pointer;
-  }
-  .swipee img:active{
-    scale: .7;
-  }
+.swipee img:hover {
+  opacity: 1;
+  cursor: pointer;
+}
+.swipee img:active {
+  scale: 0.7;
+}

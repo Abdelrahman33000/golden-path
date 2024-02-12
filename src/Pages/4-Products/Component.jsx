@@ -1,6 +1,5 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { useTranslation } from "react-i18next";
 import Box from "@mui/material/Box";
 import PropTypes from "prop-types";
 import Typography from "@mui/material/Typography";
@@ -32,8 +31,6 @@ TabPanel.propTypes = {
 };
 
 const Component = (props) => {
-  const { t, i18n } = useTranslation();
-
   return (
     <div>
       <TabPanel value={props.value} index={props.index}>

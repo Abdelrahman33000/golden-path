@@ -1,6 +1,5 @@
 import { createContext, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
-import { useNavigate } from "react-router-dom";
 export const GlobalContext = createContext(0);
 
 const GlobalContextProvider = (props) => {
@@ -14,15 +13,6 @@ const GlobalContextProvider = (props) => {
   const [categoryProductsList, setCategoryProductsList] = useState([]);
   const [categoryProjectsList, setCategoryProjectsList] = useState([]);
 
-  console.log(i18n.language, "langiage");
-
-  // useEffect(() => {
-  //   setIsLoading(true);
-  //   setTimeout(() => {
-  //     setIsLoading(false);
-  //   }, 3000);
-  // }, [i18n.language]);
-
   async function dealWithAPIData({ endpoint }) {
     const baseUrl = "https://hyateka7la.com/api/v1";
     return await fetch([baseUrl, endpoint].join("/"), {
@@ -31,10 +21,7 @@ const GlobalContextProvider = (props) => {
       },
     })
       .then((response) => response.json())
-      .then((result) => {
-        console.log(result, "result getting data");
-        return result;
-      })
+      .then((result) => result)
       .catch((error) => console.log(error, "error getting data"));
   }
 

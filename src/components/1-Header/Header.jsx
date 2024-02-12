@@ -1,7 +1,6 @@
 import React from "react";
 import Logo from "../images/Golden Path - Logo.png";
-// import Phone from '../images/telephone-x-fill.svg'
-// import Mail from '../images/mail.svg'
+
 import "./Header.css";
 import { useLocation } from "react-router-dom";
 const Header = () => {
@@ -21,14 +20,12 @@ const Header = () => {
             className="icon-email my-3"
             style={{ color: "#093266", lineHeight: "0px", fontSize: "12px" }}
           >
-            {" "}
             Info@goldenPath
           </p>
           <p
             className="icon-phone "
             style={{ color: "#093266", lineHeight: "10px", fontSize: "12px" }}
           >
-            {" "}
             +123456789
           </p>
         </div>

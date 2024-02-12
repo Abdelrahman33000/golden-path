@@ -1,5 +1,4 @@
-import React, { useContext, useEffect } from "react";
-// Import Swiper React components
+import React, { useContext } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 
 import "swiper/css";
@@ -7,41 +6,11 @@ import "swiper/css/free-mode";
 import "swiper/css/pagination";
 import "./Logo.css";
 import { FreeMode, Pagination, Navigation, Autoplay } from "swiper/modules";
-import Came1 from "../images/clients-logo-3.png";
-import Came2 from "../images/clients-logo-4 (1).png";
-import Came3 from "../images/clients-logo-4.png";
-import Came4 from "../images/clients-logo-5.png";
-import { useTranslation } from "react-i18next";
-import { useState } from "react";
+
 import { GlobalContext } from "../../Context/GlobalContext";
 
 export default function App() {
   const { partnersList } = useContext(GlobalContext);
-
-  // const { t, i18n } = useTranslation();
-
-  // const [partnersList, setPartnersList] = useState([]);
-  // const { dealWithAPIData } = useContext(GlobalContext);
-
-  // useEffect(() => {
-  //   console.log("getting partners");
-  //   dealWithAPIData({ endpoint: "partners" }).then((result) => {
-  //     console.log(result, "result partners xxx");
-  //     setPartnersList([...result.data]);
-  //   });
-  // }, []);
-
-  // useEffect(() => {
-  //   fetch('https://dash-board-sspy.onrender.com/api/all-partners')
-  //   .then(response => response.json())
-  //   .then(data =>{
-  //     console.log(data.data ,"jjjjjjjjjjjjj")
-
-  //     setPartners(data.data)
-
-  //   }
-  //   )
-  // },[])
 
   return (
     <>
@@ -79,8 +48,6 @@ export default function App() {
           },
         }}
         navigation={true}
-        // slidesPerView={4}
-        // spaceBetween={20}
         freeMode={true}
         pagination={{
           clickable: true,
@@ -103,33 +70,6 @@ export default function App() {
             </div>
           </SwiperSlide>
         ))}
-
-        {/*         
-        <SwiperSlide className='swipee'><div>
-            <img src={Came2} alt="" />
-        </div></SwiperSlide>
-        <SwiperSlide className='swipee'><div>
-            <img src={Came3} alt="" />
-        </div></SwiperSlide>
-        <SwiperSlide className='swipee'><div>
-            <img src={Came4} alt="" />
-        </div></SwiperSlide> <SwiperSlide className='swipee'><div>
-            <img src={Came1} alt="" />
-        </div></SwiperSlide>
-             <SwiperSlide className='swipee'><div>
-            <img src={Came1} alt="" />
-        </div>  </SwiperSlide>
-        <SwiperSlide className='swipee'><div>
-            <img src={Came2} alt="" />
-        </div></SwiperSlide>
-        <SwiperSlide className='swipee'><div>
-            <img src={Came3} alt="" />
-        </div></SwiperSlide>
-        <SwiperSlide className='swipee'><div>
-            <img src={Came4} alt="" />
-        </div></SwiperSlide> <SwiperSlide className='swipee'><div>
-            <img src={Came1} alt="" />
-        </div></SwiperSlide> */}
       </Swiper>
     </>
   );

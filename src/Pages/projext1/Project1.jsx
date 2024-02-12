@@ -1,16 +1,11 @@
 import React, { useContext, useEffect, useState } from "react";
-import img7 from "../../components/images/cam3.jpg";
-// import { Link } from 'react-router-dom'
 import { Swiper, SwiperSlide } from "swiper/react";
 
 import "swiper/css";
 import "swiper/css/free-mode";
 import "swiper/css/pagination";
 import { FreeMode, Pagination, Navigation, Autoplay } from "swiper/modules";
-import Came1 from "../../components/images/cam1.jpeg";
-import Came2 from "../../components/images/cam2.jpg";
-import Came3 from "../../components/images/cam3.jpg";
-import Came4 from "../../components/images/cam4.jpg";
+
 import {
   CalendarMonth,
   CardMembership,
@@ -29,10 +24,9 @@ const Project1 = () => {
   const { t, i18n } = useTranslation();
 
   useEffect(() => {
-    dealWithAPIData({ endpoint: `projects/${project_id}` }).then((result) => {
-      console.log(result, "project detail");
-      setProjectDetail(result?.data);
-    });
+    dealWithAPIData({ endpoint: `projects/${project_id}` }).then((result) =>
+      setProjectDetail(result?.data)
+    );
   }, [i18n.language]);
 
   return isLoading || !projectDetail.id ? (
@@ -126,8 +120,6 @@ const Project1 = () => {
               },
             }}
             navigation={true}
-            // slidesPerView={3}
-            // spaceBetween={30}
             freeMode={true}
             pagination={{
               clickable: true,
@@ -138,70 +130,10 @@ const Project1 = () => {
             {projectDetail?.gallery?.map((swipe) => (
               <SwiperSlide className="swip">
                 <div>
-                  <img src={Came2} alt="" />
+                  <img src={swipe} alt="" />
                 </div>
-                <br />
               </SwiperSlide>
             ))}
-            {/* <SwiperSlide className="swip">
-              <div>
-                <img src={Came1} alt="" />
-              </div>
-            </SwiperSlide>
-            <SwiperSlide className="swip">
-              <div>
-                <img src={Came2} alt="" />
-              </div>
-              <br />
-            </SwiperSlide>
-            <SwiperSlide className="swip">
-              <div>
-                <img src={Came3} alt="" />
-              </div>
-              <br />
-            </SwiperSlide>
-            <SwiperSlide className="swip">
-              <div>
-                <img src={Came4} alt="" />
-              </div>
-              <br />
-            </SwiperSlide>
-            <SwiperSlide className="swip">
-              <div>
-                <img src={Came1} alt="" />
-              </div>
-              <br />
-            </SwiperSlide>
-            <SwiperSlide className="swip">
-              <div>
-                <img src={Came1} alt="" />
-              </div>
-              <br />
-            </SwiperSlide>
-            <SwiperSlide className="swip">
-              <div>
-                <img src={Came2} alt="" />
-              </div>
-              <br />
-            </SwiperSlide>
-            <SwiperSlide className="swip">
-              <div>
-                <img src={Came3} alt="" />
-              </div>
-              <br />
-            </SwiperSlide>
-            <SwiperSlide className="swip">
-              <div>
-                <img src={Came4} alt="" />
-              </div>
-              <br />
-            </SwiperSlide>
-            <SwiperSlide className="swip">
-              <div>
-                <img src={Came1} alt="" />
-              </div>
-              <br />
-            </SwiperSlide> */}
           </Swiper>
         </div>
       </div>
