@@ -21,9 +21,9 @@ const EmailFormComponent = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    const serviceId = "service_cjc9ald";
-    const templateId = "template_iokvgau";
-    const userId = "HJ17P6yVmnVRYrwdd";
+    const serviceId = "";
+    const templateId = "";
+    const userId = "";
 
     emailjs
       .send(serviceId, templateId, formData, userId)
