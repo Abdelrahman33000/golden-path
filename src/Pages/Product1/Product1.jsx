@@ -4,6 +4,12 @@ import { GlobalContext } from "../../Context/GlobalContext";
 import { useTranslation } from "react-i18next";
 import Loader from "../../components/Loader/Loader";
 import EmailFormComponent from "../../components/EmailFormComponent/EmailFormComponent";
+import { Swiper, SwiperSlide } from "swiper/react";
+
+import "swiper/css";
+import "swiper/css/free-mode";
+import "swiper/css/pagination";
+import { FreeMode, Pagination, Navigation, Autoplay } from "swiper/modules";
 
 const Product1 = () => {
   const { product_id } = useParams();
@@ -48,6 +54,56 @@ const Product1 = () => {
               (!productDetail.description && productDetail.shortDescription)}
           </p> */}
           <p>{productDetail.shortDescription}</p>
+
+          <Swiper
+            style={{ width: "100%" }}
+            loop={true}
+            centeredSlides={true}
+            autoplay={{
+              delay: 2500,
+              disableOnInteraction: false,
+            }}
+            spaceBetween={30}
+            slidesPerView={4}
+            breakpoints={{
+              0: {
+                slidesPerView: 1,
+              },
+              400: {
+                slidesPerView: 1,
+              },
+              639: {
+                slidesPerView: 2,
+              },
+              865: {
+                slidesPerView: 2,
+              },
+              1000: {
+                slidesPerView: 3,
+              },
+              1500: {
+                slidesPerView: 4,
+              },
+              1700: {
+                slidesPerView: 4,
+              },
+            }}
+            navigation={true}
+            freeMode={true}
+            pagination={{
+              clickable: true,
+            }}
+            modules={[FreeMode, Pagination, Autoplay, Navigation]}
+            className="mySwiper my-5"
+          >
+            {productDetail?.gallery?.map((swipe) => (
+              <SwiperSlide className="swip">
+                <div>
+                  <img src={swipe} alt="" />
+                </div>
+              </SwiperSlide>
+            ))}
+          </Swiper>
 
           <div className="container-fluide  my-5 mx-2 shadow-lg p-2   rounded-4 mt-2 ">
             <EmailFormComponent />
