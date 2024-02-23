@@ -102,7 +102,9 @@ const Projects = () => {
       <h1 className="project" style={{ fontFamily: "Bodoni Moda" }}>
         {t("Our Projects")}
       </h1>
+      
       <Box
+      
         sx={{
           borderColor: "divider",
           display: "flex",
@@ -112,12 +114,15 @@ const Projects = () => {
         }}
       >
         <Tabs
+        variant="scrollable"
           value={value}
           onChange={handleChange}
           aria-label="basic tabs example"
           sx={{ textAlign: "center" }}
         >
           <Tab
+                  variant="scrollable"
+
             className="tab"
             onClick={() => {
               setLabel(0);
@@ -127,6 +132,7 @@ const Projects = () => {
           />
           {categoryProjectsList.map((category, index) => (
             <Tab
+
               className="tab"
               onClick={() => {
                 setLabel(index + 1);
