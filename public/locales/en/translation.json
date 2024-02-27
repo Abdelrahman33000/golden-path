@@ -7,7 +7,8 @@
   "Our Products": "Our Products",
   "Our Projects": "Our Projects",
   "Our Partners": "Our Partners",
-  "About Golden paths": "About Golden paths",
+  "About Golden paths Title": "About Golden paths",
+  "About Golden paths Description": "Golden Paths specialists design, build, and support scalable and secure IT and Communications infrastructure for diverse ITC needs",
   "Read More": "Read More",
   "search...": "Search ...",
   "Categories": "Categories",
@@ -22,8 +23,20 @@
   "Message...": "Message...",
   "Submit": "Submit",
   "CategoryAll": "All",
-  "ProductDetails":"Product Details",
-  "ProjectDetails": "Project Details"
-
-
+  "ProductDetails": "Product Details",
+  "ProjectDetails": "Project Details",
+  "Office Address": "Office Address",
+  "Working Hours": "Working Hours",
+  "Our Vision Title": "Our Vision",
+  "Our Vision Description": "At Golden Paths, we envision a future where technology seamlessly integrates with construction, setting new standards for safety, efficiency, and connectivity. Our vision is to lead the low-current services sector by continually innovating and pushing the boundaries of what›s achievable, contributing to the creation of smarter, safer, and more efficient environments",
+  "Our Mission Title": "Our Mission",
+  "Our Mission Description": "Our mission is to be a trailblazer in the low-current services sector, delivering groundbreaking and reliable solutions. We are dedicated to providing cutting-edge services in network infrastructure, security systems, fire fighting, electrical low voltage, and smart home services. Golden Path focuses on customizing solutions to meet the unique needs of each client, aiming to contribute to the advancement of technology in modern construction.",
+  "Security Solutions Title": "Security Solutions",
+  "Security Solutions Description": "Golden Paths consultants ensure to assist customers in creating an end-to end strategy of security that starts with the most basic practices and systems, design, build and support a complete, layered and integrated security solution based on current and future needs including.",
+  "Unified Communications Title": "Unified Communications & Collaboration",
+  "Unified Communications Description": "Unified communications (UC) encompasses the integration of real-time communication services, including telephony, video conferencing, call control, and speech recognition, offering a cohesive user interface and experience across various devices and media types rather than a single solution.",
+  "ITC Infrastructure Title": "ITC Infrastructure",
+  "ITC Infrastructure Description": "Golden Paths specialists design, build, and support scalable and secure IT and Communications infrastructure for diverse ITC needs.",
+  "Fire Alarm Title": "Fire Alarm",
+  "Fire Alarm Description": "Implementing advanced fire detection and alert solutions for rapid response and effective evacuation. Our expertise ensures compliance with industry standards, offering reliable and proactive fire safety measures."
 }

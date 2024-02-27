@@ -76,6 +76,9 @@ const GlobalContextProvider = (props) => {
     );
   }
 
+  const emailGlobal = "info@golden-paths.net";
+  const phoneGlobal = "+966556201096";
+
   return (
     <GlobalContext.Provider
       value={{
@@ -87,6 +90,8 @@ const GlobalContextProvider = (props) => {
         projectsList,
         categoryProductsList,
         categoryProjectsList,
+        emailGlobal,
+        phoneGlobal,
       }}
     >
       {props.children}

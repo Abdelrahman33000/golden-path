@@ -112,6 +112,7 @@ const Projects = () => {
         }}
       >
         <Tabs
+          variant="scrollable"
           value={value}
           onChange={handleChange}
           aria-label="basic tabs example"

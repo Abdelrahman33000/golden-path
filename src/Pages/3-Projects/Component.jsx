@@ -4,6 +4,7 @@ import Box from "@mui/material/Box";
 import PropTypes from "prop-types";
 import Typography from "@mui/material/Typography";
 import { AddLink, TravelExplore } from "@mui/icons-material";
+import { useNavigate } from "react-router-dom";
 import "./projects.css";
 
 function CustomTabPanel(props) {
@@ -40,14 +41,19 @@ function a11yProps(index) {
 }
 
 const Component1 = (props) => {
+  const navigate = useNavigate();
   return (
     <div>
       <CustomTabPanel value={props.value} index={props.index}>
-        <div className=" container" style={{ gap: "30px", flexWrap: "wrap" }}>
+        <div style={{ gap: "30px", flexWrap: "wrap" }}>
           <div className="row">
             {props.projects.map((project) => (
               <>
-                <div className="col-md-5 col-12 col-lg-4 mx-auto my-3">
+                <div
+                  className="col-md-5 col-12 col-lg-4 mx-auto my-3"
+                  onClick={() => navigate(`/ProjectDetails/${project.id}`)}
+                  style={{ cursor: "pointer" }}
+                >
                   <div className="box">
                     <img
                       src={project.img}

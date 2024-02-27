@@ -35,7 +35,7 @@ const Product1 = () => {
       </h1>
 
       <div className="my-5 d-flex justify-content-center text-center">
-        <div className=" rounded-5 mx-5  " style={{ width: "70%" }}>
+        <div className=" rounded-5 container " >
           <img
             src={productDetail.img}
             width={"100%"}

@@ -1,36 +1,37 @@
-import React from "react";
+import React, { useContext } from "react";
 import Logo from "../images/Golden Path - Logo.png";
 
 import "./Header.css";
-import { useLocation } from "react-router-dom";
+import { Link } from "react-router-dom";
+import { GlobalContext } from "../../Context/GlobalContext";
 const Header = () => {
-  const { pathname } = useLocation();
+  const { emailGlobal, phoneGlobal } = useContext(GlobalContext);
   return (
-    !pathname.includes("admin") && (
-      <header className="d-flex justify-content-between mx-2   my-3 align-items-center">
+    <header className="d-flex justify-content-between my-3 align-items-center">
+      <Link to="/">
         <img
           src={Logo}
           alt="Logo"
           style={{ width: "150px", height: "35px" }}
-          className="me-3 img"
+          className="img"
         />
+      </Link>
 
-        <div className=" mail ">
-          <p
-            className="icon-email my-3"
-            style={{ color: "#093266", lineHeight: "0px", fontSize: "12px" }}
-          >
-            Info@goldenPath
-          </p>
-          <p
-            className="icon-phone "
-            style={{ color: "#093266", lineHeight: "10px", fontSize: "12px" }}
-          >
-            +123456789
-          </p>
-        </div>
-      </header>
-    )
+      <div dir="ltr" className=" mail px-2">
+        <p
+          className="icon-email my-2"
+          style={{ color: "#093266", fontSize: "12px" }}
+        >
+          <span className="px-2">{emailGlobal}</span>
+        </p>
+        <p
+          className="icon-phone my-2"
+          style={{ color: "#093266", fontSize: "12px" }}
+        >
+          <span className="px-2">{phoneGlobal}</span>
+        </p>
+      </div>
+    </header>
   );
 };
 

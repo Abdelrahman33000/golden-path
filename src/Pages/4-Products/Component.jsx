@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import Box from "@mui/material/Box";
 import PropTypes from "prop-types";
 import Typography from "@mui/material/Typography";
+import { useNavigate } from "react-router-dom";
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -31,14 +32,19 @@ TabPanel.propTypes = {
 };
 
 const Component = (props) => {
+  const navigate = useNavigate();
   return (
     <div>
       <TabPanel value={props.value} index={props.index}>
-        <div className="d-flex" style={{ gap: "30px", flexWrap: "wrap" }}>
+        <div
+          className="d-flex"
+          style={{ gap: "30px", flexWrap: "wrap" }}
+        >
           {props.products.map((product) => (
             <div
               key={product.id}
-              className="card  mx-auto rounded-5 shadow-lg"
+              onClick={() => navigate(`/productDetails/${product.id}`)}
+              className="card  mx-auto rounded-5 shadow"
               style={{
                 display: "flex",
                 alignItems: "center",
@@ -48,6 +54,7 @@ const Component = (props) => {
                 width: "300px",
                 padding: "10px",
                 height: "400px",
+                cursor: "pointer",
               }}
             >
               {

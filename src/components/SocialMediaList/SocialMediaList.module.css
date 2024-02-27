@@ -1,0 +1,12 @@
+.icon {
+  transition: 0.5s;
+  font-size: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.icon:hover {
+  cursor: pointer;
+  font-size: 24px;
+}

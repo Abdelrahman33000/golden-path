@@ -14,9 +14,11 @@ import { GlobalContext } from "../../Context/GlobalContext";
 import "swiper/css/pagination";
 
 import "./Products.css";
+import { useNavigate } from "react-router-dom";
 
 export default function App() {
   const { productsList } = useContext(GlobalContext);
+  const navigate = useNavigate();
 
   return (
     <>
@@ -79,7 +81,7 @@ export default function App() {
               key={product.id}
               style={{ maxHeight: "500px", minHeight: "400px" }}
             >
-              <div>
+              <div onClick={() => navigate(`/productDetails/${product.id}`)}>
                 <img
                   src={product.img}
                   alt=""

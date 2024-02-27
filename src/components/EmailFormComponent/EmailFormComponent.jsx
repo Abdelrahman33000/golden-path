@@ -82,8 +82,8 @@ const EmailFormComponent = () => {
 
   return (
     <form className="contact " onSubmit={handleSubmit}>
-      <div className="d-flex justify-content-around my-5  ">
-        <div className="me-2 form-control">
+      <div className="d-flex justify-content-around my-5 gap-2 ">
+        <div className="form-control">
           <div>
             <label>{t("Full Name")}</label>
           </div>
@@ -96,7 +96,7 @@ const EmailFormComponent = () => {
             required
           />
         </div>
-        <div className="me-2  form-control">
+        <div className="form-control">
           <div>
             <label>{t("Email")}</label>
           </div>
@@ -110,8 +110,8 @@ const EmailFormComponent = () => {
         </div>
       </div>
 
-      <div className="d-flex justify-content-around my-5">
-        <div className="me-2 form-control ">
+      <div className="d-flex justify-content-around my-5 gap-2">
+        <div className=" form-control ">
           <div>
             <label>{t("Phone Number")}</label>
           </div>
@@ -123,7 +123,7 @@ const EmailFormComponent = () => {
             required
           />
         </div>
-        <div className="me-2 form-control">
+        <div className="form-control">
           <div>
             <label>{t("Subject")}</label>
           </div>

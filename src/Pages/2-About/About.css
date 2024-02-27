@@ -4,14 +4,14 @@
 }
 
 .card0 {
-  width: 200px;
+  /* width: 240px; */
   padding: 7px 1px;
   text-align: center;
   transition: 0.5s;
 }
 
 .card0 p {
-  text-align: left;
+  /* text-align: left; */
   padding: 0px 15px;
 }
 .card0:hover {

@@ -8,9 +8,11 @@ import { FreeMode, Pagination, Navigation, Autoplay } from "swiper/modules";
 
 import { useContext } from "react";
 import { GlobalContext } from "../../Context/GlobalContext";
+import { useNavigate } from "react-router-dom";
 
 export default function Projects2() {
   const { projectsList } = useContext(GlobalContext);
+  const navigate = useNavigate();
 
   return (
     <>
@@ -61,7 +63,7 @@ export default function Projects2() {
             key={project.id}
             style={{ maxHeight: "500px", minHeight: "400px" }}
           >
-            <div>
+            <div onClick={() => navigate(`/ProjectDetails/${project.id}`)}>
               <img
                 src={project.img}
                 alt=""
