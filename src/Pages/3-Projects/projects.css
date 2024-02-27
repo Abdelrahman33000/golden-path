@@ -4,7 +4,7 @@
   font-family: "Raleway", sans-serif;
   text-align: center;
   box-shadow: 0 0 15px 5px rgba(0, 0, 0, 0.07);
-  overflow: hidden;
+  overflow:  hidden;
   position: relative;
 }
 .project {
@@ -131,6 +131,7 @@
 .tab {
   transition: 1s;
   font-family: "Bodoni Moda" !important;
+  
 }
 
 .tab:hover {
@@ -144,3 +145,8 @@
 .tab:active {
   background-color: #4d08d9;
 }
+
+
+
+
+
