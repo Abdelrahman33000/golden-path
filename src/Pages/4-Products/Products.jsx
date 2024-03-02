@@ -48,8 +48,12 @@ function a11yProps(index) {
 
 const Products = () => {
   const pageItemsCount = 8;
-  const { dealWithAPIData, isLoading, productsList, categoryProductsList } =
-    useContext(GlobalContext);
+  const {
+    dealWithAPIData,
+    isLoading,
+    productsList,
+    categoryProductsList,
+  } = useContext(GlobalContext);
   const [pageNumber, setPageNumber] = useState(1);
   const [paginatePageCount, setPaginateCount] = useState(
     Math.ceil(productsList.length / pageItemsCount)
@@ -88,6 +92,10 @@ const Products = () => {
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
 
   return isLoading ? (
     <Loader />

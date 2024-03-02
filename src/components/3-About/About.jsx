@@ -6,11 +6,19 @@ import "./about.css";
 const About = () => {
   const { t } = useTranslation();
   return (
-    <div className="row my-5">
-      <img src={Img} alt="Img" className="col-lg-5 shadow-lg  rounded-5 mb-5" />
-      <div className="col-lg-6  ">
-        <h4 className="px-5 py-3 mx-5 img5">{t("About Golden paths Title")}</h4>
-        <p className="px-5 py-3">
+    <div className="w-100 px-md-3 my-5 d-flex flex-column flex-lg-row align-items-center justify-content-between">
+      <div className="h-100 col-lg-5 p-2">
+        <img
+          src={Img}
+          alt="Img"
+          width={"100%"}
+          height={"100%"}
+          className="shadow-sm  rounded-5"
+        />
+      </div>
+      <div className="col-lg-7 p-3 ">
+        <h4 className="px-5 py-3 img5">{t("About Golden paths Title")}</h4>
+        <p className="py-3">
           {[
             t("Security Solutions Description"),
             t("Unified Communications Description"),
@@ -35,7 +43,7 @@ const About = () => {
         </p>
 
         <button
-          className="btn5 mx-5 p-3 rounded"
+          className="btn5 p-3 rounded"
           style={{ display: "flex", justifyContent: "center" }}
         >
           <Link to="/about" style={{ textDecoration: "none", color: "#fff" }}>

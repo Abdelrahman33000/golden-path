@@ -42,8 +42,8 @@ const SocialMediaList = () => {
   ];
 
   return (
-    <div className="d-flex justify-content-between align-items-center my-2 py-2 w-100">
-      <span>{t("Stay Connected")}</span>
+    <div className="d-flex flex-column flex-sm-row gap-2 justify-content-between align-items-center py-2 w-100">
+      <span className="fw-semibold">{t("Stay Connected")}</span>
       <div
         dir="ltr"
         className="d-flex align-items-center justify-content-center gap-1"

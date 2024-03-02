@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import "./Home.css";
 import { useTranslation } from "react-i18next";
 
@@ -15,6 +15,10 @@ import { GlobalContext } from "../../Context/GlobalContext";
 const Home = () => {
   const { t } = useTranslation();
   const { isLoading } = useContext(GlobalContext);
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
 
   return isLoading ? (
     <Loader />

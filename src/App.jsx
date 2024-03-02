@@ -20,6 +20,10 @@ function App() {
     }, 2000);
   }, [i18n.language]);
 
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
   return (
     <GlobalContextProvider>
       {isLoading ? (

@@ -31,11 +31,8 @@ export default function App() {
           delay: 2500,
           disableOnInteraction: false,
         }}
-        navigation={true}
-        freeMode={true}
-        pagination={{
-          clickable: true,
-        }}
+        spaceBetween={30}
+        slidesPerView={3}
         breakpoints={{
           0: {
             slidesPerView: 1,
@@ -59,19 +56,25 @@ export default function App() {
             slidesPerView: 4,
           },
         }}
-        modules={[FreeMode, Pagination, EffectCoverflow, Autoplay, Navigation]}
-        spaceBetween={30}
-        slidesPerView={3}
-        effect={"coverflow"}
-        grabCursor={true}
-        coverflowEffect={{
-          rotate: 50,
-          stretch: 0,
-          depth: 100,
-          modifier: 1,
-          slideShadows: true,
+
+        navigation={true}
+        freeMode={true}
+        pagination={{
+          clickable: true,
         }}
-        className="mySwiper5"
+      
+        modules={[FreeMode, Pagination, EffectCoverflow, Autoplay, Navigation]}
+   
+        // effect={"coverflow"}
+        // grabCursor={true}
+        // coverflowEffect={{
+        //   rotate: 50,
+        //   stretch: 0,
+        //   depth: 100,
+        //   modifier: 1,
+        //   slideShadows: true,
+        // }}
+        className="mySwiper"
       >
         {productsList
           .filter((item) => item.add_item_in_home == "1")

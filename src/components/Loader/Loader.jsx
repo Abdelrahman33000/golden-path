@@ -1,8 +1,12 @@
 import styles from "./Loader.module.css";
-const Loader = () => {
+const Loader = ({ isImageLoader }) => {
   return (
     <div className={styles.parentDiv}>
-      <div className={styles.loader}></div>
+      {isImageLoader ? (
+        <span className={styles.imageLoader}></span>
+      ) : (
+        <div className={styles.loader}></div>
+      )}
     </div>
   );
 };

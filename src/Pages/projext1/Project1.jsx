@@ -29,6 +29,10 @@ const Project1 = () => {
     );
   }, [i18n.language]);
 
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
   return isLoading || !projectDetail.id ? (
     <Loader />
   ) : (
@@ -43,6 +47,15 @@ const Project1 = () => {
       <div className="my-5 d-flex justify-content-center text-center container">
         <div className="mx-2 mx-lg-5 mx-md-5 " style={{ width: "100%" }}>
           <h1>{projectDetail?.name}</h1>
+
+          <div className="container d-flex align-items-center justify-content-center">
+            <p
+              className="m-0 text-center col-11 col-lg-7 col-md-8"
+              style={{ textAlign: "justify" }}
+            >
+              {projectDetail?.shortDescription}
+            </p>
+          </div>
 
           <div className="bg-dark  text-light p-3  text-start mx-3 my-5">
             <p>
@@ -70,20 +83,27 @@ const Project1 = () => {
               </span>
             </p>
           </div>
-          <div className="container d-flex align-items-center justify-content-center">
-            <p
-              className="m-0 text-center col-11 col-lg-7 col-md-8"
-              style={{ textAlign: "left" }}
-            >
-              {projectDetail?.shortDescription}
-            </p>
-          </div>
-          <div className=" my-5">
+
+          <div
+            className=" d-flex align-items-center justify-content-center my-md-5 my-3"
+            style={{ minHeight: "250px", maxHeight: "550px" }}
+          >
             <img
-              src={projectDetail?.img}
+              src={
+                projectDetail.img
+                  ? projectDetail.img
+                  : "https://user-images.githubusercontent.com/24848110/33519396-7e56363c-d79d-11e7-969b-09782f5ccbab.png"
+              }
               alt=""
-              className="rounded-5 p-2  "
-              style={{ width: "100%" }}
+              height={"100%"}
+              width={"auto"}
+              className="rounded-5 "
+              onError={(e) => {
+                e.target.src =
+                  "https://user-images.githubusercontent.com/24848110/33519396-7e56363c-d79d-11e7-969b-09782f5ccbab.png";
+                e.target.onError = null;
+              }}
+              style={{ maxWidth: "100%", maxHeight: "550px" }}
             />
           </div>
           <Swiper

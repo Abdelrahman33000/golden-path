@@ -26,7 +26,9 @@
   "ProductDetails": "Product Details",
   "ProjectDetails": "Project Details",
   "Office Address": "Office Address",
+  "Location Text": "Saudi Arabia - Riyadh",
   "Working Hours": "Working Hours",
+  "Hours Work Text": "Saturday - Thursday (9am - 6pm)",
   "Our Vision Title": "Our Vision",
   "Our Vision Description": "At Golden Paths, we envision a future where technology seamlessly integrates with construction, setting new standards for safety, efficiency, and connectivity. Our vision is to lead the low-current services sector by continually innovating and pushing the boundaries of what›s achievable, contributing to the creation of smarter, safer, and more efficient environments",
   "Our Mission Title": "Our Mission",
@@ -38,5 +40,6 @@
   "ITC Infrastructure Title": "ITC Infrastructure",
   "ITC Infrastructure Description": "Golden Paths specialists design, build, and support scalable and secure IT and Communications infrastructure for diverse ITC needs.",
   "Fire Alarm Title": "Fire Alarm",
-  "Fire Alarm Description": "Implementing advanced fire detection and alert solutions for rapid response and effective evacuation. Our expertise ensures compliance with industry standards, offering reliable and proactive fire safety measures."
+  "Fire Alarm Description": "Implementing advanced fire detection and alert solutions for rapid response and effective evacuation. Our expertise ensures compliance with industry standards, offering reliable and proactive fire safety measures.",
+  "Subscribe Card Title": "Subscribe Our Products"
 }

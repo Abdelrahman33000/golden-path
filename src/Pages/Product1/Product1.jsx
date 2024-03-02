@@ -23,6 +23,10 @@ const Product1 = () => {
     );
   }, [i18n.language]);
 
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
   return isLoading ? (
     <Loader />
   ) : (
@@ -35,8 +39,31 @@ const Product1 = () => {
       </h1>
 
       <div className="my-5 d-flex justify-content-center text-center">
-        <div className=" rounded-5 container " >
-          <img
+        <div className=" rounded-5 container ">
+          <div
+            className=" d-flex align-items-center justify-content-center my-md-5 my-3"
+            // style={{ height: "500px" }}
+            style={{ minHeight: "250px", maxHeight: "550px" }}
+          >
+            <img
+              src={
+                productDetail.img
+                  ? productDetail.img
+                  : "https://user-images.githubusercontent.com/24848110/33519396-7e56363c-d79d-11e7-969b-09782f5ccbab.png"
+              }
+              alt=""
+              height={"100%"}
+              width={"auto"}
+              className="rounded-5 "
+              onError={(e) => {
+                e.target.src =
+                  "https://user-images.githubusercontent.com/24848110/33519396-7e56363c-d79d-11e7-969b-09782f5ccbab.png";
+                e.target.onError = null;
+              }}
+              style={{ maxWidth: "100%", maxHeight: "550px" }}
+            />
+          </div>
+          {/* <img
             src={productDetail.img}
             width={"100%"}
             alt=""
@@ -46,7 +73,7 @@ const Product1 = () => {
                 "https://user-images.githubusercontent.com/24848110/33519396-7e56363c-d79d-11e7-969b-09782f5ccbab.png";
               e.target.onError = null;
             }}
-          />
+          /> */}
 
           <h5>{productDetail.name}</h5>
           {/* <p>
@@ -105,7 +132,7 @@ const Product1 = () => {
             ))}
           </Swiper>
 
-          <div className="container-fluide  my-5 mx-2 shadow-lg p-2   rounded-4 mt-2 ">
+          <div className="container-fluide  my-5 mx-2 shadow p-2 px-sm-3   rounded-4 mt-2 ">
             <EmailFormComponent />
           </div>
         </div>

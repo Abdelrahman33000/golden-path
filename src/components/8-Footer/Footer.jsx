@@ -3,7 +3,7 @@ import img from "../images/Golden Path - Logo.png";
 import "./Footer.css";
 import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
-import { Call, Email, Place, Schedule } from "@mui/icons-material";
+import { Call, Email, Place, Schedule, WhatsApp } from "@mui/icons-material";
 import { GlobalContext } from "../../Context/GlobalContext";
 
 const Footer = () => {
@@ -13,7 +13,7 @@ const Footer = () => {
 
   return (
     <footer className="row   text-light mx-0">
-      <div className="col-lg-3">
+      <div className="col-lg-3 py-2">
         <Link to={"/"}>
           <div
             className="w-100"
@@ -29,8 +29,8 @@ const Footer = () => {
         </Link>
       </div>
 
-      <div className="bg-dark  col-lg-9 row p-3 m-0">
-        <div className="col-lg-2   m-sm-3  col-sm-4 ">
+      <div className="bg-dark  col-lg-9 m-0 p-3 row">
+        <div className="col-md-6 p-2 col-11    ">
           <Link to={"/"} style={{ textDecoration: "none" }}>
             <h4 style={{ color: "#ffa200" }}>{t("Home")}</h4>
           </Link>
@@ -47,31 +47,32 @@ const Footer = () => {
             <p style={{ color: "#ffa200" }}>{t("Contact Us")}</p>
           </Link>
         </div>
-
-        <div className="col-lg-3   m-sm-3  col-sm-4 ">
-          <h4 style={{ color: "#ffa200" }}>{t("Office Address")}</h4>
-          <p>
-            <Place /> Saudi Arabia - Riyadh
-          </p>
-        </div>
-
-        <div className="col-lg-3   m-sm-3  col-sm-4 ">
-          <h4 style={{ color: "#ffa200" }}> {t("Working Hours")} </h4>
-          <p>
-            <Schedule /> Saturday - Thursday (9am - 5pm)
-          </p>
-        </div>
-
-        <div className="col-lg-2  m-sm-3  col-sm-4 ">
+        
+        <div className="col-md-6 p-2 col-11   ">
           <h4 style={{ color: "#ffa200" }}>{t("Contact Us")}</h4>
           <p>
-            <Call /> {phoneGlobal}
+            <WhatsApp /> {phoneGlobal}
           </p>
           <p>
             <Email /> {emailGlobal}
           </p>
-          {/* <p>Sub Link</p> */}
         </div>
+
+        <div className="col-md-6 p-2 col-11    ">
+          <h4 style={{ color: "#ffa200" }}>{t("Office Address")}</h4>
+          <p>
+            <Place /> {t("Location Text")}
+          </p>
+        </div>
+
+        <div className="col-md-6 p-2 col-11    ">
+          <h4 style={{ color: "#ffa200" }}> {t("Working Hours")} </h4>
+          <p>
+            <Schedule /> {t("Hours Work Text")}
+          </p>
+        </div>
+
+      
       </div>
     </footer>
   );

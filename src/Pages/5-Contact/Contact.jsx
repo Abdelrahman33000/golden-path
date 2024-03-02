@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import "./ContactUs.css";
 import { useTranslation } from "react-i18next";
 import Lottie from "lottie-react";
@@ -11,6 +11,11 @@ import { GlobalContext } from "../../Context/GlobalContext";
 const ContactUs = () => {
   const { t } = useTranslation();
   const { emailGlobal, phoneGlobal } = useContext(GlobalContext);
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
   return (
     <div className="container-fluide  mt-0">
       <div className="  text-center p-4">
@@ -34,7 +39,9 @@ const ContactUs = () => {
               <p className=" icon-mobile "> {phoneGlobal}</p>
               {/* <div className="d-flex justify-content-between my-3 px-1 py-3"> */}
               {/* <p>{t("Stay Connected")}</p> */}
-              <SocialMediaList />
+              <div className="py-2 pb-3">
+                <SocialMediaList />
+              </div>
               {/* <div>
                   <span className="icon-instagram me-2   icon" />
                   <span className="icon-linkedin2 me-2   icon" />

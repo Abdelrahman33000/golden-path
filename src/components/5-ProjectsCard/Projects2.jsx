@@ -17,6 +17,7 @@ export default function Projects2() {
   return (
     <>
       <Swiper
+       style={{ padding: "10px " }}
         dir="ltr"
         loop={true}
         centeredSlides={true}
