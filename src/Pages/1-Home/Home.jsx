@@ -23,16 +23,25 @@ const Home = () => {
   return isLoading ? (
     <Loader />
   ) : (
-    <div className="home">
+    <div className="home d-flex flex-column gap-5">
       <Hero />
       <About />
 
-      <h3 className="ps-5 m-5 img2">{t("Our Products")}</h3>
-      <ProductCarousel />
-      <h3 className="ps-5 m-5 img2">{t("Our Projects")}</h3>
-      <Projects2 />
-      <h3 className="ps-5 m-5 img2">{t("Our Partners")}</h3>
-      <Logo />
+      <div>
+        <h4 className="px-5 py-3 m-md-4 m-3 img5">{t("Our Products")}</h4>
+
+        <ProductCarousel />
+      </div>
+      <div>
+        <h4 className="px-5 py-3 m-md-4 m-3 img5">{t("Our Projects")}</h4>
+
+        <Projects2 />
+      </div>
+
+      <div>
+        <h4 className="px-5 py-3 m-md-4 m-3 img5">{t("Our Partners")}</h4>
+        <Logo />
+      </div>
       <SubScribe />
     </div>
   );
