@@ -25,8 +25,8 @@ const ContactUs = () => {
         <p>{t("We’re always here for you to give best service")} </p>
       </div>
 
-      <div className="container-fluide side rounded-5   mt-5 ">
-        <div className="d-md-flex">
+      <div className="container-fluide side rounded-5  mt-5 ">
+        <div className="d-md-flex justify-content-evenly">
           <div className="side1  mx-3  mb-5 rounded-4 mt-2 shadow  col-lg-3 col-md-4">
             <Lottie animationData={contact} />
 
@@ -53,7 +53,7 @@ const ContactUs = () => {
             </div>
           </div>
 
-          <div className="container-fluide p-2 px-3  my-5 mx-2 shadow   rounded-4 mt-2 col-lg-8">
+          <div className=" p-2 px-3  my-5 mx-2 shadow   rounded-4 mt-2 col-lg-8 col-md-7">
             <EmailFormComponent />
           </div>
         </div>

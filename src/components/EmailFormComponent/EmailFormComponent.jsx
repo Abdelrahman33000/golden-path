@@ -81,8 +81,8 @@ const EmailFormComponent = () => {
   };
 
   return (
-    <form className="contact " onSubmit={handleSubmit}>
-      <div className="d-flex justify-content-around my-5 gap-2 ">
+    <form onSubmit={handleSubmit}>
+      <div className="d-flex flex-column flex-lg-row justify-content-around my-lg-5 my-3 gap-3">
         <div className="form-control">
           <div>
             <label>{t("Full Name")}</label>
@@ -110,7 +110,7 @@ const EmailFormComponent = () => {
         </div>
       </div>
 
-      <div className="d-flex justify-content-around my-5 gap-2">
+      <div className="d-flex flex-column flex-lg-row justify-content-around my-lg-5 my-3 gap-3">
         <div className=" form-control ">
           <div>
             <label>{t("Phone Number")}</label>
@@ -136,7 +136,7 @@ const EmailFormComponent = () => {
           />
         </div>
       </div>
-      <div className="m-3">
+      <div className="my-3 m-lg-3">
         <div className="mt-5 mb-3 text-light"></div>
         <textarea
           placeholder={t("Message...")}
@@ -152,7 +152,7 @@ const EmailFormComponent = () => {
       </div>
 
       <div
-        className=" my-5 px-3"
+        className=" my-lg-5 my-3 px-lg-3"
         style={{
           textAlign: "center",
           display: "flex",

@@ -310,12 +310,12 @@ const About = () => {
           style={{ boxShadow: "5px 5px 10px #ffa200" }}
         >
           <button className="btn5 py-3 rounded-4 px-5 my-3">
-            COMPANY FACTS
+            {t("COMPANY FACTS")}
           </button>
-          <p>
+          {/* <p>
             Lorem ipsum dolor sit amet consectetur <br /> adipisicing elit.
             Numquam, accusamus.
-          </p>
+          </p> */}
         </div>
 
         <div
