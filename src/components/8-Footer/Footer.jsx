@@ -47,11 +47,12 @@ const Footer = () => {
             <p style={{ color: "#ffa200" }}>{t("Contact Us")}</p>
           </Link>
         </div>
-        
+
         <div className="col-md-6 p-2 col-11   ">
           <h4 style={{ color: "#ffa200" }}>{t("Contact Us")}</h4>
           <p>
-            <WhatsApp /> {phoneGlobal}
+            <WhatsApp />
+            <span dir="ltr">{phoneGlobal}</span>
           </p>
           <p>
             <Email /> {emailGlobal}
@@ -71,8 +72,6 @@ const Footer = () => {
             <Schedule /> {t("Hours Work Text")}
           </p>
         </div>
-
-      
       </div>
     </footer>
   );
