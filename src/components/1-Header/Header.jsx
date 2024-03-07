@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import Logo from "../images/gloden-path-logo.jpg";
+import Logo from "../images/golden-paths-logo.png";
 
 import "./Header.css";
 import { Link } from "react-router-dom";

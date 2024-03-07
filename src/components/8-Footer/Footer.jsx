@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import img from "../images/gloden-path-logo.jpg";
+import img from "../images/golden-paths-logo.png";
 import "./Footer.css";
 import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
